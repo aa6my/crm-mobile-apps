@@ -1,0 +1,65 @@
+<ion-side-menus>
+
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+      <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-stable">
+      <h1 class="title">Left</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+        <ion-item nav-clear menu-close ng-click="login()">
+          Login
+        </ion-item>
+<!--         <ion-item nav-clear menu-close href="#/app/search">
+          Search
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/browse">
+          Browse
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/playlists">
+          Playlists
+        </ion-item> -->
+        <ion-item nav-clear menu-close href="#/app/main">
+          Dashboard
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/vendors">
+          Vendors
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/leads">
+          Leads
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/customers">
+          Customers
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/products">
+          Products
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/quotes">
+          Quotes
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/websites">
+          Websites
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/jobs">
+          Jobs
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/invoices">
+          Invoices
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/files">
+          Files
+        </ion-item>
+        <ion-item nav-clear menu-close href="#/app/finance">
+          Finance
+        </ion-item>
+
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
