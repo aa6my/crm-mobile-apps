@@ -1,8 +1,12 @@
 <ion-view title="Customers">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header" ng-controller="Customer">
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="ft-container">
             <table class="footable" data-page-size="10">
                 <thead>
@@ -25,7 +29,7 @@
                 
                 </tr>
                 </thead>
-                <tbody ng-controller="Customer">
+                <tbody>
                 <tr ng-repeat="customer in customers">
                     <td>{{customer.customer_name}}</td>
                     <td>{{customer.customer_firstname}} {{customer.customer_lastname}}</td>
@@ -34,9 +38,9 @@
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <button class="button button-icon icon ion-document-text view-icon" ng-click="viewCustomer(customer)"></button>
-                        <button class="button button-icon icon ion-compose edit-icon" ng-click="editCustomer(customer)"></button>
-                        <button class="button button-icon icon ion-trash-a del-icon" ng-click="deleteCustomer(customer)"></button>
+                        <a ng-click="viewCustomer(customer)"><span class="glyphicon glyphicon-list"></span></a>
+                        <a ng-click="editCustomer(customer)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteCustomer(customer)"><span class="glyphicon glyphicon-trash"></span></a>
 
 
                     </td>
