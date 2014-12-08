@@ -81,12 +81,12 @@ angular.module('starter.controllers', [])
 // vendor
 .controller('Vendor', 
     function($scope, $http, Settings) {
+    url = Settings.url + '/dataAll/type/vendors/format/json';
         $http.get(url).
         success(function(data) {
           $scope.vendors = data.vendors;
           console.log('Success', data.vendors);
     // For JSON responses, resp.data contains the result
-    url = Settings.url + '/dataAll/type/vendors/format/json';
       $scope.doRefresh = function() {
         $http.get(url)
          .success(function(data) {
