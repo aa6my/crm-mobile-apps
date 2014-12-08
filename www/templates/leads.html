@@ -1,8 +1,12 @@
 <ion-view title="Leads">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header" ng-controller="Lead">
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="ft-container">
             <table class="footable" data-page-size="10">
                 <thead>
@@ -25,7 +29,7 @@
                 
                 </tr>
                 </thead>
-                <tbody ng-controller="Lead">
+                <tbody>
                 <tr ng-repeat="lead in leads">
                     <td>{{lead.lead_name}}</td>
                     <td>{{lead.lead_firstname}} {{lead.lead_lastname}}</td>
@@ -34,10 +38,9 @@
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <button class="button button-icon icon ion-document-text view-icon" ng-click="viewLead(lead)"></button>
-                        <button class="button button-icon icon ion-compose edit-icon" ng-click="editLead(lead)"></button>
-                        <button class="button button-icon icon ion-trash-a del-icon" ng-click="deleteLead(lead)"></button>
-
+                        <a ng-click="viewLead(lead)"><span class="glyphicon glyphicon-list"></span></a>
+                        <a ng-click="editLead(lead)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteLead(lead)"><span class="glyphicon glyphicon-trash"></span></a>
 
                     </td>
                 </tr>

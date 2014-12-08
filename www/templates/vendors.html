@@ -1,8 +1,12 @@
 <ion-view title="Vendors">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header" ng-controller="Vendor">
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="ft-container">
             <table class="footable" data-page-size="10">
                 <thead>
@@ -25,7 +29,7 @@
                 
                 </tr>
                 </thead>
-                <tbody ng-controller="Vendor">
+                <tbody>
                 <tr ng-repeat="vendor in vendors">
                     <td>{{vendor.vendor_name}}</td>
                     <td>{{vendor.vendor_firstname}} {{vendor.vendor_firstname}}</td>
@@ -34,10 +38,9 @@
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <button class="button button-icon icon ion-document-text view-icon" ng-click="viewVendor(vendor)"></button>
-                        <button class="button button-icon icon ion-compose edit-icon" ng-click="editVendor(vendor)"></button>
-                        <button class="button button-icon icon ion-trash-a del-icon" ng-click="deleteVendor(vendor)"></button>
-
+                        <a ng-click="viewVendor(vendor)"><span class="glyphicon glyphicon-list"></span></a>
+                        <a ng-click="editVendor(vendor)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteVendor(vendor)"><span class="glyphicon glyphicon-trash"></span></a>
 
                     </td>
                 </tr>

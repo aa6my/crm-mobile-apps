@@ -1,8 +1,12 @@
 <ion-view title="Files">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header" ng-controller="File">
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="ft-container">
             <table class="footable" data-page-size="10">
                 <thead>
@@ -19,17 +23,16 @@
                 
                 </tr>
                 </thead>
-                <tbody ng-controller="File">
+                <tbody>
                 <tr ng-repeat="file in files">
                     <td>{{file.file_name}}</td>
                     <td><a href="{{upload}}/{{file.file_content}}" target="_blank">{{file.file_content}}</td>
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <button class="button button-icon icon ion-document-text view-icon" ng-click="viewFile(file)"></button>
-                        <button class="button button-icon icon ion-compose edit-icon" ng-click="editFile(file)"></button>
-                        <button class="button button-icon icon ion-trash-a del-icon" ng-click="deleteFile(file)"></button>
-
+                        <a ng-click="viewFile(file)"><span class="glyphicon glyphicon-list"></span></a>
+                        <a ng-click="editFile(file)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteFile(file)"><span class="glyphicon glyphicon-trash"></span></a>
 
                     </td>
                 </tr>

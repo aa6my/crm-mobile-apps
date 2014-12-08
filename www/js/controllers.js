@@ -81,11 +81,22 @@ angular.module('starter.controllers', [])
 // vendor
 .controller('Vendor', 
     function($scope, $http, Settings) {
-        $http.get(Settings.url + '/dataAll/type/vendors/format/json').
+        $http.get(url).
         success(function(data) {
           $scope.vendors = data.vendors;
           console.log('Success', data.vendors);
     // For JSON responses, resp.data contains the result
+    url = Settings.url + '/dataAll/type/vendors/format/json';
+      $scope.doRefresh = function() {
+        $http.get(url)
+         .success(function(data) {
+           $scope.vendors = data.vendors;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
@@ -96,11 +107,22 @@ angular.module('starter.controllers', [])
 // lead
 .controller('Lead', 
     function($scope, $http, Settings) {
-        $http.get(Settings.url + '/dataAll/type/leads/format/json').
+    url = Settings.url + '/dataAll/type/leads/format/json';
+        $http.get(url).
         success(function(data) {
           $scope.leads = data.leads;
           console.log('Success', data.leads);
     // For JSON responses, resp.data contains the result
+      $scope.doRefresh = function() {
+        $http.get(url)
+         .success(function(data) {
+           $scope.leads = data.leads;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
@@ -137,11 +159,22 @@ angular.module('starter.controllers', [])
 // product
 .controller('Product', 
     function($scope, $http, Settings) {
-        $http.get(Settings.url + '/dataAll/type/products/format/json').
+    url = Settings.url + '/dataAll/type/products/format/json';
+        $http.get(url).
         success(function(data) {
           $scope.products = data.products;
           console.log('Success', data.products);
     // For JSON responses, resp.data contains the result
+      $scope.doRefresh = function() {
+        $http.get(url)
+         .success(function(data) {
+           $scope.products = data.products;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
@@ -152,11 +185,22 @@ angular.module('starter.controllers', [])
 // quote
 .controller('Quote', 
     function($scope, $http, Settings) {
-        $http.get(Settings.url + '/dataAll/type/quotes/format/json').
+    url = Settings.url + '/dataAll/type/quotes/format/json';
+        $http.get(url).
         success(function(data) {
           $scope.quotes = data.quotes;
           console.log('Success', data.quotes);
     // For JSON responses, resp.data contains the result
+      $scope.doRefresh = function() {
+        $http.get(url)
+         .success(function(data) {
+           $scope.quotes = data.quotes;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
@@ -167,11 +211,22 @@ angular.module('starter.controllers', [])
 // website
 .controller('Website', 
     function($scope, $http, Settings) {
-        $http.get(Settings.url + '/dataAll/type/websites/format/json').
+    url = Settings.url + '/dataAll/type/websites/format/json';
+        $http.get(url).
         success(function(data) {
           $scope.websites = data.websites;
           console.log('Success', data.websites);
     // For JSON responses, resp.data contains the result
+      $scope.doRefresh = function() {
+        $http.get(url)
+         .success(function(data) {
+           $scope.websites = data.websites;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
@@ -182,26 +237,48 @@ angular.module('starter.controllers', [])
 // job
 .controller('Job', 
     function($scope, $http, Settings) {
-        $http.get(Settings.url + '/dataAll/type/jobs/format/json').
+    url = Settings.url + '/dataAll/type/jobs/format/json';
+        $http.get(url).
         success(function(data) {
           $scope.jobs = data.jobs;
           console.log('Success', data.jobs);
     // For JSON responses, resp.data contains the result
+      $scope.doRefresh = function() {
+        $http.get(url)
+         .success(function(data) {
+           $scope.jobs = data.jobs;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
-  })      
+  })
 })
 //end of website
 
 //invoice
 .controller('Invoice', 
     function($scope, $http, Settings) {
-        $http.get(Settings.url + '/dataAll/type/invoices/format/json').
+    url = Settings.url + '/dataAll/type/invoices/format/json';
+        $http.get(url).
         success(function(data) {
           $scope.invoices = data.invoices;
           console.log('Success', data.invoices);
     // For JSON responses, resp.data contains the result
+      $scope.doRefresh = function() {
+        $http.get(url)
+         .success(function(data) {
+           $scope.invoices = data.invoices;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
@@ -212,12 +289,23 @@ angular.module('starter.controllers', [])
 //file
 .controller('File', 
     function($scope, $http, Settings) {
-        $http.get(Settings.url + '/dataAll/type/files/format/json').
+    url = Settings.url + '/dataAll/type/files/format/json';
+        $http.get(url).
         success(function(data) {
           $scope.upload = Settings.upload;
           $scope.files = data.files;
           console.log('Success', data.files);
     // For JSON responses, resp.data contains the result
+      $scope.doRefresh = function() {
+        $http.get(url)
+         .success(function(data) {
+           $scope.files = data.files;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code

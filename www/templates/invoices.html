@@ -1,8 +1,12 @@
 <ion-view title="Invoices">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header" ng-controller="Invoice">
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
          <div class="ft-container">
             <table class="footable" data-page-size="10">
                 <thead>
@@ -22,7 +26,7 @@
                 
                 </tr>
                 </thead>
-                <tbody ng-controller="Invoice">
+                <tbody>
                 <tr ng-repeat="invoice in invoices">
                     <td>{{invoice.invoice_number}}</td>
                     <td>{{invoice.invoice_date_created}}</td>
@@ -30,9 +34,9 @@
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <button class="button button-icon icon ion-document-text view-icon" ng-click="viewInvoice(invoice)"></button>
-                        <button class="button button-icon icon ion-compose edit-icon" ng-click="editInvoice(invoice)"></button>
-                        <button class="button button-icon icon ion-trash-a del-icon" ng-click="deleteInvoice(invoice)"></button>
+                        <a ng-click="viewInvoice(invoice)"><span class="glyphicon glyphicon-list"></span></a>
+                        <a ng-click="editInvoice(invoice)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteInvoice(invoice)"><span class="glyphicon glyphicon-trash"></span></a>
 
 
                     </td>

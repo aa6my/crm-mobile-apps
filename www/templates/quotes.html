@@ -1,8 +1,12 @@
 <ion-view title="Quotes">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header" ng-controller="Quote">
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="ft-container">
             <table class="footable" data-page-size="10">
                 <thead>
@@ -22,7 +26,7 @@
                 
                 </tr>
                 </thead>
-                <tbody ng-controller="Quote">
+                <tbody>
                 <tr ng-repeat="quote in quotes">
                     <td>{{quote.quote_id}}</td>
                     <td>{{quote.quote_date_created}}</td>
@@ -30,9 +34,9 @@
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <button class="button button-icon icon ion-document-text view-icon" ng-click="viewQuote(quote)"></button>
-                        <button class="button button-icon icon ion-compose edit-icon" ng-click="editQuote(quote)"></button>
-                        <button class="button button-icon icon ion-trash-a del-icon" ng-click="deleteQuote(quote)"></button>
+                        <a ng-click="viewQuote(quote)"><span class="glyphicon glyphicon-list"></span></a>
+                        <a ng-click="editQuote(quote)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteQuote(quote)"><span class="glyphicon glyphicon-trash"></span></a>
 
 
                     </td>

@@ -1,9 +1,13 @@
 <ion-view title="Products">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
-         <div class="ft-container">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header" ng-controller="Product">
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
+        <div class="ft-container">
             <table class="footable" data-page-size="10">
                 <thead>
                 <tr>
@@ -22,7 +26,7 @@
                 
                 </tr>
                 </thead>
-                <tbody ng-controller="Product">
+                <tbody>
                 <tr ng-repeat="product in products">
                     <td>{{product.product_sku}}</td>
                     <td>{{product.product_name}}</td>
@@ -30,9 +34,9 @@
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <button class="button button-icon icon ion-document-text view-icon" ng-click="viewProduct(product)"></button>
-                        <button class="button button-icon icon ion-compose edit-icon" ng-click="editProduct(product)"></button>
-                        <button class="button button-icon icon ion-trash-a del-icon" ng-click="deleteProduct(product)"></button>
+                        <a ng-click="viewProduct(product)"><span class="glyphicon glyphicon-list"></span></a>
+                        <a ng-click="editProduct(product)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteProduct(product)"><span class="glyphicon glyphicon-trash"></span></a>
                     </td>
                 </tr>
                 </tbody>

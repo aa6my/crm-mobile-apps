@@ -1,8 +1,12 @@
 <ion-view title="Websites">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header" ng-controller="Website">
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
         <div class="ft-container">
             <table class="footable" data-page-size="10">
                 <thead>
@@ -19,16 +23,16 @@
                 
                 </tr>
                 </thead>
-                <tbody ng-controller="Website">
+                <tbody>
                 <tr ng-repeat="website in websites">
                     <td>{{website.website_name}}</td>
                     <td><a href="//{{website.website_url}}">{{website.website_url}}</a></td>
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <button class="button button-icon icon ion-document-text view-icon" ng-click="viewWebsite(website)"></button>
-                        <button class="button button-icon icon ion-compose edit-icon" ng-click="editWebsite(website)"></button>
-                        <button class="button button-icon icon ion-trash-a del-icon" ng-click="deleteWebsite(website)"></button>
+                        <a ng-click="viewWebsite(website)"><span class="glyphicon glyphicon-list"></span></a>
+                        <a ng-click="editWebsite(website)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteWebsite(website)"><span class="glyphicon glyphicon-trash"></span></a>
 
 
                     </td>
