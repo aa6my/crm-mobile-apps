@@ -115,7 +115,7 @@ angular.module('starter.controllers', [])
     $http.get(url).
     success(function(data) {
       $scope.customers = data.customers;
-      console.log('Success', test);
+      console.log('Success', data);
       // For JSON responses, resp.data contains the result
       $scope.doRefresh = function() {
         $http.get(url)
