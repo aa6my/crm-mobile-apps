@@ -28,6 +28,12 @@ angular.module('starter.controllers', [])
   };
 })
 
+.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+])
+
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   // Form data for the login modal
   $scope.loginData = {};
@@ -104,12 +110,23 @@ angular.module('starter.controllers', [])
 
 // customer
 .controller('Customer', 
-    function($scope, $http, Settings) {
-        $http.get(Settings.url + '/dataAll/type/customers/format/json').
-        success(function(data) {
-          $scope.customers = data.customers;
-          console.log('Success', data.customers);
-    // For JSON responses, resp.data contains the result
+  function($scope, $http, Settings) {
+    url = Settings.url + '/dataAll/type/customers/format/json';
+    $http.get(url).
+    success(function(data) {
+      $scope.customers = data.customers;
+      console.log('Success', test);
+      // For JSON responses, resp.data contains the result
+      $scope.doRefresh = function() {
+        $http.get(url)
+         .success(function(data) {
+           $scope.customers = data.customers;
+         })
+         .finally(function() {
+           // Stop the ion-refresher from spinning
+           $scope.$broadcast('scroll.refreshComplete');
+         });
+      };
   }, function(err) {
     console.error('ERR', err);
     // err.status will contain the status code
