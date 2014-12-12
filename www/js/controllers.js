@@ -23,50 +23,57 @@ angular.module('starter.controllers', [])
 
 .factory('Settings', function() {
   return {
-      upload : 'https://192.168.0.200/customer-relationship-management/assets/uploads/files/',
-      url : 'https://192.168.0.200/customer-relationship-management/apps'
+      upload : 'https://localhost/customer-relationship-management/assets/uploads/files/',
+      url : 'https://localhost/customer-relationship-management/apps'
   };
 })
 
-.config(['$httpProvider', function($httpProvider) {
+.config(['$httpProvider', function($httpProvider, $http) {
         $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+        //.config(['$http', function($http) {
+       //$httpProvider.defaults.headers.common['Authorization'] = 'Basic admin@admin.com:123456';
+       $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+        // $httpProvider.defaults.headers.common['X-Requested-With'];
     }
-])
+])//run(['$http', function($http) {
+   //$http.defaults.headers.common['Authorization'] = 'Basic admin@admin.com : 123456';
+//}])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-  // Form data for the login modal
-  $scope.loginData = {};
+.controller('Login', function($scope,$http, $ionicSideMenuDelegate, Settings) {
+  $ionicSideMenuDelegate.canDragContent(false);
+//$http.defaults.headers.common['Authorization'] = 'Basic admin@admin.com : 123456';
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
 
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
+  $scope.doLogin = function(){
 
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
+    var user = {
+      username : $scope.username,
+      password : $scope.password
+    }
 
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+    url = Settings.url + '/dataAll/type/vendors/format/json';
+    //$http.defaults.headers.common = {"Access-Control-Request-Headers": "accept, origin, authorization"}; 
+    $http.defaults.headers.common['Authorization'] = 'Basic ' + 'admin@admin.com' + ':' + '123456';
+        /*$http.get('https://localhost/customer-relationship-management/apps/dataAll/type/vendors/format/json',{
+    headers: {'Authorization': 'Basic' + user.username+ ':'+user.password},"X-Requested-With": "XMLHttpRequest"})*/
+$http.get(url)
+        .success(function(data) {
+          //$scope.vendors = data.vendors;
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
+          console.log(data);
+        })
+        .error(function(status){
+          console.log(status);
+        })
+      
+     
+
+    //alert($scope.username);
+  }
+  
 })
-
+/*
 .controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
@@ -76,7 +83,7 @@ angular.module('starter.controllers', [])
     { title: 'Rap', id: 5 },
     { title: 'Cowbell', id: 6 }
   ];
-})
+})*/
 
 // vendor
 .controller('Vendor', 
