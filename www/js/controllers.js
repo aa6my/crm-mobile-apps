@@ -19,7 +19,7 @@
  * @copyright  2014 SEGI MiDae
  * @version    0.4.1
 */
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngResource','base64'])
 
 .factory('Settings', function() {
   return {
@@ -27,69 +27,161 @@ angular.module('starter.controllers', [])
       url : 'https://localhost/customer-relationship-management/apps'
   };
 })
+.factory('Auth', function(Base64){
+
+  return {
+    
+    config : {headers: {
+            'Authorization': 'Basic '+Base64.encode('admin@admin.com:123456'),
+            'Accept': 'application/json;odata=verbose',
+            "X-Testing" : "testing"
+        }
+    }
+  };
+})
+.factory('Base64', function () {
+    /* jshint ignore:start */
+ 
+    var keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+ 
+    return {
+        encode: function (input) {
+            var output = "";
+            var chr1, chr2, chr3 = "";
+            var enc1, enc2, enc3, enc4 = "";
+            var i = 0;
+ 
+            do {
+                chr1 = input.charCodeAt(i++);
+                chr2 = input.charCodeAt(i++);
+                chr3 = input.charCodeAt(i++);
+ 
+                enc1 = chr1 >> 2;
+                enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                enc4 = chr3 & 63;
+ 
+                if (isNaN(chr2)) {
+                    enc3 = enc4 = 64;
+                } else if (isNaN(chr3)) {
+                    enc4 = 64;
+                }
+ 
+                output = output +
+                    keyStr.charAt(enc1) +
+                    keyStr.charAt(enc2) +
+                    keyStr.charAt(enc3) +
+                    keyStr.charAt(enc4);
+                chr1 = chr2 = chr3 = "";
+                enc1 = enc2 = enc3 = enc4 = "";
+            } while (i < input.length);
+ 
+            return output;
+        },
+ 
+        decode: function (input) {
+            var output = "";
+            var chr1, chr2, chr3 = "";
+            var enc1, enc2, enc3, enc4 = "";
+            var i = 0;
+ 
+            // remove all characters that are not A-Z, a-z, 0-9, +, /, or =
+            var base64test = /[^A-Za-z0-9\+\/\=]/g;
+            if (base64test.exec(input)) {
+                window.alert("There were invalid base64 characters in the input text.\n" +
+                    "Valid base64 characters are A-Z, a-z, 0-9, '+', '/',and '='\n" +
+                    "Expect errors in decoding.");
+            }
+            input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+ 
+            do {
+                enc1 = keyStr.indexOf(input.charAt(i++));
+                enc2 = keyStr.indexOf(input.charAt(i++));
+                enc3 = keyStr.indexOf(input.charAt(i++));
+                enc4 = keyStr.indexOf(input.charAt(i++));
+ 
+                chr1 = (enc1 << 2) | (enc2 >> 4);
+                chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                chr3 = ((enc3 & 3) << 6) | enc4;
+ 
+                output = output + String.fromCharCode(chr1);
+ 
+                if (enc3 != 64) {
+                    output = output + String.fromCharCode(chr2);
+                }
+                if (enc4 != 64) {
+                    output = output + String.fromCharCode(chr3);
+                }
+ 
+                chr1 = chr2 = chr3 = "";
+                enc1 = enc2 = enc3 = enc4 = "";
+ 
+            } while (i < input.length);
+ 
+            return output;
+        }
+    };
+ 
+    /* jshint ignore:end */
+})
 
 .config(['$httpProvider', function($httpProvider, $http) {
         $httpProvider.defaults.useXDomain = true;
-        //.config(['$http', function($http) {
-       //$httpProvider.defaults.headers.common['Authorization'] = 'Basic admin@admin.com:123456';
-       $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-        // $httpProvider.defaults.headers.common['X-Requested-With'];
+$httpProvider.defaults.withCredentials = true;
+/*delete $httpProvider.defaults.headers.common["X-Requested-With"];*/
+$httpProvider.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+$httpProvider.defaults.headers.common["Accept"] = "application/json";
+$httpProvider.defaults.headers.common["Content-Type"] = "application/json";
+   
+         
     }
-])//run(['$http', function($http) {
-   //$http.defaults.headers.common['Authorization'] = 'Basic admin@admin.com : 123456';
-//}])
-
-.controller('Login', function($scope,$http, $ionicSideMenuDelegate, Settings) {
+])
+.controller('Login', function($scope,$http, $ionicSideMenuDelegate, Settings, Base64, $state) {
   $ionicSideMenuDelegate.canDragContent(false);
-//$http.defaults.headers.common['Authorization'] = 'Basic admin@admin.com : 123456';
 
 
-  $scope.doLogin = function(){
+    url = Settings.url + '/dataAll/type/vendors/format/json';
+  
+    
+   
+$scope.doLogin = function(){
 
     var user = {
       username : $scope.username,
       password : $scope.password
-    }
+    } 
 
-    url = Settings.url + '/dataAll/type/vendors/format/json';
-    //$http.defaults.headers.common = {"Access-Control-Request-Headers": "accept, origin, authorization"}; 
-    $http.defaults.headers.common['Authorization'] = 'Basic ' + 'admin@admin.com' + ':' + '123456';
-        /*$http.get('https://localhost/customer-relationship-management/apps/dataAll/type/vendors/format/json',{
-    headers: {'Authorization': 'Basic' + user.username+ ':'+user.password},"X-Requested-With": "XMLHttpRequest"})*/
-$http.get(url)
+    var auth = Base64.encode(user.username + ':' + user.password);
+    //alert(auth);
+var config = {headers: {
+            'Authorization': 'Basic '+auth,
+            'Accept': 'application/json;odata=verbose',
+            "X-Testing" : "testing"
+        }
+    };
+    
+
+$http.get(url, config)
         .success(function(data) {
-          //$scope.vendors = data.vendors;
-
-          console.log(data);
+         
+          $scope.success = "berjaya";
+          $state.go('app.main');
         })
-        .error(function(status){
-          console.log(status);
-        })
-      
-     
-
-    //alert($scope.username);
+        .error(function(data, status, headers, config){
+          $scope.success = "xberjaya";
+          console.log(config);
+        })             
   }
   
 })
-/*
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})*/
+
 
 // vendor
 .controller('Vendor', 
-    function($scope, $http, Settings) {
+    function($scope, $http, Settings, Auth) {
     url = Settings.url + '/dataAll/type/vendors/format/json';
-        $http.get(url).
+        $http.get(url, Auth.config).
         success(function(data) {
           $scope.vendors = data.vendors;
           console.log('Success', data.vendors);
@@ -113,7 +205,7 @@ $http.get(url)
 
 // lead
 .controller('Lead', 
-    function($scope, $http, Settings) {
+    function($scope, $http, Settings, Base64) {
     url = Settings.url + '/dataAll/type/leads/format/json';
         $http.get(url).
         success(function(data) {
