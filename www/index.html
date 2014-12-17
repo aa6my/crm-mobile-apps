@@ -6,11 +6,10 @@
     <title></title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">\
-    <link href="ft/css/bootstrap.css" rel="stylesheet" type="text/css">
-    <link href="ft/css/footable.core.css?v=2-0-1" rel="stylesheet" type="text/css">
-    <link href="ft/css/footable.metro.css" rel="stylesheet" type="text/css">
-    <link href="ft/css/footable.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="ft/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <link href="ft/css/footable.core.css?v=2-0-1" rel="stylesheet" type="text/css"/>
+    <link href="ft/css/footable.standalone.css" rel="stylesheet" type="text/css"/>
     <style rel="stylesheet" type="text/css">
     .view-icon {
       color : green;
@@ -38,6 +37,13 @@
     <script>
         if (!window.jQuery) { document.write('<script src="js/jquery-1.9.1.min.js"><\/script>'); }
     </script>
+    <!-- table's js-->
+    <script src="ft/js/footable.js?v=2-0-1" type="text/javascript"></script>
+    <script src="ft/js/footable.sort.js?v=2-0-1" type="text/javascript"></script>
+    <script src="ft/js/footable.filter.js?v=2-0-1" type="text/javascript"></script>
+    <script src="ft/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
+    <script src="ft/js/bootstrap-tab.js" type="text/javascript"></script>
+
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
@@ -46,10 +52,13 @@
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
+    
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script type="text/javascript" src="js/value_n_constant_service.js"></script>
+    <script type="text/javascript" src="js/services.js"></script>
+    <script type="text/javascript" src="js/config.js"></script>
     <script src="js/controllers.js"></script>
     <script type="text/javascript" src="js/angular-resource.js"></script>
     <script type="text/javascript" src="js/angular-base64.js"></script>
@@ -60,10 +69,4 @@
   <body ng-app="starter">
     <ion-nav-view></ion-nav-view>
   </body>
-   <!-- table's js-->
-    <script src="ft/js/footable.js?v=2-0-1" type="text/javascript"></script>
-    <script src="ft/js/footable.sort.js?v=2-0-1" type="text/javascript"></script>
-    <script src="ft/js/footable.filter.js?v=2-0-1" type="text/javascript"></script>
-    <script src="ft/js/footable.paginate.js?v=2-0-1" type="text/javascript"></script>
-    <script src="ft/js/footable.plugin.template.js?v=2-0-1" type="text/javascript"></script>
 </html>

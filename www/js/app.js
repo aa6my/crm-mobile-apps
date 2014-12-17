@@ -103,7 +103,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })    
-
+    .state('app.websiteAdd', {
+      url: "/websitesAdd",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/websitesAdd.html"
+        }
+      }
+    }) 
     .state('app.jobs', {
       url: "/jobs",
       views: {

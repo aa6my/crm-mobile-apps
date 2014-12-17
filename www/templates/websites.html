@@ -1,3 +1,4 @@
+<div ng-controller="Website">
 <ion-view title="Websites">
 
     <!--navigation button on top-->
@@ -9,16 +10,17 @@
     </ion-nav-buttons>
 
     <!-- content-->
-    <ion-content class="has-header" ng-controller="Website">
+    <ion-content class="has-header" >
         <ion-refresher
         pulling-text="Pull to refresh..."
         on-refresh="doRefresh()">
         </ion-refresher>
+
         <div class="ft-container">
-            <table class="footable" data-page-size="10">
+            <table class="footable" data-page-size="10" id="aa">
                 <thead>
                 <tr>
-                    <th>
+                    <th data-sort-initial="true">
                         Website Name
                     </th>
                     <th>
@@ -39,7 +41,7 @@
                     <td>
                         <a ng-click="viewWebsite(website)"><span class="glyphicon glyphicon-list"></span></a>
                         <a ng-click="editWebsite(website)"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a ng-click="deleteWebsite(website)"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a ng-click="deleteData(website)"><span class="glyphicon glyphicon-trash"></span></a>
 
 
                     </td>
@@ -52,31 +54,47 @@
                     </td>
                 </tr>
                 </tfoot>
+               <!--  <tfoot class="hide-if-no-paging">
+  <tr>
+    <td colspan="5" class="text-center">
+        <ul class="pagination">
+        </ul>
+    </td>
+  </tr>
+</tfoot> -->
             </table>
         </div>
-<script type="text/javascript">
-    $(function () {
-        $('table').footable();
 
-        $('.colour-switch a').click(function(e) {
-            e.preventDefault();
-            $('.colour-switch a').each(function() {
-                $('table').removeClass($(this).data('class'));
-            });
-            $('table').addClass($(this).data('class'));
-        });
-    });
-</script>
 </ion-content>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">
     <i class="icon ion-home"></i>
   </a>
   <a class="tab-item">
-    <i class="icon ion-star"></i>
+    <i class="icon ion-plus-circled" ng-click='addData()'></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-gear-a"></i>
   </a>
 </div>
 </ion-view>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        $('table').footable();
+        
+        /*$('table').data('page-size', 5);
+        $('table').trigger('footable_initialized');
+        $('table').trigger('footable_setup_paging');*/
+
+        //$('table').trigger('footable_redraw'); //force a redraw
+        /*$('.colour-switch a').click(function(e) {
+            e.preventDefault();
+            $('.colour-switch a').each(function() {
+                $('table').removeClass($(this).data('class'));
+            });
+            $('table').addClass($(this).data('class'));
+        });*/
+    });
+</script>

@@ -15,7 +15,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <table class="footable" data-page-size="10">
+            <table class="footable" data-page-size="1">
                 <thead>
                 <tr>
                     <th>
@@ -62,19 +62,6 @@
                 </tfoot>
             </table>
         </div>
-<script type="text/javascript">
-    $(function () {
-        $('table').footable();
-
-        $('.colour-switch a').click(function(e) {
-            e.preventDefault();
-            $('.colour-switch a').each(function() {
-                $('table').removeClass($(this).data('class'));
-            });
-            $('table').addClass($(this).data('class'));
-        });
-    });
-</script>
 </ion-content>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">
