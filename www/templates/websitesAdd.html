@@ -16,19 +16,22 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
+        <form action="" ng-submit="addData()">
             <div class="list">
-  <label class="item item-input item-stacked-label">
-    <span class="input-label">First Name</span>
-    <input type="text" placeholder="John">
-  </label>
-  <label class="item item-input item-stacked-label">
-    <span class="input-label">Last Name</span>
-    <input type="text" placeholder="Suhr">
-  </label>
-  <label class="item item-input item-stacked-label">
-    <span class="input-label">Email</span>
-    <input type="text" placeholder="john@suhr.com">
-  </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Website Name</span>
+                <input type="text" placeholder="Segimidae" name="website_name" ng-model="formData.website_name">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Website Url</span>
+                <input type="text" placeholder="segimidae.net" name="website_url" ng-model="formData.website_url">
+              </label>
+              
+            <div class="padding">
+                <button type="submit" class="button button-energized ion-android-checkbox-outline button-small">&nbsp;&nbsp;Submit</button>
+           <!-- <button class="button icon-left ion-star button-positive">Favorites</button> -->
+            </div>
+        </form>
 </div>
         </div>
 <script type="text/javascript">
