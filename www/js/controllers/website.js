@@ -1,34 +1,4 @@
 var apps = angular.module('websiteModule', ['ionic']);
-
-    /**
-     * This services only encapsulate for websiteModuleOnly and for website Controller only
-     * @param  {Object} ){                     var webFunc [description]
-     * @return {[type]}     [description]
-     */
- /*   apps.factory('websiteFunction', function(){
-
-        var webFunc = {};
-        var jenis = {
-                      add : false,
-                      edit : false
-                    };
-        
-
-            webFunc.buttonOnly = function(addVal, editVal){
-                jenis.add = addVal;
-                jenis.edit = editVal;
-                return jenis;
-            }
-
-            webFunc.returnButtonOnly = function(){
-                return jenis;
-            }
-
-            
-
-        return webFunc;
-    });*/
-
     apps.controller('Website',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Website(initial start of page will call this part) ============================= */
@@ -103,9 +73,9 @@ var apps = angular.module('websiteModule', ['ionic']);
                     var data        = {                             // data sent to Api
                                         type : "websites", 
                                         formData : this.formData
-                                      };
+                        };
                     var stateToRedirect = 'app.websites';
-                CrudOperation.add(params, data, stateToRedirect);  
+                    CrudOperation.add(params, data, stateToRedirect);  
               } 
         /*================================ End Add function ================================*/
 
@@ -117,15 +87,15 @@ var apps = angular.module('websiteModule', ['ionic']);
 
                     var params     = '/dataAll';                  // request Api link
                     var dataUpdate = {                             // field column need to update
-                    website_url : $scope.formData.website_url,
-                    website_name : $scope.formData.website_name
-                    };
+                                        website_url : $scope.formData.website_url,
+                                        website_name : $scope.formData.website_name
+                        };
                     var data       = {                             // data sent to Api
                                       type : "websites",
                                       primaryKey : 'website_id', 
                                       primaryKeyVal : $scope.formData.website_id,
                                       formData : dataUpdate
-                                    };
+                        };
                     var stateToRedirect = 'app.websites';           // State that will redirect after update process success
                     CrudOperation.update(params, data, stateToRedirect);  
                 } 
