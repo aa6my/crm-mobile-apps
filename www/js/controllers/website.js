@@ -1,8 +1,48 @@
 var apps = angular.module('websiteModule', ['ionic']);
 
-    apps.controller('Website',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation ) {
+    /**
+     * This services only encapsulate for websiteModuleOnly and for website Controller only
+     * @param  {Object} ){                     var webFunc [description]
+     * @return {[type]}     [description]
+     */
+ /*   apps.factory('websiteFunction', function(){
+
+        var webFunc = {};
+        var jenis = {
+                      add : false,
+                      edit : false
+                    };
+        
+
+            webFunc.buttonOnly = function(addVal, editVal){
+                jenis.add = addVal;
+                jenis.edit = editVal;
+                return jenis;
+            }
+
+            webFunc.returnButtonOnly = function(){
+                return jenis;
+            }
+
+            
+
+        return webFunc;
+    });*/
+
+    apps.controller('Website',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
-          /**************************** Website(initial start of page will call this part) ************************************/
+          /*=============== Website(initial start of page will call this part) ============================= */
+        
+        /*-------------- initial value for page to show or hide button in website form add/edit-------------*/
+        var m = UniversalFunction.returnButtonOnly();
+        $scope.btnAdd = m.add;
+        $scope.btnEdit = m.edit;
+        /*---------------------------*/
+
+        /*------------initial value for form data of update function ----*/
+        $scope.formData = UniversalFunction.returnDisplayFormData();
+        /*---------------------------------------------------------------*/
+        
          var url = Settings.url + '/dataAll/type/websites/format/json';
               $http
                 .get(url, Auth.doAuth(init.username, init.password))
@@ -20,49 +60,90 @@ var apps = angular.module('websiteModule', ['ionic']);
                        });
                     };
               }, function(err) {
-              console.error('ERR', err);
+                  console.error('ERR', err);
               
               })
 
-              $scope.goToAddDataPage = function(){  //function redirect to add form page
-                  $state.go('app.websiteAdd');
+               
+              $scope.goToAddDataPage = function(){
+
+                   $state.go('app.websiteAdd_Edit',{},{reload:false});
+                   /*------------- If click add new button show only submit button with save function--------------*/
+                   var m = UniversalFunction.buttonOnly(true,false);
+                   $scope.btnAdd = m.add;
+                   $scope.btnEdit = m.edit;
+                   /*---------------------------*/
+                   /*---- set form value to blank */
+                   UniversalFunction.displayFormData('');
+                   
+                  
               }
 
-               $scope.goToEditPage = function(){
-                  $state.go('app.websiteEdit');
+               $scope.goToEditDataPage = function(websites){
+
+                    $state.go('app.websiteAdd_Edit',{},{reload:false});
+                    /*-------------If click edit button show only save button with edit function--------------*/
+                    var n           = UniversalFunction.buttonOnly(false,true);
+                    $scope.btnAdd   = n.add;
+                    $scope.btnEdit  = n.edit;
+                    /*---------------------------*/
+                    /*-- display value form list into update form */
+                    var b           = UniversalFunction.displayFormData(websites);
+                    $scope.formData = b;
+                    
               }
-          /**************************** End Website page ************************************/
 
-
-
-
-
-          /**************************** Add function ************************************/
-            $scope.addData = function(){
-
-            $scope.formData = {};                           //store data from form into formData onject
-            var params      = '/dataAll';                   //request Api link
-            var data        = {                             //data sent to Api
-                                type : "websites", 
-                                formData : this.formData
-                              };
-            var stateToRedirect = 'app.websites';
-            $scope.CRUD.add(params, data, stateToRedirect);
-            
           
-        }
-         /**************************** End Add function ************************************/
+ 
+          /*================================ Add function ================================*/
+                $scope.addData  = function(){
+
+                    $scope.formData = {};                           // store data from form into formData onject
+                    var params      = '/dataAll';                   // request Api link
+                    var data        = {                             // data sent to Api
+                                        type : "websites", 
+                                        formData : this.formData
+                                      };
+                    var stateToRedirect = 'app.websites';
+                CrudOperation.add(params, data, stateToRedirect);  
+              } 
+        /*================================ End Add function ================================*/
 
 
 
 
-        /**************************** Delete function ************************************/
-          $scope.deleteData = function(website) {
-            var params = '/dataAll/type/websites/key/website_id/val/'+website.website_id;
-            CrudOperation.delete(params);
+        /*================================ Edit function ================================*/
+                $scope.editData = function(){
 
-          }
-          /**************************** End Delete function ************************************/
+                    var params     = '/dataAll';                  // request Api link
+                    var dataUpdate = {                             // field column need to update
+                    website_url : $scope.formData.website_url,
+                    website_name : $scope.formData.website_name
+                    };
+                    var data       = {                             // data sent to Api
+                                      type : "websites",
+                                      primaryKey : 'website_id', 
+                                      primaryKeyVal : $scope.formData.website_id,
+                                      formData : dataUpdate
+                                    };
+                    var stateToRedirect = 'app.websites';           // State that will redirect after update process success
+                    CrudOperation.update(params, data, stateToRedirect);  
+                } 
+        /*================================ End Edit function ================================*/
+
+
+
+
+        /*================================ Delete function ================================*/
+                $scope.deleteData = function(website) {
+                    var params = '/dataAll/type/websites/key/website_id/val/'+website.website_id;
+                    CrudOperation.delete(params);
+                }
+          /*================================ End Delete function ================================*/
+
+
+
+
 
       })
 

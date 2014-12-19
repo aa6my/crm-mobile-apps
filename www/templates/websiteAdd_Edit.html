@@ -16,7 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-        <form action="" ng-submit="addData()">
+        <form action="">
             <div class="list">
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Website Name</span>
@@ -28,7 +28,8 @@
               </label>
               
             <div class="padding">
-                <button type="submit" class="button button-energized ion-android-checkbox-outline button-small">&nbsp;&nbsp;Submit</button>
+                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
+                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
            <!-- <button class="button icon-left ion-star button-positive">Favorites</button> -->
             </div>
         </form>
@@ -53,7 +54,7 @@
     <i class="icon ion-home"></i>
   </a>
   <a class="tab-item">
-    <i class="icon ion-plus-circled" ng-click='addData()'></i>
+    <i class="icon ion-plus-circled"></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-gear-a"></i>

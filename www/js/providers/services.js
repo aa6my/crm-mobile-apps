@@ -104,16 +104,50 @@ angular
 /**
  * Universal function declare here, later controller will 
  * call this function when needed
+ * mostly suitable for process that can accessable by all controllers
  */
 .factory('UniversalFunction', function($http, Auth, init){
 
-   var func = {};
+   var func     = {};
+   var formData = {};
+   var jenis    = {
+                     add : false,
+                     edit : false
+                  };
 
        func.refreshOnce = function(urlToFetch){
         
          return $http.get(urlToFetch, Auth.doAuth(init.username, init.password));
          
        }
+
+       /*--- Mostly for EDIT FORM --
+       This function used to display data into form field when click edit button, so no need to reselect again from RESTful api, just take the data from list page into edit page
+        */
+       func.displayFormData = function(myData){
+                formData = myData;
+                return formData;
+       }
+
+       func.returnDisplayFormData = function(){
+              return formData;
+       }
+       /*-- end here --*/
+
+
+       /*
+       This function used to HIDE or SHOW button submit(for add) and save(for edit) since we use the same form/page for save and edit.
+        */
+       func.buttonOnly = function(addVal, editVal){
+                jenis.add = addVal;
+                jenis.edit = editVal;
+                return jenis;
+       }
+
+       func.returnButtonOnly = function(){
+                return jenis;
+       }
+       /*-- end here --*/
 
        return func;
 })
@@ -160,6 +194,18 @@ angular
             return config;
             break;
 
+
+            case 'PUT' : 
+              var config = {headers: {
+                      'Authorization': 'Basic '+auth,
+                      'Accept': 'application/json;odata=verbose',
+                      "X-Testing" : "testing",
+                      'X-HTTP-Method-Override' : 'PUT'
+                  }
+              };
+            return config;
+            break;
+
                        
           }
           
@@ -188,9 +234,8 @@ angular
       operation.delete = function(params, stateToRedirect){
       
           var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
-          var url           = Settings.url + params;
-          
-          var confirmPopup  = $ionicPopup.confirm({
+          var url             = Settings.url + params;          
+          var confirmPopup    = $ionicPopup.confirm({
                                                      title: 'Delete Confirmation',
                                                      template: 'Are you sure you want to delete this data?'
                                                    });
@@ -200,10 +245,8 @@ angular
                   if(res) 
                     {
                       $http.get(url, Auth.doAuth(init.username, init.password, 'DELETE'))
-                           .success(function(data) {
-                              
+                           .success(function(data) {                              
                                $state.go(stateToRedirect, {}, {reload: true});
-
                            })
                            .error(function(data, status, headers, config){ /* Error handling here */ })           
                      } 
@@ -221,19 +264,36 @@ angular
        */
       operation.add = function(params, data, stateToRedirect){
         
+          var url             = Settings.url + params;
+          var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
+
+                  $http.post(url,data, Auth.doAuth(init.username, init.password))
+                  .success(function(data) {            
+                    $state.go(stateToRedirect, {}, {reload: false});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
+
+                  })
+                  .error(function(data, status, headers, config){
+                    console.log(config);            
+                  }) 
+      }
+
+
+
+      operation.update = function(params, data, stateToRedirect){
+        
           var url = Settings.url + params;
           var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
 
-          $http.post(url,data, Auth.doAuth(init.username, init.password))
-          .success(function(data) {
-            
-            $state.go(stateToRedirect, {}, {reload: false});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
+                  $http.post(url,data, Auth.doAuth(init.username, init.password, 'PUT')) /* <----- different here with add method -- */
+                  .success(function(data) {
+                    
+                    $state.go(stateToRedirect, {}, {reload: false});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
 
-          })
-          .error(function(data, status, headers, config){
-            console.log(config);
-            
-          }) 
+                  })
+                  .error(function(data, status, headers, config){
+                    console.log(config);
+                    
+                  }) 
       }
 
 
