@@ -76,7 +76,8 @@ var apps = angular.module('websiteModule', ['ionic']);
                         };
                     var stateToRedirect = 'app.websites';
                     CrudOperation.add(params, data, stateToRedirect);  
-              } 
+
+                } 
         /*================================ End Add function ================================*/
 
 
