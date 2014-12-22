@@ -1,3 +1,4 @@
+<div ng-controller="File">
 <ion-view title="Files">
 
     <!--navigation button on top-->
@@ -9,7 +10,7 @@
     </ion-nav-buttons>
 
     <!-- content-->
-    <ion-content class="has-header" ng-controller="File">
+    <ion-content class="has-header">
         <ion-refresher
         pulling-text="Pull to refresh..."
         on-refresh="doRefresh()">
@@ -38,8 +39,8 @@
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
                         <a ng-click="viewFile(file)"><span class="glyphicon glyphicon-list"></span></a>
-                        <a ng-click="editFile(file)"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a ng-click="deleteFile(file)"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a ng-click="goToEditDataPage(file)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteData(file)"><span class="glyphicon glyphicon-trash"></span></a>
 
                     </td>
                 </tr>
@@ -59,10 +60,29 @@
     <i class="icon ion-home"></i>
   </a>
   <a class="tab-item">
-    <i class="icon ion-star"></i>
+    <i class="icon ion-plus-circled" ng-click='goToAddDataPage()'></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-gear-a"></i>
   </a>
 </div>
 </ion-view>
+<script type="text/javascript">
+    $(function () {
+
+        $('table').footable();
+        
+        /*$('table').data('page-size', 5);
+        $('table').trigger('footable_initialized');
+        $('table').trigger('footable_setup_paging');*/
+
+        //$('table').trigger('footable_redraw'); //force a redraw
+        /*$('.colour-switch a').click(function(e) {
+            e.preventDefault();
+            $('.colour-switch a').each(function() {
+                $('table').removeClass($(this).data('class'));
+            });
+            $('table').addClass($(this).data('class'));
+        });*/
+    });
+</script>

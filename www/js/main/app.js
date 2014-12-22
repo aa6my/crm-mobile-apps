@@ -145,6 +145,15 @@ angular.module('starter', [
       }
     })
 
+    .state('app.quoteAdd_Edit', {
+      url: "/quoteAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/quoteAdd_Edit.html"
+        }
+      }
+    }) 
+
     .state('app.websites', {
       url: "/websites",
       views: {
@@ -188,6 +197,15 @@ angular.module('starter', [
         }
       }
     })
+
+    .state('app.fileAdd_Edit', {
+      url: "/fileAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/fileAdd_Edit.html"
+        }
+      }
+    }) 
 
     .state('app.login', {
       url: "/login",
