@@ -72,6 +72,15 @@ angular.module('starter', [
       }
     })
 
+    .state('app.vendorAdd_Edit', {
+      url: "/vendorAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/vendorAdd_Edit.html"
+        }
+      }
+    })
+
     .state('app.leads', {
       url: "/leads",
       views: {
@@ -89,6 +98,7 @@ angular.module('starter', [
         }
       }
     })
+
     .state('app.customerAdd_Edit', {
       url: "/customerAdd_Edit",
       views: {
