@@ -90,6 +90,15 @@ angular.module('starter', [
       }
     })
 
+    .state('app.leadAdd_Edit', {
+      url: "/leadAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/leadAdd_Edit.html"
+        }
+      }
+    }) 
+
     .state('app.customers', {
       url: "/customers",
       views: {
@@ -116,6 +125,16 @@ angular.module('starter', [
         }
       }
     })
+
+    .state('app.productAdd_Edit', {
+      url: "/productAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/productAdd_Edit.html"
+        }
+      }
+    }) 
+
 
     .state('app.quotes', {
       url: "/quotes",
