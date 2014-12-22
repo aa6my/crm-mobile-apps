@@ -89,6 +89,14 @@ angular.module('starter', [
         }
       }
     })
+    .state('app.customerAdd_Edit', {
+      url: "/customerAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/customerAdd_Edit.html"
+        }
+      }
+    }) 
 
     .state('app.products', {
       url: "/products",
