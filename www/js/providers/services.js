@@ -6,8 +6,8 @@ angular
  */
 .factory('Settings', function() {
   return {
-      upload  : 'https://192.168.0.200/customer-relationship-management/assets/uploads/files/',
-      url     : 'https://192.168.0.200/customer-relationship-management/apps'
+      upload  : 'https://localhost/customer-relationship-management/assets/uploads/files/',
+      url     : 'https://localhost/customer-relationship-management/apps'
   };
 })
 
@@ -294,6 +294,45 @@ angular
                     console.log(config);
                     
                   }) 
+      }
+
+
+      operation.get = function(params){
+        
+          var url = Settings.url + params;
+          var kk = [];
+          //var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
+
+                var a =    $http.get(url, Auth.doAuth(init.username, init.password));
+                return a.success( function(response) {
+                            var data = response.data,
+                                status = response.status,
+                                header = response.header,
+                                config = response.config;
+                                return data;
+
+                        }, function(response) {
+                            var data = response.data,
+                                status = response.status,
+                                header = response.header,
+                                config = response.config;
+                            
+                        } );
+                //console.log(a.success.response);
+                         /* <----- different here with add method -- */
+                  //return a.success(function(data) {
+                    //var data = data;
+                    //return data;
+                    //return data;
+                    //$state.go(stateToRedirect, {}, {reload: false});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
+
+                  /*;
+                  a.error(function(data, status, headers, config){
+                    //console.log(config);
+                    
+                  });*/
+
+                   //return a;
       }
 
 

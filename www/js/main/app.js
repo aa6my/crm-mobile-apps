@@ -177,7 +177,23 @@ angular.module('starter', [
           templateUrl: "templates/jobs.html"
         }
       }
-    })    
+    })
+    /*.state('app.jobs.', {
+      url: "/jobs",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/jobs.html"
+        }
+      }
+    }) 
+    .state('app.jobs', {
+      url: "/jobs",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/jobs.html"
+        }
+      }
+    })  */  
 
 
     .state('app.invoices', {

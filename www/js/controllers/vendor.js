@@ -29,14 +29,17 @@ var apps = angular.module('vendorModule', ['ionic']);
                             $scope.$broadcast('scroll.refreshComplete');
                        });
                     };
-              }, function(err) {
-                  console.error('ERR', err);
-              
-              })
+              }, function(err) { console.error('ERR', err); })
+
+              /*-------------------- select country name and display into select option in add form ----------------- */
+              var params = '/dataAll/type/country/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.country_list = data.country;  });
+              /*------------ end selection ---------------------------------------------------------------------------*/
 
                
               $scope.goToAddDataPage = function(){
 
+                 //var public double m = {};
                    $state.go('app.vendorAdd_Edit',{},{reload:false});
                    /*------------- If click add new button show only submit button with save function--------------*/
                    var m = UniversalFunction.buttonOnly(true,false);
@@ -45,8 +48,7 @@ var apps = angular.module('vendorModule', ['ionic']);
                    /*---------------------------*/
                    /*---- set form value to blank */
                    UniversalFunction.displayFormData('');
-                   
-                  
+
               }
 
                $scope.goToEditDataPage = function(vendors){
