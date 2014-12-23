@@ -11,17 +11,15 @@
 
     <!-- content-->
     <ion-content class="has-header" >
-        <ion-refresher
-        pulling-text="Pull to refresh..."
-        on-refresh="doRefresh()">
-        </ion-refresher>
         <div class="ft-container">
         <form action="">
             <div class="list">
+
               <label class="item item-input item-stacked-label">
                 <span class="input-label">File Name</span>
                 <input type="text" placeholder="Segimidae" name="file_name" ng-model="formData.file_name">
               </label>
+
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Upload a file</span>
                 <input type="text" placeholder="Segimidae" name="file_content" ng-model="formData.file_content">

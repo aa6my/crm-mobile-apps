@@ -20,13 +20,19 @@
                 <thead>
                 <tr>
                     <th>
-                        Quote Number
+                        Quote Subject
                     </th>
                     <th>
                         Date Issued
                     </th>
                     <th>
                         Valid Until
+                    </th>
+                    <th data-hide="phone">
+                        Quote Terms
+                    </th>
+                    <th data-hide="phone">
+                        Quote Status
                     </th>
                     <th>
                         Action
@@ -36,11 +42,16 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="quote in quotes">
-                    <td>{{quote.quote_id}}</td>
+                    <td>{{quote.quote_subject}}</td>
                     <td>{{quote.quote_date_created}}</td>
                     <td>{{quote.quote_valid_until}}</td>
-                    <!-- <td data-value="78025368997">22 Jun 1972</td> -->
-                    <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
+                    <td>{{quote.quote_customer_notes}}</td>
+                    <td>
+                        <span ng-show="{{quote.quote_status==0}}">DRAFT</span>
+                        <span ng-show="{{quote.quote_status==1}}">ACCEPTED</span>
+                        <span ng-show="{{quote.quote_status==2}}">REJECTED</span>
+                        <span ng-show="{{quote.quote_status==3}}">CANCEL</span>
+                    </td>
                     <td>
                         <a ng-click="viewQuote(quote)"><span class="glyphicon glyphicon-list"></span></a>
                         <a ng-click="goToEditDataPage(quote)"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -53,7 +64,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td colspan="5" class="text-center">
+                        <td colspan="6" class="text-center">
                         <ul class="pagination">
                         </ul>
                         </td>

@@ -11,10 +11,6 @@
 
     <!-- content-->
     <ion-content class="has-header" >
-        <ion-refresher
-        pulling-text="Pull to refresh..."
-        on-refresh="doRefresh()">
-        </ion-refresher>
         <div class="ft-container">
         <form action="">
             <div class="list">
@@ -22,6 +18,7 @@
                 <span class="input-label">Website Name</span>
                 <input type="text" placeholder="Segimidae" name="website_name" ng-model="formData.website_name">
               </label>
+
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Website Url</span>
                 <input type="text" placeholder="segimidae.net" name="website_url" ng-model="formData.website_url">

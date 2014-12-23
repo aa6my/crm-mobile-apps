@@ -1,4 +1,4 @@
-var apps = angular.module('quoteModule', ['ionic']);
+var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
     apps.controller('Quote',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== quote(initial start of page will call this part) ============================= */
@@ -120,6 +120,24 @@ var apps = angular.module('quoteModule', ['ionic']);
 
 
 
+
+  $scope.open1 = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened1 = true;
+  };
+  $scope.open2 = function($event) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    $scope.opened2 = true;
+  };
+
+
+
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
 
 
       })

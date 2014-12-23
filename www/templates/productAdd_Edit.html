@@ -10,30 +10,31 @@
     </ion-nav-buttons>
 
     <!-- content-->
-    <ion-content class="has-header" >
-        <ion-refresher
-        pulling-text="Pull to refresh..."
-        on-refresh="doRefresh()">
-        </ion-refresher>
+    <ion-content class="has-header">
         <div class="ft-container">
         <form action="">
             <div class="list">
+
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product SKU</span>
                 <input type="text" placeholder="Segimidae" name="product_sku" ng-model="formData.product_sku">
               </label>
+
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product Name</span>
                 <input type="text" placeholder="Segimidae" name="product_name" ng-model="formData.product_name">
               </label>
+
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product Description</span>
                 <input type="text" placeholder="Segimidae" name="product_desc" ng-model="formData.product_desc">
               </label>
+
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product Quantity</span>
                 <input type="text" placeholder="Segimidae" name="product_quantity" ng-model="formData.product_quantity">
               </label>
+
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product Amount</span>
                 <input type="text" placeholder="Segimidae" name="product_amount" ng-model="formData.product_amount">
