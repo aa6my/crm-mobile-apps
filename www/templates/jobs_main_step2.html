@@ -1,0 +1,96 @@
+
+        
+           
+
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Job Description</span>
+                <input type="text" placeholder="Segimidae" name="quote_subject" ng-model="formData.job_description">
+              </label>
+
+               
+                <label class="item item-input item-stacked-label">
+                  <div class="input-label">
+                    Assign Website
+                  </div>
+                  <br/>
+                  <select ng-model="formData.website_id">
+                  	<option value="">--Choose website--</option>
+                  	<option ng-repeat="cc in websites" value="{{cc.website_id}}">{{cc.website_url}}</option>
+                  </select>
+                </label>
+              
+                <label class="item item-input item-stacked-label">
+                  <div class="input-label">
+                    Assign Customer
+                  </div>
+                  <br/>
+                  <select ng-model="formData.customer_id">
+                  	<option value="">--Choose customer--</option>
+                    <option ng-repeat="cc in customers" value="{{cc.customer_id}}">{{cc.customer_name}}</option>
+                    
+                  </select>
+                </label>
+              
+
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Job Renewal Date</span>               
+              </label><div class="row">
+                <div class="col-md-2">
+                  <p class="input-group">
+                      <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.job_renewal_date" is-open="$parent.openFor['opened5']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened5')"><i class="glyphicon glyphicon-calendar"></i></button>
+                      </span>
+                  </p>
+                </div>
+              </div>
+
+              <label class="item item-input item-stacked-label">
+                  <div class="input-label">
+                    Task Type
+                  </div>
+                  <br/>
+                  <select ng-model="formData.job_task_type">
+                  	<option value="">--Choose Task--</option>
+                    <option value="0">New</option>
+                    <option value="1">Existing</option>
+                    
+                  </select>
+                </label>
+
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Discount Amount</span>
+                <input type="text" placeholder="Segimidae" name="quote_discount" ng-model="formData.job_discount_amount">
+              </label>
+
+               <label class="item item-input item-stacked-label">
+                <span class="input-label">Discount Name</span>
+                <input type="text" placeholder="Segimidae" name="quote_discount" ng-model="formData.job_discount_name">
+              </label>
+
+              
+                <label class="item item-input item-stacked-label">
+                  <div class="input-label">
+                    Discount Type
+                  </div>
+                  <br/>
+                  <select ng-model="formData.job_discount_type">
+                    <option value="">--Choose job type--</option>
+                  	<option value="0">Before Tax</option>
+                  	<option value="1">After Tax</option>
+                  </select>
+                </label>
+              
+
+              <div class="padding">
+               <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="goToStep('step1')">&nbsp;&nbsp;Back</button>
+
+               <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()">&nbsp;&nbsp;Submit</button>
+              </div>
+            <!-- <div class="padding">
+                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
+                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
+           
+            </div> -->
+        
+

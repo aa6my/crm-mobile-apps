@@ -301,7 +301,7 @@ angular
         
           var url = Settings.url + params;
           var kk = [];
-          //var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
+          
 
                 var a =    $http.get(url, Auth.doAuth(init.username, init.password));
                 return a.success( function(response) {
@@ -318,21 +318,7 @@ angular
                                 config = response.config;
                             
                         } );
-                //console.log(a.success.response);
-                         /* <----- different here with add method -- */
-                  //return a.success(function(data) {
-                    //var data = data;
-                    //return data;
-                    //return data;
-                    //$state.go(stateToRedirect, {}, {reload: false});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
-
-                  /*;
-                  a.error(function(data, status, headers, config){
-                    //console.log(config);
-                    
-                  });*/
-
-                   //return a;
+                
       }
 
 

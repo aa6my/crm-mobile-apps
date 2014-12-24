@@ -178,6 +178,14 @@ angular.module('starter', [
         }
       }
     })
+    .state('app.jobs_main', {
+      url: "/jobs_main",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/jobs_main.html"
+        }
+      }
+    })
     /*.state('app.jobs.', {
       url: "/jobs",
       views: {
