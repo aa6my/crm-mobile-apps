@@ -16,7 +16,7 @@
         </ion-refresher> -->
         <div class="ft-container">
             <div ng-switch="step">
-                <div ng-switch-when='step1'>
+                <div ng-switch-when='step1' ng-model='type'>
                     <div ng-include src="'templates/jobs_main_step1.html'"></div>
                     <!-- <button ng-click="goToStep('step2')">Next</button> -->
                 </div> 

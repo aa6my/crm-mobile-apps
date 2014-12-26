@@ -13,9 +13,13 @@
                     Type
                   </div>
                   <br/>
-                  <select ng-model="formData.job_type_id">
-                  	<option value="">--Choose job type--</option>
-                  	<option ng-repeat="cc in job_types" value="{{cc.job_type_id}}">{{cc.job_type_name}}</option>
+                  <!-- <select ng-model="formData.job_type_id">
+                  	
+                  	<option ng-repeat="cc in job_types" value="{{cc.job_type_id}}" ng-selected="{{cc.job_type_id==formData.job_type_id}}">{{cc.job_type_name}}</option>
+                  </select> -->
+                  <select  ng-model="formData.job_type_id" ng-options="cc.job_type_id as cc.job_type_name for cc in job_types track by cc.job_type_id" ng-selected="{{cc.job_type_id}}">
+                  	<option value="">dd</option>
+                  	<!-- <option ng-repeat="cc in job_types" value="{{cc.job_type_id}}" ng-selected="{{cc.job_type_id==formData.job_type_id}}">{{cc.job_type_name}}</option> -->
                   </select>
                 </label>
               

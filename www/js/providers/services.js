@@ -112,25 +112,23 @@ angular
    var formData = {};
    var jenis    = {
                      add : false,
-                     edit : false
+                     edit : false,
+                     operationType : 'add'
                   };
 
-       func.refreshOnce = function(urlToFetch){
-        
-         return $http.get(urlToFetch, Auth.doAuth(init.username, init.password));
-         
+       func.refreshOnce = function(urlToFetch){        
+            return $http.get(urlToFetch, Auth.doAuth(init.username, init.password));         
        }
 
        /*--- Mostly for EDIT FORM --
        This function used to display data into form field when click edit button, so no need to reselect again from RESTful api, just take the data from list page into edit page
         */
        func.displayFormData = function(myData){
-                formData = myData;
-                return formData;
+            formData = myData;
+            return formData;
        }
-
        func.returnDisplayFormData = function(){
-              return formData;
+            return formData;
        }
        /*-- end here --*/
 
@@ -138,14 +136,13 @@ angular
        /*
        This function used to HIDE or SHOW button submit(for add) and save(for edit) since we use the same form/page for save and edit.
         */
-       func.buttonOnly = function(addVal, editVal){
-                jenis.add = addVal;
-                jenis.edit = editVal;
-                return jenis;
+       func.buttonOnly = function(addVal, editVal){                
+            jenis.add           = addVal;   // value TRUE or FALSE
+            jenis.edit          = editVal;  // value TRUE or FALSE               
+            return jenis;
        }
-
        func.returnButtonOnly = function(){
-                return jenis;
+            return jenis;
        }
        /*-- end here --*/
 
@@ -182,7 +179,6 @@ angular
               };
             return config;
             break;
-            
 
             case 'GET_n_POST' : 
               var config = {headers: {
@@ -194,7 +190,6 @@ angular
             return config;
             break;
 
-
             case 'PUT' : 
               var config = {headers: {
                       'Authorization': 'Basic '+auth,
@@ -205,7 +200,6 @@ angular
               };
             return config;
             break;
-
                        
           }
           

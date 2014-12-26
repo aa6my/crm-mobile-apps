@@ -43,7 +43,8 @@
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
                         <a ng-click="viewJob(job)"><span class="glyphicon glyphicon-list"></span></a>
-                        <a ng-click="editJob(job)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="goToAddJobTask(job)"><span class="icon ion-clipboard" ></span></a>
+                        <a ng-click="goToEditDataPage(job)"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a ng-click="deleteData(job)"><span class="glyphicon glyphicon-trash"></span></a>
                     </td>
                 </tr>
@@ -63,7 +64,7 @@
     <i class="icon ion-home"></i>
   </a>
    <a class="tab-item">
-    <i class="icon ion-plus-circled" ng-click='goToAddDataPage()'></i>
+    <i class="icon ion-plus-circled" ng-click='goToAddDataPage("add")'></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-gear-a"></i>

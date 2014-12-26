@@ -85,7 +85,10 @@
               <div class="padding">
                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="goToStep('step1')">&nbsp;&nbsp;Back</button>
 
-               <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()">&nbsp;&nbsp;Submit</button>
+               <!-- <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()">&nbsp;&nbsp;Submit</button> -->
+
+               <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
+                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
               </div>
             <!-- <div class="padding">
                 <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
