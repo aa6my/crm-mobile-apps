@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.segimidae.crm" version="0.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>SegiMidae</name>
+  <name>SegiMidaeCRM</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Segi Midae CRM
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="support@segimidae.net" href="http://segimidae.net/">
+      Segi Midae Developer Team
     </author>
   <content src="index.html"/>
   <access origin="*"/>
@@ -14,7 +14,7 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen" />
-<preference name="SplashScreenDelay" value="3000" />
+  <preference name="SplashScreenDelay" value="3000" />
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>

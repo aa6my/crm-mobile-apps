@@ -13,23 +13,33 @@ var apps = angular.module('vendorModule', ['ionic']);
         $scope.formData = UniversalFunction.returnDisplayFormData();
         /*---------------------------------------------------------------*/
         
-         var url = Settings.url + '/dataAll/type/vendors/format/json';
-              $http
+
+        
+
+            var url = Settings.url + '/dataAll/type/vendors/format/json';
+            
+             $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
-                    $scope.vendors = data.vendors;
-                
-                    $scope.doRefresh = function(){
-                      $http
-                        .get(url, Auth.doAuth(init.username, init.password))
-                        .success(function(data){
-                            $scope.vendors = data.vendors;
-                        })
-                        .finally(function(){
-                            $scope.$broadcast('scroll.refreshComplete');
-                       });
-                    };
-              }, function(err) { console.error('ERR', err); })
+                  $scope.vendors = function(){
+                     $('.footable').trigger('footable_redraw');
+                      return data.vendors;
+                    }
+                    
+                     });
+                     
+
+
+
+         
+
+
+
+
+
+
+
+
 
               /*-------------------- select country name and display into select option in add form ----------------- */
               var params = '/dataAll/type/country/format/json';

@@ -135,9 +135,12 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
   };
 
 
-
+/*
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
   $scope.format = $scope.formats[0];
+*/
+      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy','yyyy-MM-dd', 'shortDate'];
+      $scope.format  = $scope.formats[3];
 
 
       })

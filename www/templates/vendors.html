@@ -1,4 +1,4 @@
-<div ng-controller="Vendor">
+<div ng-controller="Vendor" ng-app="vendorModule">
 <ion-view title="Vendors">
 
     <!--navigation button on top-->
@@ -16,7 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <table class="footable" data-page-size="10">
+            <table class="footable" data-page-size="5" data-page-navigation=".pagination">
                 <thead>
                 <tr>
                     <th>
@@ -38,7 +38,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="vendor in vendors">
+
+                <tr ng-repeat="vendor in vendors()">
+                   
                     <td>{{vendor.vendor_name}}</td>
                     <td>{{vendor.vendor_firstname}} {{vendor.vendor_lastname}}</td>
                     <td>{{vendor.vendor_phone}}</td>
@@ -55,14 +57,15 @@
                 </tr>
                 </tbody>
                 <tfoot>
-                    <tr>
-                        <td colspan="5" class="text-center">
-                        <ul class="pagination">
-                        </ul>
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="5">
+                        <div class="pagination pagination-centered"></div>
+                    </td>
+                </tr>
                 </tfoot>
             </table>
+            <table>
+            <tr ng-repeat="n in vendors"><td>test {{n}}</td></tr></table>
         </div>
 </ion-content>
   <div class="tabs tabs-icon-only">
@@ -79,21 +82,22 @@
 </ion-view>
 </div>
 <script type="text/javascript">
-    $(function () {
-
-        $('table').footable();
-        
-        /*$('table').data('page-size', 5);
-        $('table').trigger('footable_initialized');
-        $('table').trigger('footable_setup_paging');*/
-
-        //$('table').trigger('footable_redraw'); //force a redraw
-        /*$('.colour-switch a').click(function(e) {
-            e.preventDefault();
-            $('.colour-switch a').each(function() {
-                $('table').removeClass($(this).data('class'));
-            });
-            $('table').addClass($(this).data('class'));
-        });*/
-    });
-</script>
+ $(function () {
+            $('table').footable();
+                    $('#change-page-size').change(function (e) {
+                        e.preventDefault();
+                        var pageSize = $(this).val();
+                        $('.footable').data('page-size', pageSize);
+                        $('.footable').trigger('footable_initialized');
+                       
+                    });
+                    $('#change-nav-size').change(function (e) {
+                        e.preventDefault();
+                        var navSize = $(this).val();
+                        $('.footable').data('limit-navigation', navSize);
+                        $('.footable').trigger('footable_initialized');
+                       
+                    });
+                    $('table').trigger('footable_redraw');
+        });
+    </script>
