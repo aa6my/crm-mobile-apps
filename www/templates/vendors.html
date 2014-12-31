@@ -16,7 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <table class="footable" data-page-size="5" data-page-navigation=".pagination">
+            <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
                     <th>
@@ -77,23 +77,8 @@
 </ion-view>
 </div>
 
-<!-- footable js-->
 <script type="text/javascript">
- $(function () {
-            $('table').footable();
-                    $('#change-page-size').change(function (e) {
-                        e.preventDefault();
-                        var pageSize = $(this).val();
-                        $('.footable').data('page-size', pageSize);
-                        $('.footable').trigger('footable_initialized');
-                       
-                    });
-                    $('#change-nav-size').change(function (e) {
-                        e.preventDefault();
-                        var navSize = $(this).val();
-                        $('.footable').data('limit-navigation', navSize);
-                        $('.footable').trigger('footable_initialized');
-                    });
-                   
-        });
+    $(function () {
+        $('table').footable();
+    });
 </script>
