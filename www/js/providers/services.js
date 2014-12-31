@@ -146,6 +146,14 @@ angular
        }
        /*-- end here --*/
 
+
+       func.redraw = function(value){
+            return function(){
+                    $('.footable').trigger('footable_redraw');
+                      return value;
+                    }
+       }
+
        return func;
 })
 

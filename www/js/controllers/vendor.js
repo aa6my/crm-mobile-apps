@@ -12,32 +12,32 @@ var apps = angular.module('vendorModule', ['ionic']);
         /*------------initial value for form data of update function ----*/
         $scope.formData = UniversalFunction.returnDisplayFormData();
         /*---------------------------------------------------------------*/
-        
+
             var url = Settings.url + '/dataAll/type/vendors/format/json';
             
-             $http
+              $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
-                  $scope.vendors = function(){
-                     $('.footable').trigger('footable_redraw');
-                      return data.vendors;
-                    }
-                    $scope.doRefresh = function(){
-                      $http
-                        .get(url, Auth.doAuth(init.username, init.password))
-                        .success(function(data){
-                            $scope.leads = data.leads;
-                        })
-                        .finally(function(){
-                            $scope.$broadcast('scroll.refreshComplete');
-                       });
-                    };
+                 
+                    $scope.vendors = UniversalFunction.redraw(data.vendors);
+                    
               }, function(err) {
                   console.error('ERR', err);
               
               })
                     
-                    
+            $scope.doRefresh = function(){
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                  
+                    $scope.vendors = UniversalFunction.redraw(data.vendors);
+
+              })
+              .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+              });
+            };                    
           
 
               /*-------------------- select country name and display into select option in add form ----------------- */
@@ -132,7 +132,7 @@ var apps = angular.module('vendorModule', ['ionic']);
                     $state.go('app.vendors');
 
                   }
-          /*================================ End Delete function ================================*/
+          /*================================ End back function ================================*/
 
 
       })
