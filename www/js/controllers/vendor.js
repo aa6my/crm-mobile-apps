@@ -22,8 +22,22 @@ var apps = angular.module('vendorModule', ['ionic']);
                      $('.footable').trigger('footable_redraw');
                       return data.vendors;
                     }
+                    $scope.doRefresh = function(){
+                      $http
+                        .get(url, Auth.doAuth(init.username, init.password))
+                        .success(function(data){
+                            $scope.leads = data.leads;
+                        })
+                        .finally(function(){
+                            $scope.$broadcast('scroll.refreshComplete');
+                       });
+                    };
+              }, function(err) {
+                  console.error('ERR', err);
+              
+              })
                     
-                     });
+                    
           
 
               /*-------------------- select country name and display into select option in add form ----------------- */
