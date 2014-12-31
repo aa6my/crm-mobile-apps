@@ -1,7 +1,7 @@
 var apps = angular.module('websiteModule', ['ionic']);
     apps.controller('Website',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
-          /*=============== Website(initial start of page will call this part) ============================= */
+          /*=============== website(initial start of page will call this part) ============================= */
         
         /*-------------- initial value for page to show or hide button in website form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
@@ -12,31 +12,39 @@ var apps = angular.module('websiteModule', ['ionic']);
         /*------------initial value for form data of update function ----*/
         $scope.formData = UniversalFunction.returnDisplayFormData();
         /*---------------------------------------------------------------*/
-        
-         var url = Settings.url + '/dataAll/type/websites/format/json';
+
+            var url = Settings.url + '/dataAll/type/websites/format/json';
+
+            
               $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
-                    $scope.websites = data.websites;
-                
-                    $scope.doRefresh = function(){
-                      $http
-                        .get(url, Auth.doAuth(init.username, init.password))
-                        .success(function(data){
-                            $scope.websites = data.websites;
-                        })
-                        .finally(function(){
-                            $scope.$broadcast('scroll.refreshComplete');
-                       });
-                    };
+                 
+                    $scope.websites = UniversalFunction.redraw(data.websites);
+                    //console.log(data);
+                    
               }, function(err) {
                   console.error('ERR', err);
               
               })
+                    
+            $scope.doRefresh = function(){
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                  
+                    $scope.websites = UniversalFunction.redraw(data.websites);
 
+              })
+              .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+              });
+            };                    
+          
                
               $scope.goToAddDataPage = function(){
 
+                 //var public double m = {};
                    $state.go('app.websiteAdd_Edit',{},{reload:false});
                    /*------------- If click add new button show only submit button with save function--------------*/
                    var m = UniversalFunction.buttonOnly(true,false);
@@ -45,8 +53,7 @@ var apps = angular.module('websiteModule', ['ionic']);
                    /*---------------------------*/
                    /*---- set form value to blank */
                    UniversalFunction.displayFormData('');
-                   
-                  
+
               }
 
                $scope.goToEditDataPage = function(websites){
@@ -81,8 +88,6 @@ var apps = angular.module('websiteModule', ['ionic']);
         /*================================ End Add function ================================*/
 
 
-
-
         /*================================ Edit function ================================*/
                 $scope.editData = function(){
 
@@ -103,8 +108,6 @@ var apps = angular.module('websiteModule', ['ionic']);
         /*================================ End Edit function ================================*/
 
 
-
-
         /*================================ Delete function ================================*/
                 $scope.deleteData = function(website) {
                     var params = '/dataAll/type/websites/key/website_id/val/'+website.website_id;
@@ -112,8 +115,12 @@ var apps = angular.module('websiteModule', ['ionic']);
                 }
           /*================================ End Delete function ================================*/
 
+          /*================================ Back function ================================*/
+                 $scope.backWebsite = function() {
+                    $state.go('app.websites');
 
-
+                  }
+          /*================================ End back function ================================*/
 
 
       })
