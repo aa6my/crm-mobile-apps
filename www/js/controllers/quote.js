@@ -14,25 +14,30 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
         /*---------------------------------------------------------------*/
         
          var url = Settings.url + '/dataAll/type/quotes/format/json';
-              $http
+             
+             $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
-                    $scope.quotes = data.quotes;
-                
-                    $scope.doRefresh = function(){
-                      $http
-                        .get(url, Auth.doAuth(init.username, init.password))
-                        .success(function(data){
-                            $scope.quotes = data.quotes;
-                        })
-                        .finally(function(){
-                            $scope.$broadcast('scroll.refreshComplete');
-                       });
-                    };
+                 
+                    $scope.quotes = UniversalFunction.redraw(data.quotes);
+                    
               }, function(err) {
                   console.error('ERR', err);
               
               })
+                    
+            $scope.doRefresh = function(){
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                  
+                    $scope.quotes = UniversalFunction.redraw(data.quotes);
+
+              })
+              .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+              });
+            };
 
                
               $scope.goToAddDataPage = function(){
@@ -117,6 +122,13 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                     CrudOperation.delete(params);
                 }
           /*================================ End Delete function ================================*/
+
+          /*================================ Back function ================================*/
+                 $scope.backQuote = function() {
+                    $state.go('app.quotes');
+
+                  }
+          /*================================ End back function ================================*/
 
 
 

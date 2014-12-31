@@ -1,9 +1,9 @@
-<div ng-controller="Lead">
+<div ng-controller="Lead" ng-app="leadModule">
 <ion-view title="Leads">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
-        <button menu-toggle="left"class="button button-icon icon ion-android-options"></button>
+        <button menu-toggle="left"class="button button-icon icon ion-android-arrow-back"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
         <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
@@ -16,7 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <table class="footable" data-page-size="10">
+            <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
                     <th>
@@ -38,7 +38,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="lead in leads">
+                <tr ng-repeat="lead in leads()">
                     <td>{{lead.lead_name}}</td>
                     <td>{{lead.lead_firstname}} {{lead.lead_lastname}}</td>
                     <td>{{lead.lead_phone}}</td>

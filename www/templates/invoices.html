@@ -1,3 +1,4 @@
+<div ng-controller="Invoice" ng-app="invoiceModule">
 <ion-view title="Invoices">
 
     <!--navigation button on top-->
@@ -9,13 +10,13 @@
     </ion-nav-buttons>
 
     <!-- content-->
-    <ion-content class="has-header" ng-controller="Invoice">
+    <ion-content class="has-header">
         <ion-refresher
         pulling-text="Pull to refresh..."
         on-refresh="doRefresh()">
         </ion-refresher>
          <div class="ft-container">
-            <table class="footable" data-page-size="10">
+            <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
                     <th>
@@ -34,7 +35,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="invoice in invoices">
+                <tr ng-repeat="invoice in invoices()">
                     <td>{{invoice.invoice_number}}</td>
                     <td>{{invoice.invoice_date_created}}</td>
                     <td>{{invoice.invoice_subject}}</td>
@@ -50,11 +51,12 @@
                 </tr>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <td colspan="5">
-                        <div class="pagination pagination-centered"></div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                        <ul class="pagination">
+                        </ul>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
@@ -71,3 +73,9 @@
   </a>
 </div>
 </ion-view>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('table').footable();
+    });
+</script>

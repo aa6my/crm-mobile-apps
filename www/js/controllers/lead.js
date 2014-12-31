@@ -14,25 +14,30 @@ var apps = angular.module('leadModule', ['ionic']);
         /*---------------------------------------------------------------*/
         
          var url = Settings.url + '/dataAll/type/leads/format/json';
+
               $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
-                    $scope.leads = data.leads;
-                
-                    $scope.doRefresh = function(){
-                      $http
-                        .get(url, Auth.doAuth(init.username, init.password))
-                        .success(function(data){
-                            $scope.leads = data.leads;
-                        })
-                        .finally(function(){
-                            $scope.$broadcast('scroll.refreshComplete');
-                       });
-                    };
+                 
+                    $scope.leads = UniversalFunction.redraw(data.leads);
+                    
               }, function(err) {
                   console.error('ERR', err);
               
               })
+                    
+            $scope.doRefresh = function(){
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                  
+                    $scope.leads = UniversalFunction.redraw(data.leads);
+
+              })
+              .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+              });
+            };
 
                
               $scope.goToAddDataPage = function(){
@@ -120,6 +125,12 @@ var apps = angular.module('leadModule', ['ionic']);
                 }
           /*================================ End Delete function ================================*/
 
+          /*================================ Back function ================================*/
+                 $scope.backLead = function() {
+                    $state.go('app.leads');
+
+                  }
+          /*================================ End back function ================================*/
 
 
 
