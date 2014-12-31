@@ -3,7 +3,7 @@
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
-        <button menu-toggle="left"class="button button-icon icon ion-android-options"></button>
+        <button menu-toggle="left"class="button button-icon icon ion-android-arrow-back"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
         <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
@@ -33,26 +33,21 @@
                     </th>
                     <th>
                         Action
-                    </th>
-                
+                    </th>    
                 </tr>
                 </thead>
                 <tbody>
 
+            <!-- Get data -->
                 <tr ng-repeat="vendor in vendors()">
-                   
                     <td>{{vendor.vendor_name}}</td>
                     <td>{{vendor.vendor_firstname}} {{vendor.vendor_lastname}}</td>
                     <td>{{vendor.vendor_phone}}</td>
                     <td>{{vendor.vendor_email}}</td>
-                    <!-- <td data-value="78025368997">22 Jun 1972</td> -->
-                    <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
                         <a ng-click="viewVendor(vendor)"><span class="glyphicon glyphicon-list"></span></a>
                         <a ng-click="goToEditDataPage(vendor)"><span class="glyphicon glyphicon-pencil"></span></a>
                         <a ng-click="deleteData(vendor)"><span class="glyphicon glyphicon-trash"></span></a>
-
-
                     </td>
                 </tr>
                 </tbody>
@@ -64,9 +59,9 @@
                 </tr>
                 </tfoot>
             </table>
-            <table>
-            <tr ng-repeat="n in vendors"><td>test {{n}}</td></tr></table>
         </div>
+
+<!-- Tab on page-->
 </ion-content>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">
@@ -81,6 +76,8 @@
 </div>
 </ion-view>
 </div>
+
+<!-- footable js-->
 <script type="text/javascript">
  $(function () {
             $('table').footable();
@@ -96,8 +93,7 @@
                         var navSize = $(this).val();
                         $('.footable').data('limit-navigation', navSize);
                         $('.footable').trigger('footable_initialized');
-                       
                     });
-                    $('table').trigger('footable_redraw');
+                   
         });
-    </script>
+</script>

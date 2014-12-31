@@ -13,9 +13,6 @@ var apps = angular.module('vendorModule', ['ionic']);
         $scope.formData = UniversalFunction.returnDisplayFormData();
         /*---------------------------------------------------------------*/
         
-
-        
-
             var url = Settings.url + '/dataAll/type/vendors/format/json';
             
              $http
@@ -27,19 +24,7 @@ var apps = angular.module('vendorModule', ['ionic']);
                     }
                     
                      });
-                     
-
-
-
-         
-
-
-
-
-
-
-
-
+          
 
               /*-------------------- select country name and display into select option in add form ----------------- */
               var params = '/dataAll/type/country/format/json';
@@ -93,8 +78,6 @@ var apps = angular.module('vendorModule', ['ionic']);
         /*================================ End Add function ================================*/
 
 
-
-
         /*================================ Edit function ================================*/
                 $scope.editData = function(){
 
@@ -123,8 +106,6 @@ var apps = angular.module('vendorModule', ['ionic']);
         /*================================ End Edit function ================================*/
 
 
-
-
         /*================================ Delete function ================================*/
                 $scope.deleteData = function(vendor) {
                     var params = '/dataAll/type/vendors/key/vendor_id/val/'+vendor.vendor_id;
@@ -132,8 +113,12 @@ var apps = angular.module('vendorModule', ['ionic']);
                 }
           /*================================ End Delete function ================================*/
 
+          /*================================ Back function ================================*/
+                 $scope.backVendor = function() {
+                    $state.go('app.vendors');
 
-
+                  }
+          /*================================ End Delete function ================================*/
 
 
       })

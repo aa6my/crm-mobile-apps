@@ -69,16 +69,11 @@
 
                 <label class="item item-input item-stacked-label">
                   <div class="input-label">
-                    Quote Status
+                    Country
                   </div>
                   <br/>
                   <select>
                   <option ng-repeat="cc in country_list" value="{{cc.country_id}}">{{cc.country_name}}</option>
-
-                    <!-- <option value="0">Draft</option>
-                    <option value="1">Accepted</option>
-                    <option value="2">Rejected</option>
-                    <option value="3">Cancel</option> -->
                   </select>
                 </label>
 
@@ -108,7 +103,7 @@
 </ion-content>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">
-    <i class="icon ion-home"></i>
+    <i class="icon ion-arrow-left-b" ng-click="backVendor()"></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-plus-circled"></i>
