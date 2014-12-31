@@ -120,6 +120,12 @@ var apps = angular.module('productModule', ['ionic']);
           /*================================ End Delete function ================================*/
 
 
+           /*================================ Back function ================================*/
+                 $scope.backProduct = function() {
+                    $state.go('app.products');
+
+                  }
+          /*================================ End back function ================================*/
 
 
 

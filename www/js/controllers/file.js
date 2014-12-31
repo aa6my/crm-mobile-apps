@@ -112,7 +112,7 @@ var apps = angular.module('fileModule', ['ionic']);
 
         /*================================ Delete function ================================*/
                 $scope.deleteData = function(file) {
-                    var params = '/dataAll/type/files/key/website_id/val/'+file.file_id;
+                    var params = '/dataAll/type/files/key/file_id/val/'+file.file_id;
                     CrudOperation.delete(params);
                 }
           /*================================ End Delete function ================================*/
