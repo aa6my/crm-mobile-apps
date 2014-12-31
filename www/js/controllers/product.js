@@ -17,22 +17,26 @@ var apps = angular.module('productModule', ['ionic']);
               $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
-                    $scope.products = data.products;
-                
-                    $scope.doRefresh = function(){
-                      $http
-                        .get(url, Auth.doAuth(init.username, init.password))
-                        .success(function(data){
-                            $scope.products = data.products;
-                        })
-                        .finally(function(){
-                            $scope.$broadcast('scroll.refreshComplete');
-                       });
-                    };
+                 
+                    $scope.products = UniversalFunction.redraw(data.products);
+                    
               }, function(err) {
                   console.error('ERR', err);
               
               })
+                    
+            $scope.doRefresh = function(){
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                  
+                    $scope.products = UniversalFunction.redraw(data.products);
+
+              })
+              .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+              });
+            }; 
 
                
               $scope.goToAddDataPage = function(){

@@ -1,4 +1,4 @@
-<div ng-controller="Product">
+<div ng-controller="Product" ng-app="productModule">
 <ion-view title="Products">
 
     <!--navigation button on top-->
@@ -16,7 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <table class="footable" data-page-size="10">
+            <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
                     <th>
@@ -35,7 +35,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="product in products">
+                <tr ng-repeat="product in products()">
                     <td>{{product.product_sku}}</td>
                     <td>{{product.product_name}}</td>
                     <td>{{product.product_amount}}</td>
@@ -71,6 +71,7 @@
 </div>
 </ion-view>
 </div>
+
 <script type="text/javascript">
     $(function () {
         $('table').footable();

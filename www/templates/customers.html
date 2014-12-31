@@ -1,4 +1,4 @@
-<div ng-controller="Customer">
+<div ng-controller="Customer" ng-app="customerModule">
 <ion-view title="Customers">
 
     <!--navigation button on top-->
@@ -16,7 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <table class="footable" data-page-size="1">
+            <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
                     <th>
@@ -38,7 +38,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="customer in customers">
+                <tr ng-repeat="customer in customers()">
                     <td>{{customer.customer_name}}</td>
                     <td>{{customer.customer_firstname}} {{customer.customer_lastname}}</td>
                     <td>{{customer.customer_phone}}</td>

@@ -1,4 +1,4 @@
-<div ng-controller="File">
+<div ng-controller="File" ng-app="fileModule">
 <ion-view title="Files">
 
     <!--navigation button on top-->
@@ -16,7 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <table class="footable" data-page-size="10">
+            <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
                     <th>
@@ -32,7 +32,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="file in files">
+                <tr ng-repeat="file in files()">
                     <td>{{file.file_name}}</td>
                     <td><a href="{{upload}}/{{file.file_content}}" target="_blank">{{file.file_content}}</td>
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
@@ -47,7 +47,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="5">
+                    <td colspan="5" class="text-center">
                         <div class="pagination pagination-centered"></div>
                     </td>
                 </tr>
@@ -67,6 +67,8 @@
   </a>
 </div>
 </ion-view>
+</div>
+
 <script type="text/javascript">
     $(function () {
 

@@ -14,26 +14,30 @@ var apps = angular.module('customerModule', ['ionic']);
         /*---------------------------------------------------------------*/
         
          var url = Settings.url + '/dataAll/type/customers/format/json';
+              
               $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
-                    $scope.customers = data.customers;
-                
-                    $scope.doRefresh = function(){
-                      $http
-                        .get(url, Auth.doAuth(init.username, init.password))
-                        .success(function(data){
-                            $scope.customers = data.customers;
-                        })
-                        .finally(function(){
-                            $scope.$broadcast('scroll.refreshComplete');
-                       });
-                    };
+                 
+                    $scope.customers = UniversalFunction.redraw(data.customers);
+                    
               }, function(err) {
                   console.error('ERR', err);
               
               })
+                    
+            $scope.doRefresh = function(){
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                  
+                    $scope.customers = UniversalFunction.redraw(data.customers);
 
+              })
+              .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+              });
+            };
                
               $scope.goToAddDataPage = function(){
 
@@ -119,6 +123,12 @@ var apps = angular.module('customerModule', ['ionic']);
                 }
           /*================================ End Delete function ================================*/
 
+          /*================================ Back function ================================*/
+                 $scope.backCustomer = function() {
+                    $state.go('app.customers');
+
+                  }
+          /*================================ End back function ================================*/
 
 
 

@@ -14,25 +14,30 @@ var apps = angular.module('fileModule', ['ionic']);
         /*---------------------------------------------------------------*/
         
          var url = Settings.url + '/dataAll/type/files/format/json';
-              $http
+              
+               $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
-                    $scope.files = data.files;
-                
-                    $scope.doRefresh = function(){
-                      $http
-                        .get(url, Auth.doAuth(init.username, init.password))
-                        .success(function(data){
-                            $scope.files = data.files;
-                        })
-                        .finally(function(){
-                            $scope.$broadcast('scroll.refreshComplete');
-                       });
-                    };
+                 
+                    $scope.files = UniversalFunction.redraw(data.files);
+                    
               }, function(err) {
                   console.error('ERR', err);
               
               })
+                    
+            $scope.doRefresh = function(){
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                  
+                    $scope.files = UniversalFunction.redraw(data.files);
+
+              })
+              .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+              });
+            };
 
                
               $scope.goToAddDataPage = function(){
@@ -112,6 +117,12 @@ var apps = angular.module('fileModule', ['ionic']);
                 }
           /*================================ End Delete function ================================*/
 
+          /*================================ Back function ================================*/
+                 $scope.backFile = function() {
+                    $state.go('app.files');
+
+                  }
+          /*================================ End back function ================================*/
 
 
 
