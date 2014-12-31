@@ -1,0 +1,61 @@
+<div ng-controller="Website">
+<ion-view title="Websites">
+
+    <!--navigation button on top-->
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-android-arrow-back"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
+    </ion-nav-buttons>
+
+    <!-- content-->
+    <ion-content class="has-header" >
+        <div class="ft-container">
+        <form action="">
+            <div class="list">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Website Name</span>
+                <input type="text" placeholder="Segimidae" name="website_name" ng-model="formData.website_name">
+              </label>
+
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Website Url</span>
+                <input type="text" placeholder="segimidae.net" name="website_url" ng-model="formData.website_url">
+              </label>
+              
+            <div class="padding">
+                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
+                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
+           <!-- <button class="button icon-left ion-star button-positive">Favorites</button> -->
+            </div>
+        </form>
+</div>
+        </div>
+<script type="text/javascript">
+    $(function () {
+        $('table').footable();
+
+        $('.colour-switch a').click(function(e) {
+            e.preventDefault();
+            $('.colour-switch a').each(function() {
+                $('table').removeClass($(this).data('class'));
+            });
+            $('table').addClass($(this).data('class'));
+        });
+    });
+</script>
+</ion-content>
+  <div class="tabs tabs-icon-only">
+  <a class="tab-item">
+    <i class="icon ion-arrow-left-b" ng-click="backWebsite()"></i>
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-plus-circled"></i>
+  </a>
+  <a class="tab-item">
+    <i class="icon ion-gear-a"></i>
+  </a>
+</div>
+</ion-view>
+</div>

@@ -1,10 +1,22 @@
+<div ng-controller="Job">
 <ion-view title="Jobs">
-  <ion-nav-buttons side="left">
-    <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
-  <ion-content class="has-header">
-         <div class="ft-container">
-            <table class="footable" data-page-size="10">
+
+    <!--navigation button on top-->
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left"class="button button-icon icon ion-android-arrow-back"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
+    </ion-nav-buttons>
+
+    <!-- content-->
+    <ion-content class="has-header">
+        <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+        </ion-refresher>
+        <div class="ft-container">
+            <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
                     <th>
@@ -22,7 +34,7 @@
                 
                 </tr>
                 </thead>
-                <tbody ng-controller="Job">
+                <tbody>
                 <tr ng-repeat="job in jobs">
                     <td>{{job.job_title}}</td>
                     <td>{{job.job_date_start}}</td>
@@ -30,11 +42,10 @@
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <button class="button button-icon icon ion-document-text view-icon" ng-click="viewJob(job)"></button>
-                        <button class="button button-icon icon ion-compose edit-icon" ng-click="editJob(job)"></button>
-                        <button class="button button-icon icon ion-trash-a del-icon" ng-click="deleteJob(job)"></button>
-
-
+                        <a ng-click="viewJob(job)"><span class="glyphicon glyphicon-list"></span></a>
+                        <a ng-click="goToAddJobTask(job)"><span class="icon ion-clipboard" ></span></a>
+                        <a ng-click="goToEditDataPage(job)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteData(job)"><span class="glyphicon glyphicon-trash"></span></a>
                     </td>
                 </tr>
                 </tbody>
@@ -47,29 +58,17 @@
                 </tfoot>
             </table>
         </div>
-<script type="text/javascript">
-    $(function () {
-        $('table').footable();
-
-        $('.colour-switch a').click(function(e) {
-            e.preventDefault();
-            $('.colour-switch a').each(function() {
-                $('table').removeClass($(this).data('class'));
-            });
-            $('table').addClass($(this).data('class'));
-        });
-    });
-</script>
 </ion-content>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">
     <i class="icon ion-home"></i>
   </a>
-  <a class="tab-item">
-    <i class="icon ion-star"></i>
+   <a class="tab-item">
+    <i class="icon ion-plus-circled" ng-click='goToAddDataPage("add")'></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-gear-a"></i>
   </a>
 </div>
 </ion-view>
+</div>

@@ -4,7 +4,20 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', [
+                           'ionic', 
+                           'starter.controllers',
+                           'websiteModule',
+                           'customerModule',
+                           'vendorModule',
+                           'leadModule',
+                           'quoteModule',
+                           'fileModule',
+                           'productModule',
+                           'jobModule',
+                           'invoiceModule',
+                           'loginModule'
+                          ])
 
 
 
@@ -29,17 +42,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: "/app",
       abstract: true,
       templateUrl: "templates/menu.html",
-      controller: 'AppCtrl'
+      controller: ''
     })
 
-    // .state('app.search', {
-    //   url: "/search",
-    //   views: {
-    //     'menuContent' :{
-    //       templateUrl: "templates/search.html"
-    //     }
-    //   }
-    // })
+    .state('app.search', {
+      url: "/search",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/search.html"
+        }
+      }
+    })
 
     .state('app.main', {
       url: "/main",
@@ -59,6 +72,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
+    .state('app.vendorAdd_Edit', {
+      url: "/vendorAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/vendorAdd_Edit.html"
+        }
+      }
+    })
+
     .state('app.leads', {
       url: "/leads",
       views: {
@@ -67,6 +89,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+
+    .state('app.leadAdd_Edit', {
+      url: "/leadAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/leadAdd_Edit.html"
+        }
+      }
+    }) 
 
     .state('app.customers', {
       url: "/customers",
@@ -77,6 +108,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
+    .state('app.customerAdd_Edit', {
+      url: "/customerAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/customerAdd_Edit.html"
+        }
+      }
+    }) 
+
     .state('app.products', {
       url: "/products",
       views: {
@@ -85,6 +125,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+
+    .state('app.productAdd_Edit', {
+      url: "/productAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/productAdd_Edit.html"
+        }
+      }
+    }) 
+
 
     .state('app.quotes', {
       url: "/quotes",
@@ -95,6 +145,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
+    .state('app.quoteAdd_Edit', {
+      url: "/quoteAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/quoteAdd_Edit.html"
+        }
+      }
+    }) 
+
     .state('app.websites', {
       url: "/websites",
       views: {
@@ -103,7 +162,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })    
-
+    .state('app.websiteAdd_Edit', {
+      url: "/websiteAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/websiteAdd_Edit.html"
+        }
+      }
+    }) 
     .state('app.jobs', {
       url: "/jobs",
       views: {
@@ -111,7 +177,31 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           templateUrl: "templates/jobs.html"
         }
       }
-    })    
+    })
+    .state('app.jobs_main', {
+      url: "/jobs_main",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/jobs_main.html"
+        }
+      }
+    })
+    /*.state('app.jobs.', {
+      url: "/jobs",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/jobs.html"
+        }
+      }
+    }) 
+    .state('app.jobs', {
+      url: "/jobs",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/jobs.html"
+        }
+      }
+    })  */  
 
 
     .state('app.invoices', {
@@ -130,7 +220,25 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           templateUrl: "templates/files.html"
         }
       }
-    })    
+    })
+
+    .state('app.fileAdd_Edit', {
+      url: "/fileAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/fileAdd_Edit.html"
+        }
+      }
+    }) 
+
+    .state('app.login', {
+      url: "/login",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/login.html"
+        }
+      }
+    })         
 
     .state('app.finance', {
       url: "/finance",
@@ -141,26 +249,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     });   
 
-    // .state('app.playlists', {
-    //   url: "/playlists",
-    //   views: {
-    //     'menuContent' :{
-    //       templateUrl: "templates/playlists.html",
-    //       controller: 'PlaylistsCtrl'
-    //     }
-    //   }
-    // })
 
-    // .state('app.single', {
-    //   url: "/playlists/:playlistId",
-    //   views: {
-    //     'menuContent' :{
-    //       templateUrl: "templates/playlist.html",
-    //       controller: 'PlaylistCtrl'
-    //     }
-    //   }
-    // });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/main');
+  $urlRouterProvider.otherwise('/app/login');
 });
 

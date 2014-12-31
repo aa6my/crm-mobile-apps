@@ -1,14 +1,22 @@
+<div ng-controller="Customer" ng-app="customerModule">
 <ion-view title="Customers">
+
+    <!--navigation button on top-->
     <ion-nav-buttons side="left">
-        <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
+        <button menu-toggle="left"class="button button-icon icon ion-android-arrow-back"></button>
     </ion-nav-buttons>
-    <ion-content class="has-header" ng-controller="Customer">
+    <ion-nav-buttons side="right">
+        <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
+    </ion-nav-buttons>
+
+    <!-- content-->
+    <ion-content class="has-header">
         <ion-refresher
         pulling-text="Pull to refresh..."
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <table class="footable" data-page-size="10">
+            <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
                     <th>
@@ -30,54 +38,68 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="customer in customers">
+                <tr ng-repeat="customer in customers()">
                     <td>{{customer.customer_name}}</td>
                     <td>{{customer.customer_firstname}} {{customer.customer_lastname}}</td>
                     <td>{{customer.customer_phone}}</td>
                     <td>{{customer.customer_email}}</td>
-                    <!-- <td data-value="78025368997">22 Jun 1972</td> -->
-                    <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
                         <a ng-click="viewCustomer(customer)"><span class="glyphicon glyphicon-list"></span></a>
-                        <a ng-click="editCustomer(customer)"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a ng-click="deleteCustomer(customer)"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a ng-click="goToEditDataPage(customer)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a ng-click="deleteData(customer)"><span class="glyphicon glyphicon-trash"></span></a>
 
 
                     </td>
                 </tr>
                 </tbody>
-                <tfoot>
+                <!-- <tfoot>
                 <tr>
                     <td colspan="5">
                         <div class="pagination pagination-centered"></div>
                     </td>
                 </tr>
+                </tfoot> -->
+                <tfoot>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                        <ul class="pagination">
+                        </ul>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
-<script type="text/javascript">
-    $(function () {
-        $('table').footable();
 
-        $('.colour-switch a').click(function(e) {
-            e.preventDefault();
-            $('.colour-switch a').each(function() {
-                $('table').removeClass($(this).data('class'));
-            });
-            $('table').addClass($(this).data('class'));
-        });
-    });
-</script>
 </ion-content>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">
     <i class="icon ion-home"></i>
   </a>
   <a class="tab-item">
-    <i class="icon ion-star"></i>
+    <i class="icon ion-plus-circled" ng-click='goToAddDataPage()'></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-gear-a"></i>
   </a>
 </div>
 </ion-view>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        $('table').footable();
+        
+        /*$('table').data('page-size', 5);
+        $('table').trigger('footable_initialized');
+        $('table').trigger('footable_setup_paging');*/
+
+        //$('table').trigger('footable_redraw'); //force a redraw
+        /*$('.colour-switch a').click(function(e) {
+            e.preventDefault();
+            $('.colour-switch a').each(function() {
+                $('table').removeClass($(this).data('class'));
+            });
+            $('table').addClass($(this).data('class'));
+        });*/
+    });
+</script>
