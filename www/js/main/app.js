@@ -211,7 +211,16 @@ angular.module('starter', [
           templateUrl: "templates/invoices.html"
         }
       }
-    })    
+    })
+
+    .state('app.invoiceAdd_Edit', {
+      url: "/invoiceAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/invoiceAdd_Edit.html"
+        }
+      }
+    })     
 
     .state('app.files', {
       url: "/files",
