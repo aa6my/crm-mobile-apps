@@ -87,11 +87,22 @@ var apps = angular.module('jobModule', []);
                     //console.log(b.job_type_id);
                     
       }
+      $scope.goToJobTaskList = function(jobs){
+
+                    $state.go('app.jobs_task',{},{reload:false});
+                    /*-------------------- select job type and display into select option in add form ----------------- */
+                    var job_task_list = [];
+                    var params = '/dataAll/type/jobs_task/key/job_id/val/'+jobs.job_id+'/format/json';
+                    CrudOperation.get(params).success(function(data){  job_task_list.push(data.jobs_task);  });
+                    console.log(job_task_list);
+                   /*------------ end selection ---------------------------------------------------------------------------*/
+
+      }
       $scope.openDatePicker  = function($event, ng_open_name){
-        $scope.openFor = {};
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.openFor[ng_open_name] = true;      
+                    $scope.openFor = {};
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    $scope.openFor[ng_open_name] = true;      
       }
       $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy','yyyy-MM-dd', 'shortDate'];
       $scope.format  = $scope.formats[3];
