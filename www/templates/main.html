@@ -1,4 +1,4 @@
-<ion-view title="Dashboard">
+<ion-view title="Dashboard" ng-controller="ScanCtrl" ng-app="mainModule">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -9,9 +9,22 @@
     </ion-nav-buttons>
 
     <!-- content-->
-	<ion-content class="has-header">
-		<h1>Dashboard</h1>
-	</ion-content>
+	<ion-content class="has-header padding">
+    <div>
+      <button style="border-radius: 7px; width:100%; margin-left:auto; margin-right: auto;" class="button button-positive" ng-click="click()">
+  Click to Scan
+      </button>
+    </div>
+
+    <div  style="margin-top: 5px;" ng-bind-html="message"></div>
+
+    <div style="margin-top: 5px;" ng-show="message.length!=0">
+      <button style="border-radius: 7px; width:100%; margin-left:auto; margin-right: auto;" class="button button-positive" ng-click="clear()">
+  Clear Message
+      </button>
+    </div>
+
+  </ion-content>
 </ion-view>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">

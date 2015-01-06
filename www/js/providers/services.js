@@ -6,8 +6,8 @@ angular
  */
 .factory('Settings', function() {
   return {
-      upload  : 'https://localhost/customer-relationship-management/assets/uploads/files/',
-      url     : 'https://localhost/customer-relationship-management/apps'
+      upload  : 'https://192.168.0.200/customer-relationship-management/assets/uploads/files/',
+      url     : 'https://192.168.0.200/customer-relationship-management/apps'
   };
 })
 
@@ -15,6 +15,31 @@ angular
  * Encode and Decode Authentication username and password.
  * call this function when needed
  */
+.service('appServices', function appServices($q) {
+    // Wrap the barcode scanner in a service so that it can be shared easily.
+    this.scanBarcode = function() {
+        // The plugin operates asynchronously so a promise
+        // must be used to display the results correctly.
+        var deferred = $q.defer();
+        try {
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {  // success
+                    deferred.resolve({'error':false, 'result': result});
+                }, 
+                function (error) {  // failure
+                    deferred.resolve({'error':true, 'result': error.toString()});
+                    //console.log(error.toString());
+                }
+            );
+        }
+        catch (exc) {
+            deferred.resolve({'error':true, 'result': 'exception: ' + exc.toString()});
+            console.log(exc.toString());
+        }
+        return deferred.promise;
+    };
+})
+
 .factory('Base64', function () {
     
  
