@@ -1,5 +1,14 @@
+<style type="text/css">
+.separator{
+  border-left:1px solid #A9A9AA;
+  width:1px;
+  height:70px;
+  margin:0 10px;
+}
+</style>
 <div ng-controller="Job">
-<ion-view title="Jobs">
+
+<ion-view title="Jobs Tasks">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -11,19 +20,70 @@
 
     <!-- content-->
     <ion-content class="has-header">
+    <script id="modal.html" type="text/ng-template">
+                      <ion-modal-view>
+                        <ion-header-bar class="bar bar-header bar-positive">
+                          <h1 class="title">New Contact</h1>
+                          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+                        </ion-header-bar>
+                        <ion-content class="padding">
+                          <div class="list">
+                            <label class="item item-input">
+                              <span class="input-label">First Name</span>
+                              <input ng-model="newUser.firstName" type="text">
+                            </label>
+                            <label class="item item-input">
+                              <span class="input-label">Last Name</span>
+                              <input ng-model="newUser.lastName" type="text">
+                            </label>
+                            <label class="item item-input">
+                              <span class="input-label">Email</span>
+                              <input ng-model="newUser.email" type="text">
+                            </label>
+                            <button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
+                          </div>
+                        </ion-content>
+                      </ion-modal-view>
+                    </script>
         <ion-refresher
         pulling-text="Pull to refresh..."
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <!-- <ion-list>
+            <ion-list>
               <ion-item ng-repeat="task in job_task_list">
-                {{task}}
+               <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} </h6>
+
+               <div style="margin-left:25px">
+                  <div style=""><h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Product name</strong> : {{task.product_name}}<h3></div>
+                <span>
+                    <span><i class="icon ion-ios-alarm-outline"></i> :</span>
+                    <span>{{task.job_task_hour}} Hours</span>
+                 </span>
+                    <span class="separator"></span>
+                 <span>
+                    <span>Percentage :</span>
+                    <span>{{task.job_task_percentage}}%</span>
+                 </span>
+                    <span class="separator"></span>
+                 <span>
+                    <span><i class="icon ion-social-usd-outline"></i> :</span>
+                    <span>${{task.job_task_amount}}</span>
+                 </span>
+                    <br/>
+                 <span >
+                    <span><i class="icon ion-ios-more-outline"></i> <i class="icon ion-ios-more-outline"></i></span>
+                      <br/>
+                    <span style="overflow:inherit;text-overflow:inherit;white-space:normal;" >{{task.job_task_description}}</span>
+                </span> 
+               </div>
               </ion-item>
-            </ion-list> -->
-            <ul>
-                <li ng-repeat="task in job_task_list">{{task}}</li>
-            </ul>
+
+            </ion-list>
+            <!-- <ul>
+                <li ng-repeat="aaa in job_task_list">{{aaa.job_id}}</li>
+                
+            </ul> -->
         </div>
 </ion-content>
   <div class="tabs tabs-icon-only">
@@ -31,7 +91,7 @@
     <i class="icon ion-home"></i>
   </a>
    <a class="tab-item">
-    <i class="icon ion-plus-circled" ng-click='goToAddDataPage("add")'></i>
+    <i class="icon ion-plus-circled" ng-click="modal.show()"></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-gear-a"></i>
@@ -39,3 +99,7 @@
 </div>
 </ion-view>
 </div>
+
+
+
+

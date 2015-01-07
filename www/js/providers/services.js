@@ -217,6 +217,22 @@ angular
 
       return authVal;
 })
+.factory('jobService', function(){
+   
+   var jService = {};
+   var  dd;
+
+       jService.addData = function(data){
+          dd = data;
+
+       }
+
+       jService.displayData = function(){
+          return dd;
+       }
+
+       return jService;
+ })
 
 
 /**

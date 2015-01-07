@@ -1,7 +1,31 @@
-var apps = angular.module('jobModule', []);
+var apps = angular.module('jobModule', ['ionic']);
 	
 
-	apps.controller('Job', function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+	apps.controller('Job', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {
+
+       /* $ionicModal.fromTemplateUrl('modal.html', {
+          scope: $scope
+        }).then(function(modal) {
+          $scope.modal = modal;
+        });*/
+
+        $ionicModal.fromTemplateUrl('modal.html', function(modal) {
+          $scope.modal = modal;
+        }, {
+          animation: 'slide-in-up',
+          focusFirstInput: true
+        });
+
+        // Display job task in job_task.html page
+        // $stateParams.job_id came from $scope.goToJobTaskList function
+        // Must include paramter name in app.js for paramater declaration
+        if($stateParams.job_id !== undefined && $stateParams.job_id !== null){
+          var params = '/dataAll/type/jobs_task/key/job_id/val/'+$stateParams.job_id+'/joinid/product_id/jointo/products/format/json';
+                    CrudOperation.get(params).success(function(data){            
+                      $scope.job_task_list = data.jobs_task; 
+                    });                     
+        }
+
 
        /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
@@ -30,6 +54,8 @@ var apps = angular.module('jobModule', []);
       };
   }, function(err) {console.error('ERR', err);})
 
+        //$scope.job_task_list = {};
+
       /*-------------------- select job type and display into select option in add form ----------------- */
               var params = '/dataAll/type/job_types/format/json';
                   CrudOperation.get(params).success(function(data){  $scope.job_types = data.job_types;  });
@@ -52,7 +78,7 @@ var apps = angular.module('jobModule', []);
 
 
       /*----- ng-switch code = for multiple form step --*/
-      $scope.step     = 'step1';
+        $scope.step     = 'step1';
       $scope.goToStep = function(step){
         $scope.step     = step;
         $scope.formData = this.formData;  // When click next or back button, retain the value of form form previous entering
@@ -71,6 +97,7 @@ var apps = angular.module('jobModule', []);
              UniversalFunction.displayFormData('');
                 
       }
+
       $scope.goToEditDataPage = function(jobs){
 
                     $state.go('app.jobs_main',{},{reload:false});
@@ -88,24 +115,21 @@ var apps = angular.module('jobModule', []);
                     
       }
       $scope.goToJobTaskList = function(jobs){
+         // jobTaskList(1);
+         $state.go('app.jobs_task',{job_id : jobs.job_id},{reload:false});
 
-                    $state.go('app.jobs_task',{},{reload:false});
-                    /*-------------------- select job type and display into select option in add form ----------------- */
-                    var job_task_list = [];
-                    var params = '/dataAll/type/jobs_task/key/job_id/val/'+jobs.job_id+'/format/json';
-                    CrudOperation.get(params).success(function(data){  job_task_list.push(data.jobs_task);  });
-                    console.log(job_task_list);
-                   /*------------ end selection ---------------------------------------------------------------------------*/
 
       }
+
+      
       $scope.openDatePicker  = function($event, ng_open_name){
                     $scope.openFor = {};
                     $event.preventDefault();
                     $event.stopPropagation();
                     $scope.openFor[ng_open_name] = true;      
       }
-      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy','yyyy-MM-dd', 'shortDate'];
-      $scope.format  = $scope.formats[3];
+                    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy','yyyy-MM-dd', 'shortDate'];
+                    $scope.format  = $scope.formats[3];
 
 
 
@@ -173,4 +197,20 @@ var apps = angular.module('jobModule', []);
 
 
 
-})
+});
+
+
+/*var app_job = angular.module('jobListModule', []);
+    app_job.controller('jobListController',['jobService','CrudOperation','$stateParams','$scope', function(jobService, CrudOperation, $stateParams, $scope){
+      var params = '/dataAll/type/jobs_task/key/job_id/val/'+$stateParams.job_id+'/format/json';
+                    CrudOperation.get(params).success(function(data){  
+                      jobService.addData(data.jobs_task);
+                      
+                      $scope.job_task_list = jobService.displayData();
+                      
+                      
+                    });
+                     
+                    
+                    
+    }])*/
