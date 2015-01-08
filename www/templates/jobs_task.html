@@ -20,7 +20,10 @@
 
     <!-- content-->
     <ion-content class="has-header">
-    <script id="modal.html" type="text/ng-template">
+
+
+
+                    <!--<script id="modal.html" type="text/ng-template">
                       <ion-modal-view>
                         <ion-header-bar class="bar bar-header bar-positive">
                           <h1 class="title">New Contact</h1>
@@ -44,7 +47,7 @@
                           </div>
                         </ion-content>
                       </ion-modal-view>
-                    </script>
+                    </script>-->
         <ion-refresher
         pulling-text="Pull to refresh..."
         on-refresh="doRefresh()">
@@ -80,10 +83,67 @@
               </ion-item>
 
             </ion-list>
-            <!-- <ul>
-                <li ng-repeat="aaa in job_task_list">{{aaa.job_id}}</li>
-                
-            </ul> -->
+            <script id="modal.html" type="text/ng-template">
+                      <ion-modal-view >
+                        <ion-header-bar class="bar bar-header bar-positive">
+                          <h1 class="title">New Contact</h1>
+                          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+                        </ion-header-bar>
+                        <ion-content class="padding">
+                              <button class="button button-small button-energized" ng-click="show_field('product')">Create New description </button>
+                              <button class="button button-small button-energized" ng-click="show_field('description')">Choose from product</button>
+
+                          <div class="list">                            
+                            <label class="item item-input">
+                              <i class="icon ion-ios-list-outline" data-pack="default"></i>
+                              <span class="input-label">Description</span>
+                              <input ng-model="formData.job_task_description" type="text" ng-show="p_description" ng-init="false">
+                               <label class="item item-input item-select" ng-show="n_description" ng-init="false">
+                                 <!-- <div class="input-label"> -->
+                                    Lightsaber
+                                  <!--</div>-->
+                                  <select>
+                                    <option>Blue</option>
+                                    <option selected>Green</option>
+                                    <option>Red</option>
+                                  </select>
+                                </label>
+                            </label>
+                            <label class="item item-input">
+                              <i class="icon ion-ios-alarm-outline" data-pack="default" style=""></i>  
+                              <span class="input-label">Hour</span>
+                              <input ng-model="formData.job_task_hour" type="text">
+                            </label>
+                            <label class="item item-input">
+                              <i class="icon ion-social-usd-outline" data-pack="default" style=""></i>
+                              <span class="input-label">Amount</span>
+                              <input ng-model="formData.job_task_amount" type="text">
+                            </label>
+                            <label class="item item-input">
+                              <i class="icon ion-ios-calendar-outline" data-pack="default" style=""></i>
+                              <span class="input-label">Due Date</span>
+                              <input ng-model="formData.job_task_due_date" type="text">
+                            </label>
+                            <label class="item item-input">
+                              <i class="icon ion-ios-person" data-pack="default" style=""></i>
+                              <span class="input-label">Staff</span>
+                              <input ng-model="formData.job_task_percentage" type="text">
+                            </label>
+                            <label class="item item-input">
+                              <i class="icon ion-ios-pricetags-outline" data-pack="default" style=""></i>
+                              <span class="input-label">%</span>
+                              <span class="item item-checkbox" style="border:none;">
+                                   <i class="checkbox" style="border:none;margin-left:5px;margin-top:-25px;">
+                                     <input type="checkbox" checked ng-model="formData.">
+                                   </i>
+                                   </span>
+                                   
+                            </label>
+                            <button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
+                          </div>
+                        </ion-content>
+                      </ion-modal-view>
+                    </script>
         </div>
 </ion-content>
   <div class="tabs tabs-icon-only">
@@ -99,6 +159,8 @@
 </div>
 </ion-view>
 </div>
+
+
 
 
 

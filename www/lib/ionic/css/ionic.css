@@ -3781,11 +3781,7 @@ a.subdued {
   -moz-transition: -moz-transform 200ms ease;
   transition: transform 200ms ease; }
 
-/**
- * Modals
- * --------------------------------------------------
- * Modals are independent windows that slide in from off-screen.
- */
+/*
 .modal-backdrop {
   -webkit-transition: background-color 300ms ease-in-out;
   -moz-transition: background-color 300ms ease-in-out;
@@ -3843,11 +3839,7 @@ a.subdued {
   .modal-open.loading-active .modal, .modal-open.loading-active .modal-backdrop {
     pointer-events: none; }
 
-/**
- * Popovers
- * --------------------------------------------------
- * Popovers are independent views which float over content
- */
+
 .popover-backdrop {
   position: fixed;
   top: 0;
@@ -3880,7 +3872,13 @@ a.subdued {
     margin-top: -12px; }
 
 .popover, .popover .bar-header {
-  border-radius: 2px; }
+  border-radius: 2px; }*/
+
+
+
+
+
+  
 
 .popover .scroll-content {
   z-index: 1;

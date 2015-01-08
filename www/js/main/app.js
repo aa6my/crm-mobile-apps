@@ -188,7 +188,6 @@ angular.module('starter', [
     })
     .state('app.jobs_task', {
       url: "/jobs_task/:job_id",
-      controller : 'jobListModule',
       views: {
         'menuContent' :{
           templateUrl: "templates/jobs_task.html"

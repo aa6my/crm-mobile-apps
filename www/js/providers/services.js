@@ -7,7 +7,7 @@ angular
 .factory('Settings', function() {
   return {
       upload  : 'https://192.168.0.200/customer-relationship-management/assets/uploads/files/',
-      url     : 'https://192.168.0.200/customer-relationship-management/apps'
+      url     : 'https://localhost/customer-relationship-management/apps'
   };
 })
 

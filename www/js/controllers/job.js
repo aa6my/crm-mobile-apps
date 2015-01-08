@@ -9,22 +9,7 @@ var apps = angular.module('jobModule', ['ionic']);
           $scope.modal = modal;
         });*/
 
-        $ionicModal.fromTemplateUrl('modal.html', function(modal) {
-          $scope.modal = modal;
-        }, {
-          animation: 'slide-in-up',
-          focusFirstInput: true
-        });
-
-        // Display job task in job_task.html page
-        // $stateParams.job_id came from $scope.goToJobTaskList function
-        // Must include paramter name in app.js for paramater declaration
-        if($stateParams.job_id !== undefined && $stateParams.job_id !== null){
-          var params = '/dataAll/type/jobs_task/key/job_id/val/'+$stateParams.job_id+'/joinid/product_id/jointo/products/format/json';
-                    CrudOperation.get(params).success(function(data){            
-                      $scope.job_task_list = data.jobs_task; 
-                    });                     
-        }
+        
 
 
        /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
@@ -194,7 +179,47 @@ var apps = angular.module('jobModule', ['ionic']);
           /*================================ End Delete function ================================*/
 
 
+          /*$ionicModal.fromTemplateUrl('modal.html', function(modal) {
+          $scope.modal = modal;
 
+
+
+        }, {
+          animation: 'slide-in-up',
+          focusFirstInput: true
+        });*/
+
+        $ionicModal.fromTemplateUrl('modal.html', {
+          scope: $scope,
+          animation: 'slide-in-up',
+          focusFirstInput: true
+        }).then(function(modal) {
+          $scope.modal = modal
+        })  
+
+
+        // Display job task in job_task.html page
+        // $stateParams.job_id came from $scope.goToJobTaskList function
+        // Must include paramter name in app.js for paramater declaration
+        if($stateParams.job_id !== undefined && $stateParams.job_id !== null){
+          var params = '/dataAll/type/jobs_task/key/job_id/val/'+$stateParams.job_id+'/joinid/product_id/jointo/products/format/json';
+                    CrudOperation.get(params).success(function(data){            
+                      $scope.job_task_list = data.jobs_task; 
+                    });                     
+        }
+
+          $scope.show_field = function(view_type){
+
+            if(view_type == 'product'){
+              console.log('a');
+              $scope.p_description = true;
+              $scope.n_description = false;
+            }else{
+              console.log('b');
+              $scope.n_description = true;
+              $scope.p_description = false;
+            }
+          }
 
 
 });
