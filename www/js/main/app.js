@@ -15,8 +15,7 @@ angular.module('starter', [
                            'productModule',
                            'jobModule',
                            'invoiceModule',
-                           'loginModule',
-                           'mainModule'
+                           'loginModule'    
                           ])
 
 

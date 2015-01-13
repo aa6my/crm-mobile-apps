@@ -1,5 +1,5 @@
 var apps = angular.module('productModule', ['ionic']);
-    apps.controller('Product',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+    apps.controller('Product',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation, appServices) {
        
           /*=============== Product(initial start of page will call this part) ============================= */
         
@@ -121,13 +121,39 @@ var apps = angular.module('productModule', ['ionic']);
 
 
            /*================================ Back function ================================*/
-                 $scope.backProduct = function() {
+                $scope.backProduct = function() {
                     $state.go('app.products');
 
                   }
           /*================================ End back function ================================*/
 
+                $scope.click = function() {
+                    var promise = appServices.scanBarcode();
+                    promise.then(
+                        function(result) {
+                            if (result.error == false) {
+                                /*var d = new Date();
+                                $scope.message = '<table>' +
+                                    '<tbody>' +
+                                    '<tr><td>Timestamp:</td><td>&nbsp;</td><td>' + d.toUTCString() + '</td></tr>' +
+                                    '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.text + '</td></tr>' +
+                                    '<tr><td>Format:</td><td>&nbsp;</td><td>' + result.result.format + '</td></tr>' +
+                                    '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.cancelled + '</td></tr>' +
+                                    '</tbody>' +
+                                    '</table>';*/
+                                    alert(result.result.text);
+                                    $scope.barcoderesult = [{
 
+                                      Barcode: result.result.text
+
+                                    }];
+                            }
+                            else {
+                                $state.go('app.productAdd_Edit',{},{reload:false});
+                    
+                            }
+                        });
+                }
 
       })
 
