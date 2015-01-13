@@ -18,8 +18,10 @@
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product SKU</span>
                 <button class="button button-small" ng-click="click()">Scan</button>
-                <input type="text" class="bcode in barcoderesult" placeholder="Scan or enter Product SKU" name="product_sku" ng-model="formData.product_sku">
-                
+                <div class="item item-content">
+                <div ng-repeat="bcode in barcoderesult">{{bcode.Barcode}}
+              </div>
+                        
 
               </label>
 
