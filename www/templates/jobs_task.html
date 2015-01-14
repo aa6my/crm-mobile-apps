@@ -6,7 +6,7 @@
   margin:0 10px;
 }
 </style>
-<div ng-controller="Job">
+<div ng-controller="Job" ng-app="jobModule">
 
 <ion-view title="Jobs Tasks">
 
@@ -20,34 +20,6 @@
 
     <!-- content-->
     <ion-content class="has-header">
-
-
-
-                    <!--<script id="modal.html" type="text/ng-template">
-                      <ion-modal-view>
-                        <ion-header-bar class="bar bar-header bar-positive">
-                          <h1 class="title">New Contact</h1>
-                          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-                        </ion-header-bar>
-                        <ion-content class="padding">
-                          <div class="list">
-                            <label class="item item-input">
-                              <span class="input-label">First Name</span>
-                              <input ng-model="newUser.firstName" type="text">
-                            </label>
-                            <label class="item item-input">
-                              <span class="input-label">Last Name</span>
-                              <input ng-model="newUser.lastName" type="text">
-                            </label>
-                            <label class="item item-input">
-                              <span class="input-label">Email</span>
-                              <input ng-model="newUser.email" type="text">
-                            </label>
-                            <button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
-                          </div>
-                        </ion-content>
-                      </ion-modal-view>
-                    </script>-->
         <ion-refresher
         pulling-text="Pull to refresh..."
         on-refresh="doRefresh()">
@@ -87,59 +59,65 @@
                       <ion-modal-view >
                         <ion-header-bar class="bar bar-header bar-positive">
                           <h1 class="title">New Contact</h1>
-                          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+                          <button class="button button-clear button-primary" ng-click="modal_hide()">Cancel</button>
                         </ion-header-bar>
                         <ion-content class="padding">
-                              <button class="button button-small button-energized" ng-click="show_field('product')">Create New description </button>
-                              <button class="button button-small button-energized" ng-click="show_field('description')">Choose from product</button>
+                              <button class="button button-small button-energized" ng-click="show_field('description')">Create New description </button>
+                              <button class="button button-small button-energized" ng-click="show_field('product')">Choose from product</button>
 
                           <div class="list">                            
-                            <label class="item item-input">
+                            <label class="item item-input" ng-show="n_description" ng-init="false">
                               <i class="icon ion-ios-list-outline" data-pack="default"></i>
                               <span class="input-label">Description</span>
-                              <input ng-model="formData.job_task_description" type="text" ng-show="p_description" ng-init="false">
-                               <label class="item item-input item-select" ng-show="n_description" ng-init="false">
-                                 <!-- <div class="input-label"> -->
-                                    Lightsaber
-                                  <!--</div>-->
-                                  <select>
-                                    <option>Blue</option>
-                                    <option selected>Green</option>
-                                    <option>Red</option>
+                              <input ng-model="formData.job_task_description"  type="text" >
+                            </label>
+                            <label class="item item-input item-select" ng-show="p_description" ng-init="false">
+                                    <i class="icon ion-ios-list-outline" data-pack="default"></i>
+                                    <span class="input-label">Description</span>
+                                  <input ng-model="formData.job_task_description"  type="text" >
+                                  <select ng-model="formData.product_id" ng-change="choose_value(formData.product_id)">
+                                     <option ng-repeat="a in products" value="{{a.product_id}}">{{a.product_name}}</option>        
                                   </select>
-                                </label>
                             </label>
                             <label class="item item-input">
                               <i class="icon ion-ios-alarm-outline" data-pack="default" style=""></i>  
                               <span class="input-label">Hour</span>
-                              <input ng-model="formData.job_task_hour" type="text">
+                              <input ng-model="formData.job_task_hour" type="text" ng-keyup="calculate_amount(formData.job_task_hour, job_hour)">
+                              <input ng-model="job_hour" type="hidden">
                             </label>
                             <label class="item item-input">
                               <i class="icon ion-social-usd-outline" data-pack="default" style=""></i>
                               <span class="input-label">Amount</span>
                               <input ng-model="formData.job_task_amount" type="text">
                             </label>
-                            <label class="item item-input">
+                            <label class="item item-input" >
                               <i class="icon ion-ios-calendar-outline" data-pack="default" style=""></i>
                               <span class="input-label">Due Date</span>
-                              <input ng-model="formData.job_task_due_date" type="text">
+                              <!--<input ng-model="formData.job_task_due_date" type="text">-->
+
+                              <input type="text" datepicker-popup="{{format}}" ng-model="formData.job_task_due_date" is-open="$parent.openFor['opened12']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="width:30px"/>
+                              <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened12')"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
+                  
                             </label>
                             <label class="item item-input">
                               <i class="icon ion-ios-person" data-pack="default" style=""></i>
                               <span class="input-label">Staff</span>
-                              <input ng-model="formData.job_task_percentage" type="text">
+                              <input ng-model="formData.user_id" type="text">
                             </label>
                             <label class="item item-input">
                               <i class="icon ion-ios-pricetags-outline" data-pack="default" style=""></i>
                               <span class="input-label">%</span>
                               <span class="item item-checkbox" style="border:none;">
                                    <i class="checkbox" style="border:none;margin-left:5px;margin-top:-25px;">
-                                     <input type="checkbox" checked ng-model="formData.">
+                                     <input type="checkbox"  ng-model="formData.job_task_percentage" checked>
                                    </i>
-                                   </span>
-                                   
+                                   </span>                                   
                             </label>
-                            <button class="button button-full button-positive" ng-click="createContact(newUser)">Create</button>
+                            <input ng-model="formData.job_id" type="hidden">
+                            
+                            <button class="button button-full button-positive" ng-click="addTaskData()">Create</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>
@@ -147,8 +125,8 @@
         </div>
 </ion-content>
   <div class="tabs tabs-icon-only">
-  <a class="tab-item">
-    <i class="icon ion-home"></i>
+   <a class="tab-item">
+    <i class="icon ion-arrow-left-b" ng-click="backToJob()"></i>
   </a>
    <a class="tab-item">
     <i class="icon ion-plus-circled" ng-click="modal.show()"></i>

@@ -3,14 +3,7 @@ var apps = angular.module('jobModule', ['ionic']);
 
 	apps.controller('Job', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {
 
-       /* $ionicModal.fromTemplateUrl('modal.html', {
-          scope: $scope
-        }).then(function(modal) {
-          $scope.modal = modal;
-        });*/
-
-        
-
+       
 
        /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
@@ -101,12 +94,14 @@ var apps = angular.module('jobModule', ['ionic']);
       }
       $scope.goToJobTaskList = function(jobs){
          // jobTaskList(1);
-         $state.go('app.jobs_task',{job_id : jobs.job_id},{reload:false});
+         $state.go('app.jobs_task',{job_id : jobs.job_id, job_hour : jobs.job_hour},{reload:false});
 
 
       }
+      $scope.backToJob = function() {
+          $state.go('app.jobs');
 
-      
+      }           
       $scope.openDatePicker  = function($event, ng_open_name){
                     $scope.openFor = {};
                     $event.preventDefault();
@@ -118,7 +113,7 @@ var apps = angular.module('jobModule', ['ionic']);
 
 
 
-      /*================================ Add function ================================*/
+      /*================================ Add Job function ================================*/
                 $scope.addData  = function(){
                     //$scope.formData = {};                           // store data from form into formData onject
                     var params      = '/dataAll';                   // request Api link
@@ -129,10 +124,10 @@ var apps = angular.module('jobModule', ['ionic']);
                     var stateToRedirect = 'app.jobs';
                     CrudOperation.add(params, data, stateToRedirect);
                 } 
-        /*================================ End Add function ================================*/
+        /*================================ End Add Job function ================================*/
 
 
-        /*================================ Edit function ================================*/
+        /*================================ Edit Job function ================================*/
                 $scope.editData = function(){
 
                     var params     = '/dataAll';                  // request Api link
@@ -179,63 +174,87 @@ var apps = angular.module('jobModule', ['ionic']);
           /*================================ End Delete function ================================*/
 
 
-          /*$ionicModal.fromTemplateUrl('modal.html', function(modal) {
-          $scope.modal = modal;
+         /*================================ job task part ================================*/ 
 
-
-
-        }, {
-          animation: 'slide-in-up',
-          focusFirstInput: true
-        });*/
-
+         // function ionic to call modal box
+         // will triggered after add job task button clicked
         $ionicModal.fromTemplateUrl('modal.html', {
-          scope: $scope,
-          animation: 'slide-in-up',
-          focusFirstInput: true
+            scope: $scope,
+            animation: 'slide-in-up',
+            focusFirstInput: true
         }).then(function(modal) {
-          $scope.modal = modal
-        })  
-
-
+            $scope.modal = modal
+        }) 
+        // function ionic to hide modal box
+        // will trigger when cancel button clicked
+        // after that clear the form data to empty field
+        $scope.modal_hide = function(){
+            $scope.modal.hide();
+            $scope.formData.job_task_description = "";
+            $scope.formData.job_task_hour = "";
+            $scope.formData.job_task_amount = "";
+            $scope.formData.job_task_due_date = "";
+            $scope.formData.user_id = "";
+            $scope.formData.job_task_percentage = "";
+        }
         // Display job task in job_task.html page
         // $stateParams.job_id came from $scope.goToJobTaskList function
         // Must include paramter name in app.js for paramater declaration
         if($stateParams.job_id !== undefined && $stateParams.job_id !== null){
-          var params = '/dataAll/type/jobs_task/key/job_id/val/'+$stateParams.job_id+'/joinid/product_id/jointo/products/format/json';
+          var job_id = $stateParams.job_id;
+          var params = '/dataAll/type/jobs_task/key/job_id/val/'+job_id+'/joinid/product_id/jointo/products/format/json';
                     CrudOperation.get(params).success(function(data){            
                       $scope.job_task_list = data.jobs_task; 
+                      $scope.formData.job_id = job_id;
+                      $scope.job_hour = $stateParams.job_hour;
                     });                     
         }
-
+          // show field either text field or select drop down list
+          // for job description & job task hour & job task amount. 
           $scope.show_field = function(view_type){
-
+            if($scope.formData.job_task_description !== "" || $scope.formData.job_task_amount !=="" || $scope.formData.job_task_hour !== ""){
+                $scope.formData.job_task_description = "";
+                $scope.formData.job_task_hour = "";
+                $scope.formData.job_task_amount = "";
+            }            
             if(view_type == 'product'){
-              console.log('a');
-              $scope.p_description = true;
-              $scope.n_description = false;
-            }else{
-              console.log('b');
-              $scope.n_description = true;
-              $scope.p_description = false;
+                $scope.p_description = true;
+                $scope.n_description = false;
+               /*-------------------- select product and display into select option in add form ----------------- */
+                var params = '/dataAll/type/products/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.products = data.products;  });
+              /*------------ end selection -----------------------------------------------------------------------*/            
+            }else{                
+                $scope.n_description = true;
+                $scope.p_description = false;              
             }
           }
+          /*================================ Add job task function ================================*/
+                $scope.addTaskData  = function(){
+                    
+                    var params      = '/dataAll';                   // request Api link
+                    var data        = {                             // data sent to Api
+                                        type : "jobs_task", 
+                                        formData : this.formData
+                        };
+                    CrudOperation.add(params, data, '', true);
+                    $scope.modal.hide();
+                }       
+        /*================================ End Delete function ================================*/
+        $scope.choose_value = function(product_id){
+          /*-------------------- select product data by product id then insert into description ----------------- */
+              var params = '/dataAll/type/products/key/product_id/val/'+product_id+'format/json';
+                  CrudOperation.get(params).success(function(data){  
+                    $scope.formData.job_task_description = data.products[0].product_name;
+                    $scope.formData.job_task_amount = data.products[0].product_amount;
+                    $scope.formData.job_task_hour = data.products[0].product_quantity; 
+              });
+          /*------------ end selection ---------------------------------------------------------------------------*/
+        }
+
+        $scope.calculate_amount = function(hour, job_hour){
+          $scope.formData.job_task_amount = hour * job_hour;
+        }
 
 
 });
-
-
-/*var app_job = angular.module('jobListModule', []);
-    app_job.controller('jobListController',['jobService','CrudOperation','$stateParams','$scope', function(jobService, CrudOperation, $stateParams, $scope){
-      var params = '/dataAll/type/jobs_task/key/job_id/val/'+$stateParams.job_id+'/format/json';
-                    CrudOperation.get(params).success(function(data){  
-                      jobService.addData(data.jobs_task);
-                      
-                      $scope.job_task_list = jobService.displayData();
-                      
-                      
-                    });
-                     
-                    
-                    
-    }])*/

@@ -186,7 +186,7 @@ angular.module('starter', [
       }
     })
     .state('app.jobs_task', {
-      url: "/jobs_task/:job_id",
+      url: "/jobs_task/:job_id/:job_hour",
       views: {
         'menuContent' :{
           templateUrl: "templates/jobs_task.html"

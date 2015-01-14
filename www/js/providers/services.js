@@ -7,7 +7,7 @@ angular
 .factory('Settings', function() {
   return {
       upload  : 'https://192.168.0.200/customer-relationship-management/assets/uploads/files/',
-      url     : 'https://192.168.0.200/customer-relationship-management/apps'
+      url     : 'https://localhost/customer-relationship-management/apps'
   };
 })
 
@@ -305,14 +305,15 @@ angular
        * @param {[type]} data   [cumpolsary : form data from view form]
        * @param {[type]} stateToRedirect   [optional : redirect to state function]
        */
-      operation.add = function(params, data, stateToRedirect){
+      operation.add = function(params, data, stateToRedirect, reload){
         
           var url             = Settings.url + params;
+          var reload          = (reload === undefined || reload === null || reload === "") ? false : true;
           var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
 
                   $http.post(url,data, Auth.doAuth(init.username, init.password))
                   .success(function(data) {            
-                    $state.go(stateToRedirect, {}, {reload: false});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
+                    $state.go(stateToRedirect, {}, {reload: reload});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
 
                   })
                   .error(function(data, status, headers, config){
