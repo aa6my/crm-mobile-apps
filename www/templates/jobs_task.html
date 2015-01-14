@@ -27,7 +27,7 @@
         <div class="ft-container">
             <ion-list>
               <ion-item ng-repeat="task in job_task_list">
-               <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} </h6>
+               <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} <a ng-click="modal.show()" style="float:right"><i class="icon ion-android-create"></i></a></h6>
 
                <div style="margin-left:25px">
                   <div style=""><h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Product name</strong> : {{task.product_name}}<h3></div>
@@ -74,7 +74,7 @@
                             <label class="item item-input item-select" ng-show="p_description" ng-init="false">
                                     <i class="icon ion-ios-list-outline" data-pack="default"></i>
                                     <span class="input-label">Description</span>
-                                  <input ng-model="formData.job_task_description"  type="text" >
+                                  <input ng-model="formData.job_task_description"  type="text">
                                   <select ng-model="formData.product_id" ng-change="choose_value(formData.product_id)">
                                      <option ng-repeat="a in products" value="{{a.product_id}}">{{a.product_name}}</option>        
                                   </select>
@@ -93,18 +93,20 @@
                             <label class="item item-input" >
                               <i class="icon ion-ios-calendar-outline" data-pack="default" style=""></i>
                               <span class="input-label">Due Date</span>
-                              <!--<input ng-model="formData.job_task_due_date" type="text">-->
+                              <input ng-model="formData.job_task_due_date" type="date" value="2012-11-08">
 
-                              <input type="text" datepicker-popup="{{format}}" ng-model="formData.job_task_due_date" is-open="$parent.openFor['opened12']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="width:30px"/>
+                             <!-- <input type="text" datepicker-popup="{{format}}" ng-model="formData.job_task_due_date" is-open="$parent.openFor['opened12']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="width:30px"/>
                               <span class="input-group-btn">
-                                  <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened12')"><i class="glyphicon glyphicon-calendar"></i></button>
+                                  <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened12')"><i class="glyphicon glyphicon-calendar"></i></button>-->
                               </span>
                   
                             </label>
-                            <label class="item item-input">
-                              <i class="icon ion-ios-person" data-pack="default" style=""></i>
-                              <span class="input-label">Staff</span>
-                              <input ng-model="formData.user_id" type="text">
+                            <label class="item item-input item-select">
+                                    <i class="icon ion-ios-list-outline" data-pack="default"></i>
+                                    <span class="input-label">Staff</span>                                  
+                                  <select ng-model="formData.user_id" style="float:left">
+                                     <option ng-repeat="a in user_meta" value="{{a.user_id}}">{{a.first_name + a.last_name}}</option>        
+                                  </select>
                             </label>
                             <label class="item item-input">
                               <i class="icon ion-ios-pricetags-outline" data-pack="default" style=""></i>
