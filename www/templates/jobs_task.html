@@ -27,7 +27,7 @@
         <div class="ft-container">
             <ion-list>
               <ion-item ng-repeat="task in job_task_list">
-               <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} <a ng-click="modal.show()" style="float:right"><i class="icon ion-android-create"></i></a></h6>
+               <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right"><i class="icon ion-android-create"></i></a></h6>
 
                <div style="margin-left:25px">
                   <div style=""><h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Product name</strong> : {{task.product_name}}<h3></div>
@@ -58,8 +58,8 @@
             <script id="modal.html" type="text/ng-template">
                       <ion-modal-view >
                         <ion-header-bar class="bar bar-header bar-positive">
-                          <h1 class="title">New Contact</h1>
-                          <button class="button button-clear button-primary" ng-click="modal_hide()">Cancel</button>
+                          <h1 class="title">{{myModal.title}}</h1>
+                          <button class="button button-clear button-primary" ng-click="modal_hide('{{myModal.type}}')">Cancel</button>
                         </ion-header-bar>
                         <ion-content class="padding">
                               <button class="button button-small button-energized" ng-click="show_field('description')">Create New description </button>
@@ -131,7 +131,7 @@
     <i class="icon ion-arrow-left-b" ng-click="backToJob()"></i>
   </a>
    <a class="tab-item">
-    <i class="icon ion-plus-circled" ng-click="modal.show()"></i>
+    <i class="icon ion-plus-circled" ng-click="modal_show('','add', 'Add Job Task')"></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-gear-a"></i>
