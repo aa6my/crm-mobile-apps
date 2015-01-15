@@ -36,43 +36,43 @@ var apps = angular.module('jobModule', ['ionic']);
 
       /*-------------------- select job type and display into select option in add form ----------------- */
               var params = '/dataAll/type/job_types/format/json';
-                  CrudOperation.get(params).success(function(data){  $scope.job_types = data.job_types;  });
+                    CrudOperation.get(params).success(function(data){  $scope.job_types = data.job_types;  });
       /*------------ end selection ---------------------------------------------------------------------------*/
 
       /*-------------------- select user meta and display into select option in add form ----------------- */
               var params = '/dataAll/type/user_meta/format/json';
-                  CrudOperation.get(params).success(function(data){  $scope.user_meta = data.user_meta;  });
+                    CrudOperation.get(params).success(function(data){  $scope.user_meta = data.user_meta;  });
       /*------------ end selection ---------------------------------------------------------------------------*/
 
       /*-------------------- select websites and display into select option in add form ----------------- */
               var params = '/dataAll/type/websites/format/json';
-                  CrudOperation.get(params).success(function(data){  $scope.websites = data.websites;  });
+                    CrudOperation.get(params).success(function(data){  $scope.websites = data.websites;  });
       /*------------ end selection ---------------------------------------------------------------------------*/
 
       /*-------------------- select customers and display into select option in add form ----------------- */
               var params = '/dataAll/type/customers/format/json';
-                  CrudOperation.get(params).success(function(data){  $scope.customers = data.customers;  });
+                    CrudOperation.get(params).success(function(data){  $scope.customers = data.customers;  });
       /*------------ end selection ---------------------------------------------------------------------------*/
 
 
       /*----- ng-switch code = for multiple form step --*/
-        $scope.step     = 'step1';
+                    $scope.step     = 'step1';
       $scope.goToStep = function(step){
-        $scope.step     = step;
-        $scope.formData = this.formData;  // When click next or back button, retain the value of form form previous entering
+                    $scope.step     = step;
+                    $scope.formData = this.formData;  // When click next or back button, retain the value of form form previous entering
 
       }/*--- end ng-switch --*/
       
       
 
       $scope.goToAddDataPage = function(){ 
-             $state.go('app.jobs_main',{},{reload:false});
-              var m = UniversalFunction.buttonOnly(true,false);
-                      $scope.btnAdd = m.add;
-                      $scope.btnEdit = m.edit;
+                    $state.go('app.jobs_main',{},{reload:false});
+                    var m = UniversalFunction.buttonOnly(true,false);
+                    $scope.btnAdd  = m.add;
+                    $scope.btnEdit = m.edit;
 
                 /*---- set form value to blank */
-             UniversalFunction.displayFormData('');
+                    UniversalFunction.displayFormData('');
                 
       }
 
@@ -94,12 +94,12 @@ var apps = angular.module('jobModule', ['ionic']);
       }
       $scope.goToJobTaskList = function(jobs){
          // jobTaskList(1);
-         $state.go('app.jobs_task',{job_id : jobs.job_id, job_hour : jobs.job_hour},{reload:false});
+                    $state.go('app.jobs_task',{job_id : jobs.job_id, job_hour : jobs.job_hour},{reload:false});
 
 
       }
       $scope.backToJob = function() {
-          $state.go('app.jobs');
+                    $state.go('app.jobs');
 
       }           
       $scope.openDatePicker  = function($event, ng_open_name){
@@ -197,28 +197,42 @@ var apps = angular.module('jobModule', ['ionic']);
               $scope.formData.job_task_percentage  = "";
         }
 
+
+        var myModal = {
+              title : '',
+              type  : ''
+        };
         $scope.myModal = {
               title : '',
               type  : ''
         };
 
+
         $scope.modal_hide = function(type){
-            
-            if(type=='add'){
-               clear_job_task_form();
-            }
-               $scope.modal.hide();
+            //console.log(myModal.type);
+              $scope.modal.hide();
+              $scope.p_description = false;
+              $scope.n_description = false;
+
+              
             
         }
         $scope.modal_show = function(data, type, title){
-            
-            if(type=="edit"){
-              $scope.formData    = data;
-            }else{
-              clear_job_task_form();
-            }              
-              $scope.myModal.title = title;
-              $scope.myModal.type  = type;
+           console.log(type);
+            if(type === "edit"){
+                $scope.formData  = data; 
+                $scope.original = true; 
+                $scope.n_description = false;
+                $scope.b_description = false; 
+                $scope.edit_description = true;            
+            }else if(type === "add")   {
+                $scope.original = false;
+                $scope.b_description = true; 
+            }
+              myModal.title = title;
+              myModal.type = type;         
+              $scope.myModal.title = myModal.title;
+              $scope.myModal.type  = myModal.type;
               $scope.modal.show();
 
         }
@@ -236,8 +250,9 @@ var apps = angular.module('jobModule', ['ionic']);
         }
           // show field either text field or select drop down list
           // for job description & job task hour & job task amount. 
-          $scope.show_field = function(view_type){
-            if($scope.formData.job_task_description !== "" || $scope.formData.job_task_amount !=="" || $scope.formData.job_task_hour !== ""){
+          $scope.show_field = function(view_type, type){
+                console.log(myModal.type);
+            if($scope.formData.job_task_description != "" || $scope.formData.job_task_amount !="" || $scope.formData.job_task_hour != "" || $scope.formData.job_task_description != null){
                 $scope.formData.job_task_description = "";
                 $scope.formData.job_task_hour        = "";
                 $scope.formData.job_task_amount      = "";
@@ -245,6 +260,7 @@ var apps = angular.module('jobModule', ['ionic']);
             if(view_type == 'product'){
                 $scope.p_description = true;
                 $scope.n_description = false;
+                $scope.edit_description = false;  
                /*-------------------- select product and display into select option in add form ----------------- */
                 var params = '/dataAll/type/products/format/json';
                   CrudOperation.get(params).success(function(data){  $scope.products = data.products;  });
@@ -253,6 +269,8 @@ var apps = angular.module('jobModule', ['ionic']);
                 $scope.n_description = true;
                 $scope.p_description = false;              
             }
+
+            //console.log(type);
           }
           /*================================ Add job task function ================================*/
                 $scope.addTaskData  = function(){
