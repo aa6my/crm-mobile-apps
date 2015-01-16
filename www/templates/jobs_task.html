@@ -6,7 +6,7 @@
   margin:0 10px;
 }
 </style>
-<div ng-controller="Job" ng-app="jobModule">
+
 
 <ion-view title="Jobs Tasks">
 
@@ -17,7 +17,7 @@
     <ion-nav-buttons side="right">
         <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
     </ion-nav-buttons>
-
+<div ng-controller="Job" ng-app="jobModule">
     <!-- content-->
     <ion-content class="has-header">
         <ion-refresher
@@ -92,28 +92,29 @@
                             <label class="item item-input item-select" ng-show="p_description" ng-init="false">
                                     <i class="icon ion-ios-list-outline" data-pack="default"></i>
                                     <span class="input-label">Description</span>
-                                  <input ng-model="formData.job_task_description"  type="text">
-                                  <select ng-model="formData.product_id" ng-change="choose_value(formData.product_id)">
+                                    <select ng-model="formData.product_id" ng-change="choose_value(formData.product_id)">
                                      <option ng-repeat="a in products" value="{{a.product_id}}">{{a.product_name}}</option>        
                                   </select>
+                                  <input ng-model="formData.job_task_description"  type="text" readonly>
+                                  
                             </label>
                             <label class="item item-input">
-                              <i class="icon ion-ios-alarm-outline" data-pack="default" style=""></i>  
+                              <i class="icon ion-ios-alarm-outline" data-pack="default"></i>  
                               <span class="input-label">Hour</span>
                               <input ng-model="formData.job_task_hour" type="text" ng-keyup="calculate_amount(formData.job_task_hour, job_hour)">
                               <input ng-model="job_hour" type="hidden">
                             </label>
                             <label class="item item-input">
-                              <i class="icon ion-social-usd-outline" data-pack="default" style=""></i>
+                              <i class="icon ion-social-usd-outline" data-pack="default"></i>
                               <span class="input-label">Amount</span>
-                              <input ng-model="formData.job_task_amount" type="text">
+                              <input ng-model="formData.job_task_amount" type="text"/>
                             </label>
                             <label class="item item-input" >
-                              <i class="icon ion-ios-calendar-outline" data-pack="default" style=""></i>
+                              <i class="icon ion-ios-calendar-outline" data-pack="default"></i>
                               <span class="input-label">Due Date</span>
                               <input ng-model="formData.job_task_due_date" type="date" value="2012-11-08">
 
-                             <!-- <input type="text" datepicker-popup="{{format}}" ng-model="formData.job_task_due_date" is-open="$parent.openFor['opened12']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" style="width:30px"/>
+                             <!-- <input type="text" datepicker-popup="{{format}}" ng-model="formData.job_task_due_date" is-open="$parent.openFor['opened12']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
                               <span class="input-group-btn">
                                   <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened12')"><i class="glyphicon glyphicon-calendar"></i></button>-->
                               </span>
@@ -127,7 +128,7 @@
                                   </select>
                             </label>
                             <label class="item item-input">
-                              <i class="icon ion-ios-pricetags-outline" data-pack="default" style=""></i>
+                              <i class="icon ion-ios-pricetags-outline" data-pack="default"></i>
                               <span class="input-label">%</span>
                               <span class="item item-checkbox" style="border:none;">
                                    <i class="checkbox" style="border:none;margin-left:5px;margin-top:-25px;">
