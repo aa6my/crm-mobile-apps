@@ -27,7 +27,10 @@
         <div class="ft-container">
             <ion-list>
               <ion-item ng-repeat="task in job_task_list">
-               <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right"><i class="icon ion-android-create"></i></a></h6>
+               <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} 
+               <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right"><i class="icon ion-android-create"></i></a> 
+               <a ng-click="deleteTask(task)" style="float:right"><i class="icon ion-ios-trash-outline"></i></a>
+               </h3>
 
                <div style="margin-left:25px">
                   <div style=""><h3><i class="icon ion-ios-arrow-thin-right"></i> <strong>Product name</strong> : {{task.product_id != null ? task.product_name : 'No description product for this task'}}<h3></div>
@@ -63,9 +66,9 @@
                         </ion-header-bar>
                         <ion-content class="padding">
                               <button class="button button-small button-energized" ng-click="show_field('description', '{{myModal.type}}')" ng-show="b_description" ng-init="false">Create New description </button>
-                              <button class="button button-small button-energized" ng-click="show_field('original', '{{myModal.type}}')" ng-show="original" ng-init='false'>Restore Original Data </button>
+                             <!-- <button class="button button-small button-energized" ng-click="show_field('original', '{{myModal.type}}','{{myModal.task}}')" ng-show="original" ng-init='false'>Restore Original Data </button>-->
                               <button class="button button-small button-energized" ng-click="show_field('product', '{{myModal.type}}')">Choose from product</button>
-
+<br/><br/>
                           <div class="list">
                           <!-- ------------------- This is for new description --------------------- --> 
 
@@ -134,7 +137,8 @@
                             </label>
                             <input ng-model="formData.job_id" type="hidden">
                             
-                            <button class="button button-full button-positive" ng-click="addTaskData()">Create</button>
+                            <button class="button button-full button-positive" ng-click="addTaskData()" ng-show="c_button" ng-init="false">Create</button>
+                            <button class="button button-full button-positive" ng-click="editTaskData()" ng-show="s_button" ng-init="false">Save</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>
