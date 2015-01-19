@@ -35,7 +35,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="job in jobs">
+                <tr ng-repeat="job in jobs()">
                     <td>{{job.job_title}}</td>
                     <td>{{job.job_date_start}}</td>
                     <td>{{job.job_due_date}}</td>
@@ -72,3 +72,8 @@
 </div>
 </ion-view>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('table').footable();
+    });
+</script>

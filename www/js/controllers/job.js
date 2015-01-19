@@ -16,7 +16,7 @@ var apps = angular.module('jobModule', ['ionic']);
         $scope.formData = UniversalFunction.returnDisplayFormData();
         /*---------------------------------------------------------------*/
 
-    url = Settings.url + '/dataAll/type/jobs/format/json';
+    /*url = Settings.url + '/dataAll/type/jobs/format/json';
         $http.get(url, Auth.doAuth(init.username, init.password)).
         success(function(data) {
           $scope.jobs = data.jobs;
@@ -32,7 +32,33 @@ var apps = angular.module('jobModule', ['ionic']);
       };
   }, function(err) {console.error('ERR', err);})
 
-        //$scope.job_task_list = {};
+        //$scope.job_task_list = {};*/
+
+        var url = Settings.url + '/dataAll/type/jobs/format/json';
+
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                 
+                    $scope.jobs = UniversalFunction.redraw(data.jobs);
+                    
+              }, function(err) {
+                  console.error('ERR', err);
+              
+              })
+                    
+            $scope.doRefresh = function(){
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                  
+                    $scope.jobs = UniversalFunction.redraw(data.jobs);
+
+              })
+              .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+              });
+            };
 
       /*-------------------- select job type and display into select option in add form ----------------- */
               var params = '/dataAll/type/job_types/format/json';
