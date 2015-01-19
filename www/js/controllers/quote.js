@@ -44,8 +44,8 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
 
                    $state.go('app.quoteAdd_Edit',{},{reload:false});
                    /*------------- If click add new button show only submit button with save function--------------*/
-                   var m = UniversalFunction.buttonOnly(true,false);
-                   $scope.btnAdd = m.add;
+                   var m          = UniversalFunction.buttonOnly(true,false);
+                   $scope.btnAdd  = m.add;
                    $scope.btnEdit = m.edit;
                    /*---------------------------*/
                    /*---- set form value to blank */
@@ -102,12 +102,12 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
 
                     var params     = '/dataAll';                  // request Api link
                     var dataUpdate = {                             // field column need to update
-                                        quote_subject : $scope.formData.quote_subject,
-                                        quote_date_created : $scope.formData.quote_date_created,
-                                        quote_valid_until : $scope.formData.quote_valid_until,
-                                        quote_discount : $scope.formData.quote_discount,
-                                        quote_customer_notes : $scope.formData.quote_customer_notes,
-                                        quote_status : $scope.formData.quote_status
+                                        quote_subject         : $scope.formData.quote_subject,
+                                        quote_date_created    : $scope.formData.quote_date_created,
+                                        quote_valid_until     : $scope.formData.quote_valid_until,
+                                        quote_discount        : $scope.formData.quote_discount,
+                                        quote_customer_notes  : $scope.formData.quote_customer_notes,
+                                        quote_status          : $scope.formData.quote_status
 
 
                         };
@@ -142,30 +142,22 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
 
 
 
-  $scope.open1 = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
+            $scope.open1 = function($event) {
+              $event.preventDefault();
+              $event.stopPropagation();
 
-    $scope.opened1 = true;
-  };
-  $scope.open2 = function($event) {
-    $event.preventDefault();
-    $event.stopPropagation();
+              $scope.opened1 = true;
+            };
+            $scope.open2 = function($event) {
+              $event.preventDefault();
+              $event.stopPropagation();
 
-    $scope.opened2 = true;
-  };
+              $scope.opened2 = true;
+            };
 
 
-/*
-  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  $scope.format = $scope.formats[0];
-*/
       $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy','yyyy-MM-dd', 'shortDate'];
       $scope.format  = $scope.formats[3];
-
-
-
-
 
       /* quote items ===================================================== */
               /*-------------------- select product and display into select option in add form ----------------- */
@@ -180,10 +172,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
             var params = '/dataAll/type/quote_items/key/quote_id/val/'+quote_id+'/joinid/product_id/jointo/products/format/json';
                       CrudOperation.get(params).success(function(data){            
                       $scope.quote_items   = data.quote_items;
-                      $scope.formData.quote_id = quote_id;
-                      //console.log($scope.formData.quote_id);
-                      /*$scope.formData.job_id = job_id;
-                      $scope.job_hour        = $stateParams.job_hour;*/
+                      $scope.formData.quote_id = quote_id;                      
                     });                     
         }
 
@@ -196,9 +185,6 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
         }).then(function(modal) {
             $scope.modal = modal
         });
-
-
-
 
         var myModal = {
               title : '',
@@ -224,7 +210,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                 $scope.formData.quote_item_quantity    = "";
                 $scope.formData.quote_item_price       = "";
                 $scope.formData.quote_item_subtotal    = "";
-                $scope.formData.product_id             = "";
+                $scope.formData.product_id               = "";
                
             }
                 myModal.title = title;
@@ -265,8 +251,6 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
         }
 
   /********************************* end Second modal(choose product) *****************************/
-
-
     $scope.addQuoteItemData = function(){
           var params      = '/dataAll';                   // request Api link
           var data_data = {
@@ -308,7 +292,6 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                     CrudOperation.update(params, data);
     }
 
-
     $scope.deleteItem = function(quote_items){
       var params = '/dataAll/type/quote_items/key/quote_item_id/val/'+quote_items.quote_item_id;
                     CrudOperation.delete(params);
@@ -327,8 +310,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
         var tot = $scope.formData.quote_item_quantity * $scope.formData.quote_item_price;
           $scope.formData.quote_item_subtotal = tot;
           calculate_dis();
-      }
-      
+      }      
       
     }
 

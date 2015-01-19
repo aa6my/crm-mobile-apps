@@ -49,7 +49,7 @@
                   <div style="">
                     <h3>
                     <i class="icon ion-ios-arrow-thin-right"></i> 
-                    <strong>Discount</strong> : {{quote.quote_item_discount}}
+                    <strong>Discount</strong> : {{quote.quote_item_discount}} <span class="separator"></span>  <strong>Total</strong> : {{quote.quote_item_subtotal}}
                     <h3>
                   </div>
                 
@@ -70,7 +70,7 @@
                           <button class="button button-clear button-primary" ng-click="modal_hide('{{myModal.type}}')">Cancel</button>
                         </ion-header-bar>
                         <ion-content class="padding">
-                              <button class="button button-small button-energized" ng-click="show_field('description', '{{myModal.type}}')" ng-show="b_description" ng-init="false">Create New description </button>
+                              
                               <button class="button button-small button-energized" ng-click="modal_product.show()">Choose from product</button>
 <br/><br/>
                           <div class="list">
@@ -113,7 +113,7 @@
                               <input ng-model="formData.quote_item_subtotal" type="text"/>                                   
                             </label>
 
-                            <input ng-model="formData.quote_id" type="text">
+                            <input ng-model="formData.quote_id" type="hidden">
                             <input ng-model="formData.product_id" type="hidden">                             
                             <button class="button button-full button-positive" ng-click="addQuoteItemData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
                             <button class="button button-full button-positive" ng-click="editQuoteItemData()" ng-show="edit_button" ng-init="false">Save</button>
