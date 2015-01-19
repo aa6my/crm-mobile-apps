@@ -1,5 +1,5 @@
 var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
-    apps.controller('Quote',function($scope,$http, $state,$ionicPopup,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
+    apps.controller('Quote',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== quote(initial start of page will call this part) ============================= */
         
@@ -168,17 +168,118 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
 
 
       /* quote items ===================================================== */
+              /*-------------------- select product and display into select option in add form ----------------- */
+                var params = '/dataAll/type/products/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.products = data.products;  });
+              /*------------ end selection -----------------------------------------------------------------------*/ 
 
+
+      /********************************* first modal *****************************/
       if($stateParams.quote_id !== undefined && $stateParams.quote_id !== null){
             var quote_id = $stateParams.quote_id;
             var params = '/dataAll/type/quote_items/key/quote_id/val/'+quote_id+'/joinid/product_id/jointo/products/format/json';
                       CrudOperation.get(params).success(function(data){            
-                      $scope.quote_items   = data.quote_items; 
+                      $scope.quote_items   = data.quote_items;
+                      $scope.formData.quote_id = quote_id;
                       /*$scope.formData.job_id = job_id;
                       $scope.job_hour        = $stateParams.job_hour;*/
                     });                     
         }
 
+         // function ionic to call modal box
+         // will triggered after add job task button clicked
+        $ionicModal.fromTemplateUrl('modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        }).then(function(modal) {
+            $scope.modal = modal
+        });
+
+
+
+
+        var myModal = {
+              title : '',
+              type  : '',
+              task : ''
+        };
+        $scope.myModal = {
+              title : '',
+              type  : ''
+        };
+        $scope.modal_show = function(data, type, title){
+           console.log(type);
+            //$scope.b_description = true;
+            if(type === "edit"){
+                /*$scope.formData  = data;
+                $scope.edit_description = true;
+                $scope.c_button = false;
+                $scope.s_button = true;*/            
+            }else if(type === "add")  { 
+                /*$scope.c_button = true;
+                $scope.s_button = false;*/
+            }
+              myModal.title = title;
+              $scope.myModal.title = myModal.title;
+             /* 
+              myModal.type = type;
+              myModal.task = data;         
+              
+              $scope.myModal.type  = myModal.type;
+              $scope.myModal.task  = myModal.task;*/
+              $scope.modal.show();
+
+        } 
+        $scope.modal_hide = function(type){
+              $scope.modal.hide();
+              /*$scope.p_description = false;
+              $scope.n_description = false;*/
+              $state.go($state.current,{},{reload:true}); 
+        }
+
+  /********************************* end first modal *****************************/
+
+  /********************************* Second modal(choose product) *****************************/
+
+            $ionicModal.fromTemplateUrl('modal_product.html', {
+            scope: $scope,
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        }).then(function(modal) {
+            $scope.modal_product = modal
+        });
+
+        $scope.choose_product = function(){
+          //console.log($scope.modal_product.pro_id);
+                var product_id = $scope.modal_product.pro_id;              
+                var params = '/dataAll/type/products/key/product_id/val/'+product_id+'/format/json';
+                  CrudOperation.get(params).success(function(data){                    
+                      $scope.formData.quote_item_description  = data.products[0].product_desc;
+                      $scope.formData.quote_item_name  = data.products[0].product_name;
+                      $scope.formData.quote_item_quantity  = data.products[0].product_quantity;
+                      $scope.formData.quote_item_price  = data.products[0].product_amount;
+                      $scope.formData.quote_item_subtotal  = data.products[0].product_quantity * data.products[0].product_amount;
+                      $scope.formData.product_id  = data.products[0].product_id;
+                });
+              
+
+            
+            $scope.modal_product.hide();
+        }
+  /********************************* end Second modal(choose product) *****************************/
+
+
+    $scope.addQuoteItemData = function(formData){
+          var params      = '/dataAll';                   // request Api link
+          var data        = {                             // data sent to Api
+                                type : "quote_items", 
+                                formData : formData
+                        };
+          CrudOperation.add(params, data, '', false);
+          $scope.modal.hide();
+    }
+      
 
       })
 
