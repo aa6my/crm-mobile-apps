@@ -89,21 +89,22 @@
                             </label>
 
                             <label class="item item-input">
-                              <i class="icon ion-social-usd-outline" data-pack="default"></i>
+                              <i class="icon ion-ios-calendar-outline" data-pack="default"></i>
                               <span class="input-label">Quantity</span>
-                              <input ng-model="formData.quote_item_quantity" type="text"/>
+                              <input ng-model="formData.quote_item_quantity" type="text" ng-keyup="kira()"/>
                             </label>
 
                             <label class="item item-input" >
-                              <i class="icon ion-ios-calendar-outline" data-pack="default"></i>
+                              
+                              <i class="icon ion-social-usd-outline" data-pack="default"></i>
                               <span class="input-label">Unit Price</span>
-                              <input ng-model="formData.quote_item_price" type="text">
+                              <input ng-model="formData.quote_item_price" type="text" ng-keyup="kira()">
                            </label>
 
                             <label class="item item-input">
                                     <i class="icon ion-ios-list-outline" data-pack="default"></i>
                                     <span class="input-label">Discount</span>                                  
-                                  <input ng-model="formData.quote_item_discount" type="text" ng-keyup="calculate_discount(formData.quote_item_discount)"/>
+                                  <input ng-model="formData.quote_item_discount" type="text" ng-keyup="kira()"/>
                             </label>
 
                             <label class="item item-input">
@@ -112,10 +113,10 @@
                               <input ng-model="formData.quote_item_subtotal" type="text"/>                                   
                             </label>
 
-                            <input ng-model="formData.quote_id" type="hidden">
+                            <input ng-model="formData.quote_id" type="text">
                             <input ng-model="formData.product_id" type="hidden">                             
                             <button class="button button-full button-positive" ng-click="addQuoteItemData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
-                            <button class="button button-full button-positive" ng-click="editQuoteItemData(formData)" ng-show="edit_button" ng-init="false">Save</button>
+                            <button class="button button-full button-positive" ng-click="editQuoteItemData()" ng-show="edit_button" ng-init="false">Save</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>
