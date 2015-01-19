@@ -6,8 +6,8 @@ angular
  */
 .factory('Settings', function() {
   return {
-      upload  : 'https://192.168.0.200/customer-relationship-management/assets/uploads/files/',
-      url     : 'https://localhost/customer-relationship-management/apps'
+      upload  : 'http://192.168.0.200/crm/assets/uploads/files/',
+      url     : 'http://192.168.0.200/crm/apps'
   };
 })
 
