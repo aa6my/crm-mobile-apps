@@ -6,8 +6,8 @@ angular
  */
 .factory('Settings', function() {
   return {
-      upload  : 'https://192.168.0.200/customer-relationship-management/assets/uploads/files/',
-      url     : 'https://192.168.0.200/customer-relationship-management/apps'
+      upload  : 'http://192.168.0.200/crm/assets/uploads/files/',
+      url     : 'http://192.168.0.200/crm/apps'
   };
 })
 
@@ -15,6 +15,31 @@ angular
  * Encode and Decode Authentication username and password.
  * call this function when needed
  */
+.service('appServices', function appServices($q) {
+    // Wrap the barcode scanner in a service so that it can be shared easily.
+    this.scanBarcode = function() {
+        // The plugin operates asynchronously so a promise
+        // must be used to display the results correctly.
+        var deferred = $q.defer();
+        try {
+            cordova.plugins.barcodeScanner.scan(
+                function (result) {  // success
+                    deferred.resolve({'error':false, 'result': result});
+                }, 
+                function (error) {  // failure
+                    deferred.resolve({'error':true, 'result': error.toString()});
+                    //console.log(error.toString());
+                }
+            );
+        }
+        catch (exc) {
+            deferred.resolve({'error':true, 'result': 'exception: ' + exc.toString()});
+            console.log(exc.toString());
+        }
+        return deferred.promise;
+    };
+})
+
 .factory('Base64', function () {
     
  
@@ -217,6 +242,22 @@ angular
 
       return authVal;
 })
+.factory('jobService', function(){
+   
+   var jService = {};
+   var  dd;
+
+       jService.addData = function(data){
+          dd = data;
+
+       }
+
+       jService.displayData = function(){
+          return dd;
+       }
+
+       return jService;
+ })
 
 
 /**
@@ -264,14 +305,15 @@ angular
        * @param {[type]} data   [cumpolsary : form data from view form]
        * @param {[type]} stateToRedirect   [optional : redirect to state function]
        */
-      operation.add = function(params, data, stateToRedirect){
+      operation.add = function(params, data, stateToRedirect, reload){
         
           var url             = Settings.url + params;
+          var reload          = (reload === undefined || reload === null || reload === "") ? false : true;
           var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
 
                   $http.post(url,data, Auth.doAuth(init.username, init.password))
                   .success(function(data) {            
-                    $state.go(stateToRedirect, {}, {reload: false});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
+                    $state.go(stateToRedirect, {}, {reload: reload});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
 
                   })
                   .error(function(data, status, headers, config){

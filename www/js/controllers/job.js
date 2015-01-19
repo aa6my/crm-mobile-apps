@@ -1,7 +1,9 @@
-var apps = angular.module('jobModule', []);
+var apps = angular.module('jobModule', ['ionic']);
 	
 
-	apps.controller('Job', function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+	apps.controller('Job', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {
+
+       
 
        /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
@@ -14,7 +16,7 @@ var apps = angular.module('jobModule', []);
         $scope.formData = UniversalFunction.returnDisplayFormData();
         /*---------------------------------------------------------------*/
 
-    url = Settings.url + '/dataAll/type/jobs/format/json';
+    /*url = Settings.url + '/dataAll/type/jobs/format/json';
         $http.get(url, Auth.doAuth(init.username, init.password)).
         success(function(data) {
           $scope.jobs = data.jobs;
@@ -30,47 +32,76 @@ var apps = angular.module('jobModule', []);
       };
   }, function(err) {console.error('ERR', err);})
 
+        //$scope.job_task_list = {};*/
+
+        var url = Settings.url + '/dataAll/type/jobs/format/json';
+
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                 
+                    $scope.jobs = UniversalFunction.redraw(data.jobs);
+                    
+              }, function(err) {
+                  console.error('ERR', err);
+              
+              })
+                    
+            $scope.doRefresh = function(){
+              $http
+                .get(url, Auth.doAuth(init.username, init.password))
+                .success(function(data){
+                  
+                    $scope.jobs = UniversalFunction.redraw(data.jobs);
+
+              })
+              .finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+              });
+            };
+
       /*-------------------- select job type and display into select option in add form ----------------- */
               var params = '/dataAll/type/job_types/format/json';
-                  CrudOperation.get(params).success(function(data){  $scope.job_types = data.job_types;  });
+                    CrudOperation.get(params).success(function(data){  $scope.job_types = data.job_types;  });
       /*------------ end selection ---------------------------------------------------------------------------*/
 
       /*-------------------- select user meta and display into select option in add form ----------------- */
               var params = '/dataAll/type/user_meta/format/json';
-                  CrudOperation.get(params).success(function(data){  $scope.user_meta = data.user_meta;  });
+                    CrudOperation.get(params).success(function(data){  $scope.user_meta = data.user_meta;  });
       /*------------ end selection ---------------------------------------------------------------------------*/
 
       /*-------------------- select websites and display into select option in add form ----------------- */
               var params = '/dataAll/type/websites/format/json';
-                  CrudOperation.get(params).success(function(data){  $scope.websites = data.websites;  });
+                    CrudOperation.get(params).success(function(data){  $scope.websites = data.websites;  });
       /*------------ end selection ---------------------------------------------------------------------------*/
 
       /*-------------------- select customers and display into select option in add form ----------------- */
               var params = '/dataAll/type/customers/format/json';
-                  CrudOperation.get(params).success(function(data){  $scope.customers = data.customers;  });
+                    CrudOperation.get(params).success(function(data){  $scope.customers = data.customers;  });
       /*------------ end selection ---------------------------------------------------------------------------*/
 
 
       /*----- ng-switch code = for multiple form step --*/
-      $scope.step     = 'step1';
+                    $scope.step     = 'step1';
       $scope.goToStep = function(step){
-        $scope.step     = step;
-        $scope.formData = this.formData;  // When click next or back button, retain the value of form form previous entering
+                    $scope.step     = step;
+                    $scope.formData = this.formData;  // When click next or back button, retain the value of form form previous entering
 
       }/*--- end ng-switch --*/
       
       
 
       $scope.goToAddDataPage = function(){ 
-             $state.go('app.jobs_main',{},{reload:false});
-              var m = UniversalFunction.buttonOnly(true,false);
-                      $scope.btnAdd = m.add;
-                      $scope.btnEdit = m.edit;
+                    $state.go('app.jobs_main',{},{reload:false});
+                    var m = UniversalFunction.buttonOnly(true,false);
+                    $scope.btnAdd  = m.add;
+                    $scope.btnEdit = m.edit;
 
                 /*---- set form value to blank */
-             UniversalFunction.displayFormData('');
+                    UniversalFunction.displayFormData('');
                 
       }
+
       $scope.goToEditDataPage = function(jobs){
 
                     $state.go('app.jobs_main',{},{reload:false});
@@ -87,18 +118,28 @@ var apps = angular.module('jobModule', []);
                     //console.log(b.job_type_id);
                     
       }
-      $scope.openDatePicker  = function($event, ng_open_name){
-        $scope.openFor = {};
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.openFor[ng_open_name] = true;      
+      $scope.goToJobTaskList = function(jobs){
+         // jobTaskList(1);
+                    $state.go('app.jobs_task',{job_id : jobs.job_id, job_hour : jobs.job_hour},{reload:false});
+
+
       }
-      $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy','yyyy-MM-dd', 'shortDate'];
-      $scope.format  = $scope.formats[3];
+      $scope.backToJob = function() {
+                    $state.go('app.jobs');
+
+      }           
+      $scope.openDatePicker  = function($event, ng_open_name){
+                    $scope.openFor = {};
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    $scope.openFor[ng_open_name] = true;      
+      }
+                    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy','yyyy-MM-dd', 'shortDate'];
+                    $scope.format  = $scope.formats[3];
 
 
 
-      /*================================ Add function ================================*/
+      /*================================ Add Job function ================================*/
                 $scope.addData  = function(){
                     //$scope.formData = {};                           // store data from form into formData onject
                     var params      = '/dataAll';                   // request Api link
@@ -109,10 +150,10 @@ var apps = angular.module('jobModule', []);
                     var stateToRedirect = 'app.jobs';
                     CrudOperation.add(params, data, stateToRedirect);
                 } 
-        /*================================ End Add function ================================*/
+        /*================================ End Add Job function ================================*/
 
 
-        /*================================ Edit function ================================*/
+        /*================================ Edit Job function ================================*/
                 $scope.editData = function(){
 
                     var params     = '/dataAll';                  // request Api link
@@ -159,7 +200,168 @@ var apps = angular.module('jobModule', []);
           /*================================ End Delete function ================================*/
 
 
+         /*================================ job task part ================================*/ 
+
+         // function ionic to call modal box
+         // will triggered after add job task button clicked
+        $ionicModal.fromTemplateUrl('modal.html', {
+            scope: $scope,
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        }).then(function(modal) {
+            $scope.modal = modal
+        }) 
+        // function ionic to hide modal box
+        // will trigger when cancel button clicked
+        // after that clear the form data to empty field 
+        function clear_job_task_form(){
+              $scope.formData.job_task_description = "";
+              $scope.formData.job_task_hour        = "";
+              $scope.formData.job_task_amount      = "";
+              $scope.formData.job_task_due_date    = "";
+              $scope.formData.user_id              = "";
+              $scope.formData.job_task_percentage  = "";
+        }
 
 
+        var myModal = {
+              title : '',
+              type  : '',
+              task : ''
+        };
+        $scope.myModal = {
+              title : '',
+              type  : ''
+        };
+        $scope.modal_hide = function(type){
+              $scope.modal.hide();
+              $scope.p_description = false;
+              $scope.n_description = false;
+              $state.go($state.current,{},{reload:true}); 
+        }
+        $scope.modal_show = function(data, type, title){
+           console.log(type);
+            $scope.b_description = true;
+            if(type === "edit"){
+                $scope.formData  = data;
+                $scope.edit_description = true;
+                $scope.c_button = false;
+                $scope.s_button = true;            
+            }else if(type === "add")  { 
+                $scope.c_button = true;
+                $scope.s_button = false;
+            }
 
-})
+              myModal.title = title;
+              myModal.type = type;
+              myModal.task = data;         
+              $scope.myModal.title = myModal.title;
+              $scope.myModal.type  = myModal.type;
+              $scope.myModal.task  = myModal.task;
+              $scope.modal.show();
+
+        }
+        // Display job task in job_task.html page
+        // $stateParams.job_id came from $scope.goToJobTaskList function
+        // Must include paramter name in app.js for paramater declaration
+        if($stateParams.job_id !== undefined && $stateParams.job_id !== null){
+            var job_id = $stateParams.job_id;
+            var params = '/dataAll/type/jobs_task/key/job_id/val/'+job_id+'/joinid/product_id/jointo/products/format/json';
+                      CrudOperation.get(params).success(function(data){            
+                      $scope.job_task_list   = data.jobs_task; 
+                      $scope.formData.job_id = job_id;
+                      $scope.job_hour        = $stateParams.job_hour;
+                    });                     
+        }
+          // show field either text field or select drop down list
+          // for job description & job task hour & job task amount. 
+          $scope.show_field = function(view_type, type, data){
+            console.log(view_type);
+                
+                     
+            if(view_type == 'product'){
+                /*if($scope.formData.job_task_description != "" || $scope.formData.job_task_amount !="" || $scope.formData.job_task_hour != "" || $scope.formData.job_task_description != null){
+                $scope.formData.job_task_description = "";
+                $scope.formData.job_task_hour        = "";
+                $scope.formData.job_task_amount      = "";
+                 } */  
+                $scope.p_description = true;
+                $scope.n_description = false;
+                $scope.edit_description = false;  
+               /*-------------------- select product and display into select option in add form ----------------- */
+                var params = '/dataAll/type/products/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.products = data.products;  });
+              /*------------ end selection -----------------------------------------------------------------------*/  
+            }
+            else if(view_type == 'original'){          
+
+              $scope.formData = myModal.task;
+              console.log(myModal.task);
+              
+            }
+            else{ 
+                         
+                $scope.n_description = true;
+                $scope.p_description = false; 
+                $scope.edit_description = false;             
+            }
+
+            
+          }
+          /*================================ Add job task function ================================*/
+                $scope.addTaskData  = function(){
+                    
+                    var params      = '/dataAll';                   // request Api link
+                    var data        = {                             // data sent to Api
+                                        type : "jobs_task", 
+                                        formData : this.formData
+                        };
+                    CrudOperation.add(params, data, '', true);
+                    $scope.modal.hide();
+                }       
+        /*================================ End Delete function ================================*/
+        $scope.choose_value = function(product_id){
+          /*-------------------- select product data by product id then insert into description ----------------- */
+              var params = '/dataAll/type/products/key/product_id/val/'+product_id+'format/json';
+                  CrudOperation.get(params).success(function(data){  
+                    $scope.formData.job_task_description = data.products[0].product_name;
+                    $scope.formData.job_task_amount      = data.products[0].product_amount;
+                    $scope.formData.job_task_hour        = data.products[0].product_quantity; 
+              });
+          /*------------ end selection ---------------------------------------------------------------------------*/
+        }
+
+        $scope.calculate_amount = function(hour, job_hour){
+                 $scope.formData.job_task_amount = hour * job_hour;
+        }
+
+
+        $scope.editTaskData = function(){
+                var params     = '/dataAll';                  // request Api link
+                    var dataUpdate = {                             // field column need to update
+                                        'product_id'                  : $scope.formData.product_id,
+                                        'job_task_hour'               : $scope.formData.job_task_hour,
+                                        'job_task_due_date'           : $scope.formData.job_task_due_date,
+                                        'job_task_amount'             : $scope.formData.job_task_amount,
+                                        'user_id'                     : $scope.formData.user_id,
+                                        'job_task_percentage'         : $scope.formData.job_task_percentage,
+                                        'job_task_description'        : $scope.formData.job_task_description
+                        };
+                    var data       = {                             // data sent to Api
+                                      type : "jobs_task",
+                                      primaryKey : 'job_task_id', 
+                                      primaryKeyVal : $scope.formData.job_task_id,
+                                      formData : dataUpdate
+                        };
+                    
+                    $scope.modal.hide();
+                    CrudOperation.update(params, data);
+        }
+
+        $scope.deleteTask = function(jobs_task) {
+                    var params = '/dataAll/type/jobs_task/key/job_task_id/val/'+jobs_task.job_task_id;
+                    CrudOperation.delete(params);
+                }
+
+
+});

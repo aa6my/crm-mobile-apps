@@ -42,9 +42,9 @@
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <a ng-click="viewInvoice(invoice)"><span class="glyphicon glyphicon-list"></span></a>
-                        <a ng-click="editInvoice(invoice)"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a ng-click="deleteInvoice(invoice)"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a ng-click="viewInvoice(invoice)"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
+                        <a ng-click="goToEditDataPage(invoice)"><i class="icon ion-android-create"></i></a>
+                        <a ng-click="deleteData(invoice)"><i class="icon ion-ios-trash-outline"></i></a>
 
 
                     </td>
@@ -61,16 +61,17 @@
             </table>
         </div>
 </ion-content>
-  <div class="tabs tabs-icon-only">
-  <a class="tab-item">
-    <i class="icon ion-home"></i>
-  </a>
-  <a class="tab-item">
-    <i class="icon ion-star"></i>
-  </a>
-  <a class="tab-item">
-    <i class="icon ion-gear-a"></i>
-  </a>
+
+<div class="tabs tabs-icon-only">
+    <a class="tab-item">
+        <i class="icon ion-home"></i>
+    </a>
+    <a class="tab-item">
+        <i class="icon ion-plus-circled" ng-click='goToAddDataPage()'></i>
+    </a>
+    <a class="tab-item">
+        <i class="icon ion-gear-a"></i>
+    </a>
 </div>
 </ion-view>
 </div>

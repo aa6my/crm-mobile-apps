@@ -1,5 +1,4 @@
-// Ionic Starter App
-
+// Ionic Starter App 
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
@@ -16,7 +15,7 @@ angular.module('starter', [
                            'productModule',
                            'jobModule',
                            'invoiceModule',
-                           'loginModule'
+                           'loginModule'    
                           ])
 
 
@@ -186,6 +185,14 @@ angular.module('starter', [
         }
       }
     })
+    .state('app.jobs_task', {
+      url: "/jobs_task/:job_id/:job_hour",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/jobs_task.html"
+        }
+      }
+    })
     /*.state('app.jobs.', {
       url: "/jobs",
       views: {
@@ -211,7 +218,16 @@ angular.module('starter', [
           templateUrl: "templates/invoices.html"
         }
       }
-    })    
+    })
+
+    .state('app.invoiceAdd_Edit', {
+      url: "/invoiceAdd_Edit",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/invoiceAdd_Edit.html"
+        }
+      }
+    })     
 
     .state('app.files', {
       url: "/files",

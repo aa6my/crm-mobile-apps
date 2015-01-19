@@ -35,17 +35,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="job in jobs">
+                <tr ng-repeat="job in jobs()">
                     <td>{{job.job_title}}</td>
                     <td>{{job.job_date_start}}</td>
                     <td>{{job.job_due_date}}</td>
-                    <!-- <td data-value="78025368997">22 Jun 1972</td> -->
+                  <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <a ng-click="viewJob(job)"><span class="glyphicon glyphicon-list"></span></a>
-                        <a ng-click="goToAddJobTask(job)"><span class="icon ion-clipboard" ></span></a>
-                        <a ng-click="goToEditDataPage(job)"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a ng-click="deleteData(job)"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a ng-click="viewJob(job)" style="height:5px;"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
+                        <a ng-click="goToJobTaskList(job)"><i class="icon ion-clipboard" ></i></a>
+                        <a ng-click="goToEditDataPage(job)"><i class="icon ion-android-create"></i></a>
+                        <a ng-click="deleteData(job)"><i class="icon ion-ios-trash-outline"></i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -72,3 +72,8 @@
 </div>
 </ion-view>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('table').footable();
+    });
+</script>
