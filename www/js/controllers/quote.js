@@ -210,15 +210,15 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
         };
         $scope.modal_show = function(data, type, title){
            console.log(type);
-            //$scope.b_description = true;
+            
             if(type === "edit"){
-                /*$scope.formData  = data;
-                $scope.edit_description = true;
-                $scope.c_button = false;
-                $scope.s_button = true;*/            
+                $scope.formData    = data;
+                $scope.edit_button = true;
+                $scope.add_button  = false;                        
             }else if(type === "add")  { 
-                /*$scope.c_button = true;
-                $scope.s_button = false;*/
+                $scope.add_button  = true;
+                $scope.edit_button = false;
+               
             }
               myModal.title = title;
               $scope.myModal.title = myModal.title;
@@ -261,12 +261,10 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                       $scope.formData.quote_item_price  = data.products[0].product_amount;
                       $scope.formData.quote_item_subtotal  = data.products[0].product_quantity * data.products[0].product_amount;
                       $scope.formData.product_id  = data.products[0].product_id;
-                });
-              
-
-            
+                });  
             $scope.modal_product.hide();
         }
+
   /********************************* end Second modal(choose product) *****************************/
 
 
@@ -279,6 +277,43 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
           CrudOperation.add(params, data, '', false);
           $scope.modal.hide();
     }
+    $scope.editQuoteItemData = function(formData){
+        var params     = '/dataAll';                  // request Api link
+                    var dataUpdate = {                             // field column need to update
+                                        'product_id'                  : formData.product_id,
+                                        'quote_item_name'             : formData.quote_item_name,
+                                        'quote_item_description'      : formData.quote_item_description,
+                                        'quote_item_price'            : formData.quote_item_price,
+                                        'quote_item_quantity'         : formData.quote_item_quantity,
+                                        'quote_item_discount'         : formData.quote_item_discount,
+                                        'quote_item_subtotal'         : formData.quote_item_subtotal
+                        };
+                    var data       = {                             // data sent to Api
+                                      type : "quote_items",
+                                      primaryKey : 'quote_item_id', 
+                                      primaryKeyVal : $scope.formData.quote_item_id,
+                                      formData : dataUpdate
+                        };
+                    
+                    $scope.modal.hide();
+                    CrudOperation.update(params, data);
+    }
+
+
+    $scope.deleteItem = function(quote_items){
+      var params = '/dataAll/type/quote_items/key/quote_item_id/val/'+quote_items.quote_item_id;
+                    CrudOperation.delete(params);
+    }
+
+    /*$scope.calculate_discount = function(discount){
+      var discount_tot = (discount/100) * $scope.formData.quote_item_subtotal;
+      $scope.formData.quote_item_subtotal = $scope.formData.quote_item_subtotal - discount_tot;
+      
+    }
+
+    function calculate_dis(){
+
+    }*/
       
 
       })

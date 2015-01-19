@@ -29,7 +29,7 @@
               <ion-item ng-repeat="quote in quote_items">
                <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Quote Item Name :</strong> {{quote.quote_item_name}} 
                <a ng-click="modal_show(quote,'edit', 'Edit Quote Item')" style="float:right"><i class="icon ion-android-create"></i></a> 
-               <a ng-click="deleteTask(task)" style="float:right"><i class="icon ion-ios-trash-outline"></i></a>
+               <a ng-click="deleteItem(quote)" style="float:right"><i class="icon ion-ios-trash-outline"></i></a>
                </h3>
 
                <div style="margin-left:25px">
@@ -103,7 +103,7 @@
                             <label class="item item-input">
                                     <i class="icon ion-ios-list-outline" data-pack="default"></i>
                                     <span class="input-label">Discount</span>                                  
-                                  <input ng-model="formData.quote_item_discount" type="text"/>
+                                  <input ng-model="formData.quote_item_discount" type="text" ng-keyup="calculate_discount(formData.quote_item_discount)"/>
                             </label>
 
                             <label class="item item-input">
@@ -113,9 +113,9 @@
                             </label>
 
                             <input ng-model="formData.quote_id" type="hidden">
-                            <input ng-model="formData.product_id" type="text">                             
-                            <button class="button button-full button-positive" ng-click="addQuoteItemData(formData)">Add Item</button>
-                            <button class="button button-full button-positive" ng-click="editTaskData()" ng-show="s_button" ng-init="false">Save</button>
+                            <input ng-model="formData.product_id" type="hidden">                             
+                            <button class="button button-full button-positive" ng-click="addQuoteItemData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
+                            <button class="button button-full button-positive" ng-click="editQuoteItemData(formData)" ng-show="edit_button" ng-init="false">Save</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>
