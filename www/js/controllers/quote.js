@@ -1,5 +1,5 @@
 var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
-    apps.controller('Quote',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+    apps.controller('Quote',function($scope,$http, $state,$ionicPopup,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== quote(initial start of page will call this part) ============================= */
         
@@ -67,6 +67,15 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                     $scope.formData = b;
                     
               }
+
+                $scope.goToQuoteItemList = function(quote){
+                    $state.go('app.quote_items',{quote_id : quote.quote_id},{reload:false});
+
+                }
+
+                $scope.backToQuote = function(){
+                  $state.go('app.quotes');
+                }
 
           
  
@@ -153,6 +162,22 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
 */
       $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy','yyyy-MM-dd', 'shortDate'];
       $scope.format  = $scope.formats[3];
+
+
+
+
+
+      /* quote items ===================================================== */
+
+      if($stateParams.quote_id !== undefined && $stateParams.quote_id !== null){
+            var quote_id = $stateParams.quote_id;
+            var params = '/dataAll/type/quote_items/key/quote_id/val/'+quote_id+'/joinid/product_id/jointo/products/format/json';
+                      CrudOperation.get(params).success(function(data){            
+                      $scope.quote_items   = data.quote_items; 
+                      /*$scope.formData.job_id = job_id;
+                      $scope.job_hour        = $stateParams.job_hour;*/
+                    });                     
+        }
 
 
       })

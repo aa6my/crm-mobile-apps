@@ -152,6 +152,14 @@ angular.module('starter', [
         }
       }
     }) 
+    .state('app.quote_items', {
+      url: "/quote_items/:quote_id",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/quote_items.html"
+        }
+      }
+    })
 
     .state('app.websites', {
       url: "/websites",

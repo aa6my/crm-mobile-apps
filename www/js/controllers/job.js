@@ -1,38 +1,17 @@
 var apps = angular.module('jobModule', ['ionic']);
 	
 
-	apps.controller('Job', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {
-
-       
+	apps.controller('Job', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {       
 
        /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
         $scope.btnEdit = m.edit;
-        /*---------------------------*/
-        
+        /*---------------------------*/      
 
         /*------------initial value for form data of update function ----*/
         $scope.formData = UniversalFunction.returnDisplayFormData();
-        /*---------------------------------------------------------------*/
-
-    /*url = Settings.url + '/dataAll/type/jobs/format/json';
-        $http.get(url, Auth.doAuth(init.username, init.password)).
-        success(function(data) {
-          $scope.jobs = data.jobs;
-          //console.log('Success', data.jobs);
-      $scope.doRefresh = function() {
-        $http.get(url, Auth.doAuth(init.username, init.password))
-         .success(function(data) {
-           $scope.jobs = data.jobs;
-         })
-         .finally(function() {
-           $scope.$broadcast('scroll.refreshComplete');
-         });
-      };
-  }, function(err) {console.error('ERR', err);})
-
-        //$scope.job_task_list = {};*/
+        /*---------------------------------------------------------------*/    
 
         var url = Settings.url + '/dataAll/type/jobs/format/json';
 
@@ -87,8 +66,7 @@ var apps = angular.module('jobModule', ['ionic']);
                     $scope.step     = step;
                     $scope.formData = this.formData;  // When click next or back button, retain the value of form form previous entering
 
-      }/*--- end ng-switch --*/
-      
+      }/*--- end ng-switch --*/    
       
 
       $scope.goToAddDataPage = function(){ 
@@ -222,7 +200,6 @@ var apps = angular.module('jobModule', ['ionic']);
               $scope.formData.user_id              = "";
               $scope.formData.job_task_percentage  = "";
         }
-
 
         var myModal = {
               title : '',
