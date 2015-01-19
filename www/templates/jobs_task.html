@@ -40,8 +40,13 @@
                  </span>
                     <span class="separator"></span>
                  <span>
-                    <span>Percentage :</span>
-                    <span>{{task.job_task_percentage}}%</span>
+                    <span>Percent :</span>
+                    <span>
+                    {{
+                          task.job_task_percentage == true || task.job_task_percentage == 1 ? 100 
+                        : task.job_task_percentage == false || task.job_task_percentage == 0 ? 0 : 0
+                    }}%
+                    </span>
                  </span>
                     <span class="separator"></span>
                  <span>
@@ -132,7 +137,8 @@
                               <span class="input-label">%</span>
                               <span class="item item-checkbox" style="border:none;">
                                    <i class="checkbox" style="border:none;margin-left:5px;margin-top:-25px;">
-                                     <input type="checkbox"  ng-model="formData.job_task_percentage" checked>
+                                     <input type="checkbox"  ng-model="formData.job_task_percentage" ng-checked="formData.job_task_percentage">
+
                                    </i>
                                    </span>                                   
                             </label>
