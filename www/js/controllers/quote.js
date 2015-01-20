@@ -318,7 +318,41 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
       var discount_tot = ($scope.formData.quote_item_discount/100) * $scope.formData.quote_item_subtotal;
           $scope.formData.quote_item_subtotal = $scope.formData.quote_item_subtotal - discount_tot;
     }
-      
 
-      })
+
+    $scope.convert_to_invoice = function(quote_items){
+      
+      //quote_items[0].quote_id
+      var quote_details = {};
+      var params = '/dataAll/type/quotes/key/quote_id/val/'+quote_items[0].quote_id+'/format/json';
+          CrudOperation.get(params).success(function(data){  
+               
+                  var obj_size    = quote_items.length,
+                      params      = '/dataAll',
+                      quote_details = data.quotes,
+                      data_data = {};           
+                      data_data = {
+                                      'customer_id'               : quote_details[0].customer_id,
+                                      'invoice_subject'           : quote_details[0].quote_subject,
+                                      'invoice_date_created'      : quote_details[0].quote_date_created,
+                                      //'invoice_number'            : quote_details[0].quote_item_description,
+                                      'invoice_customer_notes'    : quote_details[0].quote_customer_notes,
+                                      'invoice_valid_until'       : quote_details[0].quote_valid_until,
+                                      'invoice_status'            : quote_details[0].quote_status
+                                  };
+                      var data        = {                             // data sent to Api
+                                        type : "invoices", 
+                                        formData : data_data
+                      };
+                  CrudOperation.add(params, data, '', false);
+                  //  console.log(quote_details[0]);
+
+          });
+
+      
+      
+      
+    }
+      
+})
 

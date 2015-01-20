@@ -114,8 +114,8 @@
                                    </i>
                                    </span>                                   
                             </label>
-                            <input ng-model="formData.job_id" type="text">
-                            <input ng-model="formData.product_id" type="text">                             
+                            <input ng-model="formData.job_id" type="hidden">
+                            <input ng-model="formData.product_id" type="hidden">                             
                             <button class="button button-full button-positive" ng-click="addJobTaskData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
                             <button class="button button-full button-positive" ng-click="editJobTaskData()" ng-show="edit_button" ng-init="false">Save</button>
                           </div>
