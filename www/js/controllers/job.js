@@ -184,7 +184,7 @@ var apps = angular.module('jobModule', ['ionic']);
                 var params = '/dataAll/type/products/format/json';
                   CrudOperation.get(params).success(function(data){  $scope.products = data.products;  });
         /*------------ end selection -----------------------------------------------------------------------*/ 
-         // Display job task in job_task.html page
+        // Display job task in job_task.html page
         // $stateParams.job_id came from $scope.goToJobTaskList function
         // Must include paramter name in app.js for paramater declaration
         if($stateParams.job_id !== undefined && $stateParams.job_id !== null){
@@ -224,7 +224,17 @@ var apps = angular.module('jobModule', ['ionic']);
             if(type === "edit"){
                 $scope.formData    = data;                
                 $scope.edit_button = true;
-                $scope.add_button  = false;                        
+                $scope.add_button  = false;
+
+                var percentage = $scope.formData.job_task_percentage;
+                if(percentage == 0 || percentage == false){
+
+                    percentage == false;
+                }
+                else if(percentage == 1 || percentage == true){
+                    percentage == true;
+                }
+
             }else if(type === "add")  { 
                 $scope.add_button                    = true;
                 $scope.edit_button                   = false;
