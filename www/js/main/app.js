@@ -15,7 +15,8 @@ angular.module('starter', [
                            'productModule',
                            'jobModule',
                            'invoiceModule',
-                           'loginModule'    
+                           'loginModule',
+                           'serverModule'    
                           ])
 
 
@@ -42,6 +43,15 @@ angular.module('starter', [
       abstract: true,
       templateUrl: "templates/menu.html",
       controller: ''
+    })
+
+    .state('app.server', {
+      url: "/server",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/server.html"
+        }
+      }
     })
 
     .state('app.search', {
@@ -256,7 +266,7 @@ angular.module('starter', [
     }) 
 
     .state('app.login', {
-      url: "/login",
+      url: "/login/:server_name",
       views: {
         'menuContent' :{
           templateUrl: "templates/login.html"
@@ -275,6 +285,6 @@ angular.module('starter', [
 
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/login');
+  $urlRouterProvider.otherwise('/app/server');
 });
 

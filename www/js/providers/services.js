@@ -1,13 +1,13 @@
 angular
-.module('ServiceModule', ['ngResource','ionic'])
+.module('ServiceModule', ['ngResource','ionic','ValConstantService'])
 /**
  * Default setting for crm-mobile-apps 
  * call this function when needed
  */
-.factory('Settings', function() {
+.factory('Settings', function(init) {
   return {
-      upload  : 'http://192.168.0.200/crm/assets/uploads/files/',
-      url     : 'http://192.168.0.200/crm/apps'
+      upload  : '',
+      url     : ''
   };
 })
 

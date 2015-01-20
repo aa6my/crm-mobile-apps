@@ -141,11 +141,7 @@ var apps = angular.module('productModule', ['ionic']);
                                     '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.cancelled + '</td></tr>' +
                                     '</tbody>' +
                                     '</table>';*/
-                                    $scope.formData = {
-
-                                      product_sku: result.result.text
-
-                                    };
+                                    $scope.formData.product_sku = result.result.text;
                             }
                             else {
                                 $state.go('app.productAdd_Edit',{},{reload:false});

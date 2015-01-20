@@ -1,0 +1,24 @@
+<ion-view title="Choose Company">
+<ion-content>  
+<div ng-controller="Server">
+  <div class="col">
+    <form ng-submit="">
+      <div class="list list-inset">
+        <label class="item item-input item-stacked-label padding">
+          Company
+        &nbsp;&nbsp;
+        
+          <select ng-model="server_name">
+              <option value="{{s.domain_name}}" ng-repeat="s in server">{{s.company_name}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="padding">
+        <button class="button button-block button-assertive" ng-click="goToLogin()">Submit</button>
+        <div>{{success}}</div>
+      </div>
+    </form>
+  </div>
+</div>
+</ion-content>
+</ion-view>
