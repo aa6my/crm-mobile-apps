@@ -377,6 +377,15 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                                                    data.formData = qi;
                                                    var params = '/dataAll';
                                                    CrudOperation.add(params, data, '', false);
+
+
+                                                   var params = Settings.url+'/dataAll/type/quotes-quote_items/key/quote_id-quote_id/val/'+quote_items[0].  quote_id+'-'+quote_items[0].quote_id;
+                                                   var stateToRedirect = 'app.quotes';
+                                                       $http.get(params, Auth.doAuth(init.username, init.password, 'DELETE'))
+                                                         .success(function(data) {                              
+                                                             $state.go(stateToRedirect, {}, {reload: true});
+                                                         })
+                                                         //.error(function(data, status, headers, config){ /* Error handling here */ })
                         
 
                       });
