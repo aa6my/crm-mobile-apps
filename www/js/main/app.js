@@ -267,12 +267,13 @@ angular.module('starter', [
 
     .state('app.login', {
       url: "/login/:server_name",
+     //url: "/login/:server_name{crm:(?:/[^/]+)?}",
       views: {
         'menuContent' :{
           templateUrl: "templates/login.html"
         }
       }
-    })         
+    })        
 
     .state('app.finance', {
       url: "/finance",

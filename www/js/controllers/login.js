@@ -2,10 +2,9 @@ var apps = angular.module('loginModule', []);
 	
 	apps.controller('Login', function($scope,$http, $ionicSideMenuDelegate,$stateParams, Settings, $state, init, Auth) {
   $ionicSideMenuDelegate.canDragContent(false);
-
-  //
+  
     url = 'http://' +$stateParams.server_name+ '/apps/dataAll/type/vendors/format/json';
-//console.log(url);
+    
     /** Using dummy data for development testing only */
     $scope.username = 'admin@admin.com';
     $scope.password = 123456;
@@ -27,12 +26,12 @@ var apps = angular.module('loginModule', []);
           init.password   = user.password;
           Settings.upload  = 'http://'+$stateParams.server_name+'/assets/uploads/files/';
           Settings.url    = 'http://'+ $stateParams.server_name+'/apps';
-          console.log(url);
-         // $state.go('app.main');
+          
+          $state.go('app.main');
         })
         .error(function(data, status, headers, config){
           $scope.success = "xberjaya";
-          //console.log(config);
+          
         })             
   }
   
