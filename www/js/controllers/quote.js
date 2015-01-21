@@ -322,7 +322,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
 
     $scope.convert_to_invoice = function(quote_items){
       
-      //quote_items[0].quote_id
+      
       var quote_details = {};
       var params = '/dataAll/type/quotes/key/quote_id/val/'+quote_items[0].quote_id+'/format/json';
           CrudOperation.get(params).success(function(data){  
@@ -330,22 +330,64 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                   var obj_size    = quote_items.length,
                       params      = '/dataAll',
                       quote_details = data.quotes,
-                      data_data = {};           
+                      data_data = [],
+                      data_items = {};           
                       data_data = {
                                       'customer_id'               : quote_details[0].customer_id,
                                       'invoice_subject'           : quote_details[0].quote_subject,
-                                      'invoice_date_created'      : quote_details[0].quote_date_created,
-                                      //'invoice_number'            : quote_details[0].quote_item_description,
+                                      'invoice_date_created'      : quote_details[0].quote_date_created,                                      
                                       'invoice_customer_notes'    : quote_details[0].quote_customer_notes,
                                       'invoice_valid_until'       : quote_details[0].quote_valid_until,
                                       'invoice_status'            : quote_details[0].quote_status
                                   };
-                      var data        = {                             // data sent to Api
-                                        type : "invoices", 
-                                        formData : data_data
-                      };
-                  CrudOperation.add(params, data, '', false);
-                  //  console.log(quote_details[0]);
+                      var params = '/dataAll';
+                      var data = {type:'invoices', formData : data_data};
+                      CrudOperation.add(params, data, '', false);
+
+                       var params = '/dataInvoice/format/json';
+                      CrudOperation.get(params).success(function(a){
+
+
+                                            var obj_size    = quote_items.length;
+                                            var b = 'invoice_items';
+                                                for(var i = 1; i < obj_size; i++){
+                                                  b+= '-invoice_items';
+                                                }
+                                      
+                                            var data = {type:'', formData : ''};
+                                                data.type = b;
+                                                
+                                                var qi = [];
+
+                                                    for(var md = 0; md < quote_items.length; md++){
+                                                      qi[md] = {
+                                                        invoice_id : a.invoices.invoice_id,
+                                                        product_id : quote_items[md].product_id,
+                                                        invoice_item_name : quote_items[md].quote_item_name,
+                                                        invoice_item_description : quote_items[md].quote_item_description,
+                                                        invoice_item_price : quote_items[md].quote_item_price,
+                                                        invoice_item_quantity : quote_items[md].quote_item_quantity,
+                                                        invoice_item_discount : quote_items[md].quote_item_discount,
+                                                        invoice_item_subtotal : quote_items[md].quote_item_subtotal
+
+                                                      }
+                                                      
+                                                    }
+                                                   qi.push(data_data);
+                                                   data.formData = qi;
+                                                   var params = '/dataAll';
+                                                   CrudOperation.add(params, data, '', false);
+                        
+
+                      });
+                  
+
+
+
+                      //console.log(data);
+                 
+
+                  //console.log(settings);
 
           });
 
@@ -353,6 +395,8 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
       
       
     }
+
+    //console.log(Settings.url);
       
 })
 
