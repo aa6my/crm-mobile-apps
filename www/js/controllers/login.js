@@ -6,8 +6,8 @@ var apps = angular.module('loginModule', []);
     url = 'http://' +$stateParams.server_name+ '/apps/dataAll/type/vendors/format/json';
     
     /** Using dummy data for development testing only */
-    $scope.username = 'admin@admin.com';
-    $scope.password = 123456;
+   /* $scope.username = 'admin@admin.com';
+    $scope.password = 123456;*/
     /* remove this in production environment */
    
   $scope.doLogin = function(){
@@ -21,7 +21,7 @@ var apps = angular.module('loginModule', []);
   $http.get(url, Auth.doAuth(user.username, user.password))
         .success(function(data) {
          
-          $scope.success  = "berjaya";
+          alert("Authentication Successful");
           init.username   = user.username;
           init.password   = user.password;
           Settings.upload  = 'http://'+$stateParams.server_name+'/assets/uploads/files/';
@@ -30,7 +30,7 @@ var apps = angular.module('loginModule', []);
           $state.go('app.main');
         })
         .error(function(data, status, headers, config){
-          $scope.success = "xberjaya";
+          alert("Wrong Username/Password");
           
         })             
   }
