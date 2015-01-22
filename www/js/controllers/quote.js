@@ -382,7 +382,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                                                    var params = '/dataAll';
                                                    
                                                    CrudOperation.add_no_redirect(params, data).success(function(response){ //add quote items into invoice item
-                                                    
+                                                     
                                                           var params_del = Settings.url+'/dataAll/type/quotes-quote_items/key/quote_id-quote_id/val/'+quote_items[0].  quote_id+'-'+quote_items[0].quote_id;
                                                            var stateToRedirect = 'app.quotes';
                                                                $http.get(params_del, Auth.doAuth(init.username, init.password, 'DELETE'))
