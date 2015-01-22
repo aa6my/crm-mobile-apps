@@ -16,7 +16,8 @@ angular.module('starter', [
                            'jobModule',
                            'invoiceModule',
                            'loginModule',
-                           'serverModule'    
+                           'serverModule',
+                           'mainModule'
                           ])
 
 
@@ -252,6 +253,14 @@ angular.module('starter', [
       views: {
         'menuContent' :{
           templateUrl: "templates/invoice_items.html"
+        }
+      }
+    }) 
+    .state('app.invoice_payments', {
+      url: "/invoice_payments/:invoice_id",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/invoice_payments.html"
         }
       }
     })     

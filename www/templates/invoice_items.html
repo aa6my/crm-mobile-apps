@@ -154,13 +154,13 @@
 </ion-content>
   <div class="tabs tabs-icon-only">
    <a class="tab-item">
-    <i class="icon ion-arrow-left-b" ng-click="backToinvoice()"></i>
+    <i class="icon ion-arrow-left-b" ng-click="backInvoice()"></i>
   </a>
    <a class="tab-item">
     <i class="icon ion-plus-circled" ng-click="modal_show('','add','Add Invoice Item')"></i>
   </a>
   <a class="tab-item">
-    <i class="icon ion-gear-a"></i>
+    <i class="icon ion-calculator" ng-click="goToListPayment({{formData.invoice_id}})"></i>
   </a>
 </div>
 </ion-view>
