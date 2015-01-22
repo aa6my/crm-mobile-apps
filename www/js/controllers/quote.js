@@ -210,7 +210,8 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                 $scope.formData.quote_item_quantity    = "";
                 $scope.formData.quote_item_price       = "";
                 $scope.formData.quote_item_subtotal    = "";
-                $scope.formData.product_id               = "";
+                $scope.formData.quote_item_discount    = "";
+                $scope.formData.product_id             = "";
                
             }
                 myModal.title = title;
@@ -236,7 +237,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
         });
 
         $scope.choose_product = function(){
-          //console.log($scope.modal_product.pro_id);
+          
                 var product_id = $scope.modal_product.pro_id;              
                 var params = '/dataAll/type/products/key/product_id/val/'+product_id+'/format/json';
                   CrudOperation.get(params).success(function(data){                    
@@ -246,6 +247,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                       $scope.formData.quote_item_price       = data.products[0].product_amount;
                       $scope.formData.quote_item_subtotal    = data.products[0].product_quantity * data.products[0].product_amount;
                       $scope.formData.product_id             = data.products[0].product_id;
+                      console.log($scope.formData);
                 });  
                 $scope.modal_product.hide();
         }
@@ -320,12 +322,15 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
     }
 
 
+
+
+    /********************* FOR QUOTE CONVERT INTO INVOICE ONLY ****************************/
     $scope.convert_to_invoice = function(quote_items){
       
       
       var quote_details = {};
       var params = '/dataAll/type/quotes/key/quote_id/val/'+quote_items[0].quote_id+'/format/json';
-          CrudOperation.get(params).success(function(data){  
+          CrudOperation.get(params).success(function(data){   //get quote data
                
                   var obj_size    = quote_items.length,
                       params      = '/dataAll',
@@ -341,20 +346,19 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                                       'invoice_status'            : quote_details[0].quote_status
                                   };
                       var params = '/dataAll';
-                      var data = {type:'invoices', formData : data_data};
-                      CrudOperation.add(params, data, '', false);
+                      var data_invoice = {type:'invoices', formData : data_data};
 
-                       var params = '/dataInvoice/format/json';
-                      CrudOperation.get(params).success(function(a){
+                      CrudOperation.add_no_redirect(params, data_invoice).success(function(response){ //add into invoices
+                              var params_quote = '/dataInvoice/format/json';
+                              CrudOperation.get(params_quote).success(function(a){ //get new insert invoice data
 
-
-                                            var obj_size    = quote_items.length;
+                                  var obj_size    = quote_items.length;
                                             var b = 'invoice_items';
                                                 for(var i = 1; i < obj_size; i++){
                                                   b+= '-invoice_items';
                                                 }
-                                      
-                                            var data = {type:'', formData : ''};
+
+                                  var data = {type:'', formData : ''};
                                                 data.type = b;
                                                 
                                                 var qi = [];
@@ -373,30 +377,27 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                                                       }
                                                       
                                                     }
-                                                   qi.push(data_data);
+                                                   
                                                    data.formData = qi;
                                                    var params = '/dataAll';
-                                                   CrudOperation.add(params, data, '', false);
+                                                   
+                                                   CrudOperation.add_no_redirect(params, data).success(function(response){ //add quote items into invoice item
+                                                    
+                                                          var params_del = Settings.url+'/dataAll/type/quotes-quote_items/key/quote_id-quote_id/val/'+quote_items[0].  quote_id+'-'+quote_items[0].quote_id;
+                                                           var stateToRedirect = 'app.quotes';
+                                                               $http.get(params_del, Auth.doAuth(init.username, init.password, 'DELETE'))
+                                                                 .success(function(data) {                              
+                                                                     $state.go(stateToRedirect, {}, {reload: true});
+                                                                 });
+                                                      
 
+                                                   });
+                              });
 
-                                                   var params = Settings.url+'/dataAll/type/quotes-quote_items/key/quote_id-quote_id/val/'+quote_items[0].  quote_id+'-'+quote_items[0].quote_id;
-                                                   var stateToRedirect = 'app.quotes';
-                                                       $http.get(params, Auth.doAuth(init.username, init.password, 'DELETE'))
-                                                         .success(function(data) {                              
-                                                             $state.go(stateToRedirect, {}, {reload: true});
-                                                         })
-                                                         //.error(function(data, status, headers, config){ /* Error handling here */ })
                         
-
                       });
-                  
 
-
-
-                      //console.log(data);
-                 
-
-                  //console.log(settings);
+                      
 
           });
 
@@ -405,7 +406,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
       
     }
 
-    //console.log(Settings.url);
+    
       
 })
 
