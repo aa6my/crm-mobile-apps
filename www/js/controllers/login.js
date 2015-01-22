@@ -1,6 +1,6 @@
 var apps = angular.module('loginModule', []);
 	
-	apps.controller('Login', function($scope,$http, $ionicSideMenuDelegate,$stateParams, Settings, $state, init, Auth) {
+	apps.controller('Login', function($scope,$http, $ionicSideMenuDelegate,$stateParams, Settings, $state, init, Auth,$ionicPopup) {
   $ionicSideMenuDelegate.canDragContent(false);
   
     url = 'http://' +$stateParams.server_name+ '/apps/dataAll/type/vendors/format/json';
@@ -21,7 +21,11 @@ var apps = angular.module('loginModule', []);
   $http.get(url, Auth.doAuth(user.username, user.password))
         .success(function(data) {
          
-          alert("Authentication Successful");
+          var alertPopup = $ionicPopup.alert({
+              title: 'Login Successful',
+              template: 'Going to dashboard!'
+          })  
+             
           init.username   = user.username;
           init.password   = user.password;
           Settings.upload  = 'http://'+$stateParams.server_name+'/assets/uploads/files/';
@@ -30,7 +34,11 @@ var apps = angular.module('loginModule', []);
           $state.go('app.main');
         })
         .error(function(data, status, headers, config){
-          alert("Wrong Username/Password");
+          
+          var alertPopup = $ionicPopup.alert({
+              title: 'Login Failed',
+              template: 'Wrong Username/Password'
+          })
           
         })             
   }
