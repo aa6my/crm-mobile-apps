@@ -245,6 +245,15 @@ angular.module('starter', [
           templateUrl: "templates/invoiceAdd_Edit.html"
         }
       }
+    })
+
+    .state('app.invoice_items', {
+      url: "/invoice_items/:invoice_id",
+      views: {
+        'menuContent' :{
+          templateUrl: "templates/invoice_items.html"
+        }
+      }
     })     
 
     .state('app.files', {
