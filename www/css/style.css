@@ -1,1 +1,69 @@
-/* Empty. Add your own CSS if you like */
+.spacing{
+       margin-top: 50px;
+      
+       
+    }
+
+    .error{
+        color: red;
+    }
+    .custom-icon {
+      font-size: 150px;
+      color : #EF4E3A;
+    }
+
+    .bg {
+    background-color: #172434;
+    -moz-box-shadow:    inset 0 0 40px #000000;
+   -webkit-box-shadow: inset 0 0 40px #000000;
+     box-shadow:         inset 0 0 40px #000000;
+
+    }
+
+    .copyright{
+        color: #555555;
+    }
+
+
+
+    .trans{
+         background-color: rgba(0,0,0,0.2);
+         border-style: solid !important;
+         border-width: 1px;
+         border-color:#121C28;
+         
+    }
+
+    .trans label{
+        color: #fff;
+    }
+
+    .trans select{
+        color: #000;
+
+    }
+
+    .trans .item{
+        border-style: none !important;
+         border-width: 0;
+    }
+
+    .circle {
+        border-radius: 100px;
+        box-shadow:0 0 40px #111B28;
+        
+        /*border:1px solid #fff;*/
+    }
+    /*.hitam .item, .hitam .item-content, .hitam .item-complex{
+    background-color: rgba(0,0,0,0);
+    color: #172434;
+    border: none;
+    border-top: 1px solid #464646;
+    border-bottom: 2px solid #333333;
+    color: #F0F1F1;
+    max-height: none;
+    }*/
+
+    .head {
+        background-color: #c66c66
+    }

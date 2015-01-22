@@ -35,12 +35,9 @@ var apps = angular.module('loginModule', []);
           $state.go('app.main');
         })
         .error(function(data, status, headers, config){
-          
-          var alertPopup = $ionicPopup.alert({
-              title: 'Login Failed',
-              template: 'Wrong Username/Password'
-          })
-          
+       
+              $scope.wrong =  true;
+
         })             
   }
   

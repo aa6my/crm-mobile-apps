@@ -1,7 +1,10 @@
 <ion-view title="Login">
-<ion-content>  
+<ion-content class="bg">  
 <div ng-controller="Login">
   <div class="col">
+  <p align="center"><i class="icon ion-arrow-graph-up-right custom-icon"></i></p>
+  <!-- {{success}} -->
+  <p align="center"><span ng-show="wrong" ng-init="false" style="color:red">Wrong Username/Password</span></p>
     <form ng-submit="">
       <div class="list list-inset">
         <label class="item item-input">
@@ -13,9 +16,9 @@
       </div>
       <div class="padding">
         <button class="button button-block button-assertive" ng-click="doLogin()">Submit</button>
-        <div>{{success}}</div>
       </div>
     </form>
+     <p class="copyright" align="center">2015 &copy; Copyright SeGi MiDae - Media Solutions</p>
   </div>
 </div>
 </ion-content>

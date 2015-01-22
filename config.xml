@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.segimidae.crm" version="0.4.2" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>SegiMidaeCRM</name>
+  <name>segiCRM</name>
   <description>
-        Segi Midae CRM
+        Segi Midae Customer Relationship Management
     </description>
-  <author email="support@segimidae.net" href="http://segimidae.net/">
+  <author email="dev@segimidae.net" href="http://segimidae.net/">
       Segi Midae Developer Team
     </author>
     <content src="index.html" />
