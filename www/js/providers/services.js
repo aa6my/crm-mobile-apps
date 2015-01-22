@@ -7,7 +7,7 @@ angular
 .factory('Settings', function(init) {
   return {
       upload  : '',
-      url     : ''
+      url     : 'http://192.168.0.201/apps'
   };
 })
 
@@ -314,6 +314,26 @@ angular
                   $http.post(url,data, Auth.doAuth(init.username, init.password))
                   .success(function(data) {            
                     $state.go(stateToRedirect, {}, {reload: reload});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
+
+                  })
+                  .error(function(data, status, headers, config){
+                    console.log(config);            
+                  }) 
+      }
+
+      operation.add_no_redirect = function(params, data){
+        
+          var url             = Settings.url + params;
+          //var reload          = (reload === undefined || reload === null || reload === "") ? false : true;
+          //var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
+
+          var f = $http.post(url,data, Auth.doAuth(init.username, init.password));
+              return f.success(function(response) {            
+                    var data = response.data,
+                                status = response.status,
+                                header = response.header,
+                                config = response.config;
+                                return status;
 
                   })
                   .error(function(data, status, headers, config){
