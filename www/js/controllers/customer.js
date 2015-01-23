@@ -38,6 +38,11 @@ var apps = angular.module('customerModule', ['ionic']);
                 $scope.$broadcast('scroll.refreshComplete');
               });
             };
+
+            /*-------------------- select country name and display into select option in add form ----------------- */
+              var params = '/dataAll/type/country/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.country_list = data.country;  });
+              /*------------ end selection ---------------------------------------------------------------------------*/
                
               $scope.goToAddDataPage = function(){
 
@@ -100,7 +105,8 @@ var apps = angular.module('customerModule', ['ionic']);
                                         customer_fax : $scope.formData.customer_fax,
                                         customer_address : $scope.formData.customer_address,
                                         customer_postcode : $scope.formData.customer_postcode,
-                                        customer_state : $scope.formData.customer_state
+                                        customer_state : $scope.formData.customer_state,
+                                        country_id : $scope.formData.country_id
                         };
                     var data       = {                             // data sent to Api
                                       type : "customers",

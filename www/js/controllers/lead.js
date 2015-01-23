@@ -39,6 +39,10 @@ var apps = angular.module('leadModule', ['ionic']);
               });
             };
 
+            /*-------------------- select country name and display into select option in add form ----------------- */
+              var params = '/dataAll/type/country/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.country_list = data.country;  });
+              /*------------ end selection ---------------------------------------------------------------------------*/
                
               $scope.goToAddDataPage = function(){
 

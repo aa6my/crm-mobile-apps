@@ -106,7 +106,8 @@ var apps = angular.module('vendorModule', ['ionic']);
                                         vendor_fax : $scope.formData.vendor_fax,
                                         vendor_address : $scope.formData.vendor_address,
                                         vendor_postcode : $scope.formData.vendor_postcode,
-                                        vendor_state : $scope.formData.vendor_state
+                                        vendor_state : $scope.formData.vendor_state,
+                                        country_id   : $scope.formData.country_id
                         };
                     var data       = {                             // data sent to Api
                                       type : "vendors",
