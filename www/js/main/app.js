@@ -249,7 +249,7 @@ angular.module('starter', [
     })
 
     .state('app.invoice_items', {
-      url: "/invoice_items/:invoice_id",
+      url: "/invoice_items/:invoice_id/:invoice_status",
       views: {
         'menuContent' :{
           templateUrl: "templates/invoice_items.html"
@@ -257,7 +257,7 @@ angular.module('starter', [
       }
     }) 
     .state('app.invoice_payments', {
-      url: "/invoice_payments/:invoice_id",
+      url: "/invoice_payments/:invoice_id/:invoice_status",
       views: {
         'menuContent' :{
           templateUrl: "templates/invoice_payments.html"

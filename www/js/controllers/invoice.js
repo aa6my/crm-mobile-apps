@@ -69,7 +69,7 @@ var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
               }
 
               $scope.goToInvoiceItemList = function(invoice){
-                    $state.go('app.invoice_items',{invoice_id : invoice.invoice_id},{reload:false});
+                    $state.go('app.invoice_items',{invoice_id : invoice.invoice_id, invoice_status : invoice.invoice_status},{reload:false});
 
                 }
 
@@ -112,8 +112,28 @@ var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
                                       primaryKeyVal : $scope.formData.invoice_id,
                                       formData : dataUpdate
                         };
-                    var stateToRedirect = 'app.invoices';           // State that will redirect after update process success
-                    CrudOperation.update(params, data, stateToRedirect);  
+                    
+
+
+                    
+                    CrudOperation.update_no_redirect(params, data).success(function(){ //update without redirect function
+                            var du = {
+                              invoice_status : $scope.formData.invoice_status
+                            }
+                            var dt = {
+                                      type : 'invoice_payments',
+                                      primaryKey : 'invoice_id', 
+                                      primaryKeyVal : $scope.formData.invoice_id,
+                                      formData : du
+                            }
+
+                            var stateToRedirect = 'app.invoices';           // State that will redirect after update process success
+                            CrudOperation.update(params, dt, stateToRedirect); //update with redirect function
+                    }); 
+                     
+
+
+
                 } 
         /*================================ End Edit function ================================*/
 
@@ -167,11 +187,13 @@ var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
 
       /********************************* first modal *****************************/
       if($stateParams.invoice_id !== undefined && $stateParams.invoice_id !== null){
-            var invoice_id = $stateParams.invoice_id;
+            var invoice_id = $stateParams.invoice_id,
+                invoice_status = $stateParams.invoice_status;
             var params = '/dataAll/type/invoice_items/key/invoice_id/val/'+invoice_id+'/joinid/product_id/jointo/products/format/json';
                       CrudOperation.get(params).success(function(data){            
                       $scope.invoice_items   = data.invoice_items;
-                      $scope.formData.invoice_id = invoice_id;                      
+                      $scope.formData.invoice_id = invoice_id;
+                      $scope.invoice_status = invoice_status;                      
                     });                     
         }
 
@@ -245,7 +267,8 @@ var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
                       $scope.formData.invoice_item_quantity    = data.products[0].product_quantity;
                       $scope.formData.invoice_item_price       = data.products[0].product_amount;
                       $scope.formData.invoice_item_subtotal    = data.products[0].product_quantity * data.products[0].product_amount;
-                      $scope.formData.product_id             = data.products[0].product_id;
+                      $scope.formData.product_id               = data.products[0].product_id;
+
                       console.log($scope.formData);
                 });  
                 $scope.modal_product.hide();
@@ -255,7 +278,7 @@ var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
     $scope.addInvoiceItemData = function(){
           var params      = '/dataAll';                   // request Api link
           var data_data = {
-                                        'product_id'                  : $scope.formData.product_id,
+                                        'product_id'                    : $scope.formData.product_id,
                                         'invoice_id'                    : $scope.formData.invoice_id,
                                         'invoice_item_name'             : $scope.formData.invoice_item_name,
                                         'invoice_item_description'      : $scope.formData.invoice_item_description,
@@ -322,11 +345,149 @@ var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
 
 
     /***************** Invoice Payment ***************/
+    $ionicModal.fromTemplateUrl('modal_payments.html', {
+            scope: $scope,
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        }).then(function(modal) {
+            $scope.modal_payment = modal
+        });
+
+
+    $scope.modal_payment_show = function(data, type, title){
+           console.log(type);
+            
+            if(type === "edit"){
+                $scope.formData    = data;                
+                $scope.edit_button = true;
+                $scope.add_button  = false;
+                //$scope.invoice_payment_id =                         
+            }else if(type === "add")  { 
+                $scope.add_button                      = true;
+                $scope.edit_button                     = false;
+                $scope.formData.payment_id             = "";
+                //$scope.invoice_id,
+                $scope.formData.invoice_payment_amount = "";
+                $scope.formData.invoice_payment_date   = "";
+                $scope.formData.invoice_payment_note   = "";
+                $scope.formData.invoice_payment_id     = "";
+                //$scope.invoice_status
+                 /*$scope.formData.invoice_item_description = "";
+                $scope.formData.invoice_item_name        = "";
+                $scope.formData.invoice_item_quantity    = "";
+                $scope.formData.invoice_item_price       = "";
+                $scope.formData.invoice_item_subtotal    = "";
+                $scope.formData.invoice_item_discount    = "";
+                $scope.formData.product_id             = "";*/
+               
+            }
+                myModal.title = title;
+                $scope.myModal.title = myModal.title;
+                $scope.modal_payment.show();
+
+        } 
+        $scope.modal_payment_hide = function(type){
+              $scope.modal_payment.hide();
+              $state.go($state.current,{},{reload:true}); 
+        }
+
 
     $scope.goToListPayment = function(){
       var invoice_id = $scope.formData.invoice_id;
-      $state.go('app.invoice_payments',{invoice_id : invoice_id},{reload:false});
+      var invoice_status = $scope.invoice_status;
+      $state.go('app.invoice_payments',{invoice_id : invoice_id, invoice_status : invoice_status},{reload:false});
     }
+
+    if($stateParams.invoice_status != undefined && $stateParams.invoice_status != ""){
+       var params = '/dataAll/type/invoice_payments/key/invoice_id/val/'+$stateParams.invoice_id+'/joinid/payment_id/jointo/payments/format/json';
+       CrudOperation.get(params).success(function(data){            
+                      $scope.invoice_payments   = data.invoice_payments;
+                      $scope.invoice_id = $stateParams.invoice_id;
+                      $scope.invoice_status = $stateParams.invoice_status; 
+
+                      /* display total, overdue and paid status */
+                      var paid_total = 0; 
+                      for(var a = 0; a < data.invoice_payments.length; a++){
+                          paid_total = (paid_total + parseInt(data.invoice_payments[a].invoice_payment_amount));
+                           
+                      }
+                      $scope.paid_invoice = paid_total;    
+
+
+                      var params = '/dataAll/type/invoice_items/key/invoice_id/val/'+$stateParams.invoice_id+'/format/json';
+                      CrudOperation.get(params).success(function(data){
+
+                          var total_due = 0;                           
+                          for(var b = 0; b < data.invoice_items.length; b++){
+                              total_due = (total_due + parseInt(data.invoice_items[b].invoice_item_subtotal));
+                               
+                          } 
+                          $scope.total_due = total_due;
+                          $scope.due = (total_due - paid_total);
+                            //console.log(total_due);
+                      });    
+                    });   
+    }
+
+    
+
+    var params = '/dataAll/type/payments/format/json';
+        CrudOperation.get(params).success(function(data){  $scope.payment_methods   = data.payments; });   
+
+
+    $scope.addInvoicePaymentData = function(){
+
+        var params      = '/dataAll';                   // request Api link
+          var data_data = {
+                                        'payment_id'                    : $scope.formData.payment_id,
+                                        'invoice_id'                    : $scope.invoice_id,
+                                        'invoice_payment_amount'        : $scope.formData.invoice_payment_amount,
+                                        'invoice_payment_date'          : $scope.formData.invoice_payment_date,
+                                        'invoice_payment_note'          : $scope.formData.invoice_payment_note,
+                                        'invoice_status'                : $scope.invoice_status
+          }
+          var data        = {                             // data sent to Api
+                                type : "invoice_payments", 
+                                formData : data_data
+                        };
+          CrudOperation.add(params, data, '', false);
+          $scope.modal_payment.hide();
+    }
+
+    $scope.editInvoicePaymentData = function(){
+         var params     = '/dataAll';                  // request Api link
+                    var dataUpdate = {                             // field column need to update
+                                        'payment_id'                    : $scope.formData.payment_id,
+                                        'invoice_payment_amount'        : $scope.formData.invoice_payment_amount,
+                                        'invoice_payment_date'          : $scope.formData.invoice_payment_date,
+                                        'invoice_payment_note'          : $scope.formData.invoice_payment_note,
+                                        'invoice_status'                : $scope.invoice_status
+                        };
+                    var data       = {                             // data sent to Api
+                                      type : "invoice_payments",
+                                      primaryKey : 'invoice_payment_id', 
+                                      primaryKeyVal : $scope.formData.invoice_payment_id,
+                                      formData : dataUpdate
+                        };
+                    
+                    $scope.modal_payment.hide();
+                    CrudOperation.update(params, data, '', true);
+
+                    /*$scope.$watch('$scope.formData.payment_id', function(){
+                      $scope.formData.payment_id = $scope.formData.payment_id;
+                    }, true);*/
+    }
+
+
+    $scope.backToInvoiceItem = function(){
+      $state.go('app.invoice_items',{invoice_id : $scope.invoice_id, invoice_status : $scope.invoice_status},{reload:false});
+    }
+
+    $scope.deletePayment = function(invoice_payments){
+        var params = '/dataAll/type/invoice_payments/key/invoice_payment_id/val/'+invoice_payments.invoice_payment_id;
+            CrudOperation.delete(params);
+    }
+    
 
 
 

@@ -114,7 +114,8 @@
                             </label>
 
                             <input ng-model="formData.invoice_id" type="hidden">
-                            <input ng-model="formData.product_id" type="hidden">                             
+                            <input ng-model="formData.product_id" type="hidden">
+                            <input ng-model="invoice_status" type="text">                             
                             <button class="button button-full button-positive" ng-click="addInvoiceItemData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
                             <button class="button button-full button-positive" ng-click="editInvoiceItemData()" ng-show="edit_button" ng-init="false">Save</button>
                           </div>
