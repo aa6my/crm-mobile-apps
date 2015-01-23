@@ -7,7 +7,7 @@ angular
 .factory('Settings', function(init) {
   return {
       upload  : '',
-      url     : 'http://192.168.0.201/apps'
+      url     : ''
   };
 })
 
