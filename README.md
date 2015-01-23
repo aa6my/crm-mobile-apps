@@ -7,7 +7,7 @@ Date 23/1/2015
 
 - Framework under ionic & angularjs
 - Compatible with phone and tablet
-- Branch version starting 0.5.0
+- Branch version starting 0.5.1-beta
 
 
 ## Plugins ##
