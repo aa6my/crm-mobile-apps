@@ -54,9 +54,14 @@
         
         /*border:1px solid #fff;*/
     }
-    /*.hitam .item, .hitam .item-content, .hitam .item-complex{
+
+    /*.menu-color{
+        background-color: #444444;
+    }*/
+
+    /*.menu-color .item, .menu-color .item-content, .menu-color .item-complex{
     background-color: rgba(0,0,0,0);
-    color: #172434;
+    color: #444444;
     border: none;
     border-top: 1px solid #464646;
     border-bottom: 2px solid #333333;
@@ -65,5 +70,15 @@
     }*/
 
     .head {
-        background-color: #c66c66
+        background-color: #c66c66;
+    }
+
+    .ft-icon-color i{
+        color: black;
+        font-size: 25px;
+    }
+
+    .wrong-login{
+        color:red;
+        font-size: 15px;
     }
