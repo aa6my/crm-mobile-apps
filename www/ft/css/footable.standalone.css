@@ -36,13 +36,13 @@
 }
 .footable > thead > tr > th,
 .footable > thead > tr > td {
-  background-color: #dce9f9;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
-  background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
-  background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
-  background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
-  background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
-  background-image: linear-gradient(to bottom, #ebf3fc, #dce9f9);
+  background-color: #b2adad;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e5e5e5), to(#b2adad));
+  background-image: -webkit-linear-gradient(top, #e5e5e5, #b2adad);
+  background-image: -moz-linear-gradient(top, #e5e5e5, #b2adad);
+  background-image: -ms-linear-gradient(top, #e5e5e5, #b2adad);
+  background-image: -o-linear-gradient(top, #e5e5e5, #b2adad);
+  background-image: linear-gradient(to bottom, #e5e5e5, #b2adad);
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
@@ -63,7 +63,7 @@
   vertical-align: middle;
 }
 .footable > tbody > tr:hover {
-  background: #fbf8e9;
+  background: #e5a29d;
 }
 .footable > tbody > tr:last-child > td.footable-first-column {
   -moz-border-radius: 0 0 0 6px;
@@ -91,13 +91,13 @@
 }
 .footable > tfoot > tr > th,
 .footable > tfoot > tr > td {
-  background-color: #dce9f9;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
-  background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
-  background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
-  background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
-  background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
-  background-image: linear-gradient(to bottom, #ebf3fc, #dce9f9);
+  background-color: #b2adad;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#e5e5e5), to(#b2adad));
+  background-image: -webkit-linear-gradient(top, #e5e5e5, #b2adad);
+  background-image: -moz-linear-gradient(top, #e5e5e5, #b2adad);
+  background-image: -ms-linear-gradient(top, #e5e5e5, #b2adad);
+  background-image: -o-linear-gradient(top, #e5e5e5, #b2adad);
+  background-image: linear-gradient(to bottom, #e5e5e5, #b2adad);
   -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
   -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
@@ -168,7 +168,7 @@
 .footable .pagination > ul > .disabled > a:focus {
   color: #cccccc;
   cursor: default;
-  background-color: #ebf3fc;
+  background-color: #e5e5e5;
 }
 .footable .pagination.pagination-centered {
   text-align: center;
