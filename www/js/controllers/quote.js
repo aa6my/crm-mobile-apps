@@ -107,7 +107,8 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                                         quote_valid_until     : $scope.formData.quote_valid_until,
                                         quote_discount        : $scope.formData.quote_discount,
                                         quote_customer_notes  : $scope.formData.quote_customer_notes,
-                                        quote_status          : $scope.formData.quote_status
+                                        quote_status          : $scope.formData.quote_status,
+                                        customer_id           : $scope.formData.customer_id 
 
 
                         };

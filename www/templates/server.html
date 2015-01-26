@@ -13,6 +13,7 @@
         &nbsp;&nbsp;
         
           <select ng-model="server_name">
+              <option value="">-- Choose Company --</option>
               <option value="{{s.domain_name}}" ng-repeat="s in server">{{s.company_name}}</option>
           </select>
         </label>

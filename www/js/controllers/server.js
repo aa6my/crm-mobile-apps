@@ -5,6 +5,8 @@ var apps = angular.module('serverModule', []);
 
 
     var murl = 'http://apps.segimidae.net/x/dataAll/type/company/key/crm-product_id/val/1-1/joinid/company_id/jointo/applications';
+
+
     $http.get(murl)
         .success(function(data) {
           $scope.server = data.company;
@@ -16,10 +18,17 @@ var apps = angular.module('serverModule', []);
     })    
 
 
+
     $scope.goToLogin = function(){
-      //console.log($scope.server_name);
-        //if($scope.server_name=="192.168.0.200"){}
-        $state.go('app.login',{server_name : $scope.server_name}, {reload:false});
+      if ($scope.server_name == null) {
+          alert("Please choose company")
+      }
+      else {
+          $state.go('app.login',{server_name : $scope.server_name}, {reload:false});
+      };
+ /*     console.log($scope.server_name);*/
+       
+        
     }         
   
   
