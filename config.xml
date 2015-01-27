@@ -32,6 +32,9 @@
     <feature name="Keyboard">
             <param name="ios-package" value="IonicKeyboard" onload="true" />
     </feature>
+    <feature name="UniversalAnalytics">
+      <param name="android-package" value="com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin" />
+    </feature>
 
     <!-- phonegap directives -->
     <gap:plugin name="com.phonegap.plugins.barcodescanner" />

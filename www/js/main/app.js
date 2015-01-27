@@ -26,6 +26,13 @@ angular.module('starter', [
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+    if (typeof analytics !== 'undefined'){
+      analytics.startTrackerWithId('UA-58939571-2');
+    }
+    else
+    {
+      alert("Google Analytics plugin could not be loaded.");
+    }
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -212,24 +219,7 @@ angular.module('starter', [
         }
       }
     })
-    /*.state('app.jobs.', {
-      url: "/jobs",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/jobs.html"
-        }
-      }
-    }) 
-    .state('app.jobs', {
-      url: "/jobs",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/jobs.html"
-        }
-      }
-    })  */  
-
-
+    
     .state('app.invoices', {
       url: "/invoices",
       views: {
