@@ -3,8 +3,7 @@
 <div ng-controller="Login">
   <div class="col">
   <p align="center"><i class="icon ion-arrow-graph-up-right custom-icon"></i></p>
-  <!-- {{success}} -->
-  <p align="center"><span ng-show="wrong" ng-init="false" class="wrong-login">Wrong Username/Password</span></p>
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
     <form ng-submit="">
       <div class="list list-inset">
         <label class="item item-input">
