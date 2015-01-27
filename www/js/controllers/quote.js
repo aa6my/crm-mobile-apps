@@ -1,3 +1,25 @@
+/**
+
+  +-+-+-+-+ +-+-+-+-+-+
+  |S|E|G|I| |M|i|D|a|e|
+  +-+-+-+-+ +-+-+-+-+-+
+
+ * CRM MOBILE APPLICATION
+ *
+ * http://www.segimidae.net
+ *
+ * Ionic Framework
+ * 
+ * @category   controllers
+ * @package    quote.js
+ * @author     Nizam <nizam@segimidae.net>
+ * @author     Norlihazmey <norlihazmey@segimidae.net>
+ * @author     Azim <azim@segimidae.net>
+ * @license    SeGi MiDae
+ * @copyright  2015 SEGI MiDae
+ * @version    0.5.1
+*/
+
 var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
     apps.controller('Quote',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
