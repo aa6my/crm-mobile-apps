@@ -37,8 +37,8 @@
             <ion-list>
               <ion-item ng-repeat="quote in quote_items">
                <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Quote Item Name :</strong> {{quote.quote_item_name}} 
-               <a ng-click="modal_show(quote,'edit', 'Edit Quote Item')" style="float:right"><i class="icon ion-android-create"></i></a> 
-               <a ng-click="deleteItem(quote)" style="float:right"><i class="icon ion-ios-trash-outline"></i></a>
+               <a ng-click="modal_show(quote,'edit', 'Edit Quote Item')" style="float:right" class="ft-icon-color"><i class="icon ion-android-create"></i></a> 
+               <a ng-click="deleteItem(quote)" style="float:right" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
                </h3>
 
                <div style="margin-left:25px">
@@ -124,8 +124,8 @@
 
                             <input ng-model="formData.quote_id" type="hidden">
                             <input ng-model="formData.product_id" type="hidden">                             
-                            <button class="button button-full button-positive" ng-click="addQuoteItemData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
-                            <button class="button button-full button-positive" ng-click="editQuoteItemData()" ng-show="edit_button" ng-init="false">Save</button>
+                            <button class="button button-block button-assertive" ng-click="addQuoteItemData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
+                            <button class="button button-block button-assertive" ng-click="editQuoteItemData()" ng-show="edit_button" ng-init="false">Save</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>
@@ -136,7 +136,7 @@
                       <ion-modal-view >
                         <ion-header-bar class="bar bar-header head">
                           <h1 class="title">{{myModal.title}}</h1>
-                          <button class="button button-clear button-primary" ng-click="modal_product.hide()">Cancel</button>
+                          <button class="button button-clear button-primary error" ng-click="modal_product.hide()">Cancel</button>
                         </ion-header-bar>
                         <ion-content class="padding">
                           <div class="list">
@@ -150,8 +150,8 @@
                             </label>
                             
                        
-                            <button class="button button-full button-positive" ng-click="choose_product()">Choose</button>
-                            <button class="button button-full button-positive" ng-click="editTaskData()" ng-show="s_button" ng-init="false">Save</button>
+                            <button class="button button-block button-assertive" ng-click="choose_product()">Choose</button>
+                            <button class="button button-block button-assertive" ng-click="editTaskData()" ng-show="s_button" ng-init="false">Save</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>

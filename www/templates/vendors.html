@@ -1,4 +1,3 @@
-<div ng-controller="Vendor" ng-app="vendorModule">
 <ion-view title="VENDORS">
 
     <!--navigation button on top-->
@@ -8,7 +7,7 @@
     <ion-nav-buttons side="right">
         <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
     </ion-nav-buttons>
-
+    <div ng-controller="Vendor" ng-app="vendorModule">
     <!-- content-->
     <ion-content class="has-header">
         <ion-refresher
@@ -45,9 +44,9 @@
                     <td>{{vendor.vendor_phone}}</td>
                     <td>{{vendor.vendor_email}}</td>
                     <td>
-                        <a ng-click="viewVendor(vendor)"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
-                        <a ng-click="goToEditDataPage(vendor)"><i class="icon ion-android-create"></i></a>
-                        <a ng-click="deleteData(vendor)"><i class="icon ion-ios-trash-outline"></i></a>
+                        <a ng-click="viewVendor(vendor)" class="ft-icon-color"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
+                        <a ng-click="goToEditDataPage(vendor)" class="ft-icon-color"><i class="icon ion-android-create"></i></a>
+                        <a ng-click="deleteData(vendor)" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
                     </td>
                 </tr>
                 </tbody>
@@ -74,8 +73,8 @@
     <i class="icon ion-gear-a"></i>
   </a>
 </div>
-</ion-view>
 </div>
+</ion-view>
 
 <script type="text/javascript">
     $(function () {
