@@ -43,7 +43,13 @@ var apps = angular.module('serverModule', []);
 
     $scope.goToLogin = function(){
       if ($scope.server_name == null) {
-          alert("Please choose company")
+          $scope.alerts = [
+              { type: 'danger', msg: 'Please choose company before proceed.' },
+            ]
+
+            $scope.closeAlert = function(index) {
+              $scope.alerts.splice(index, 1);
+            }
       }
       else {
           $state.go('app.login',{server_name : $scope.server_name}, {reload:false});

@@ -7,6 +7,7 @@
   <div class="col">
   <center><img class="circle" src="img/logo.jpg"></center>
     <form ng-submit="">
+     <br><alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
       <div class="list list-inset trans">
         <label class="item item-input item-stacked-label padding">
           Company
@@ -21,7 +22,6 @@
       <br>
       <div class="padding">
         <button class="button button-block button-assertive" ng-click="goToLogin()">Proceed</button>
-        <div>{{success}}</div>
       </div>
     </form>
     <p class="copyright" align="center">2015 &copy; Copyright SeGi MiDae - Media Solutions</p>
