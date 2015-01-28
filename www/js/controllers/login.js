@@ -21,7 +21,9 @@ var apps = angular.module('loginModule', []);
    
   $http.get(url, Auth.doAuth(user.username, user.password))
         .success(function(data) {
-         
+        
+        $ionicSideMenuDelegate.canDragContent(true);
+
           var alertPopup = $ionicPopup.alert({
               title: 'Login Successful',
               template: 'Going to dashboard!'
