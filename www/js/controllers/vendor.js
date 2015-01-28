@@ -24,7 +24,7 @@ var apps = angular.module('vendorModule', ['ionic']);
     apps.controller('Vendor',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Vendor(initial start of page will call this part) ============================= */
-        
+        if(typeof analytics !== "undefined") { analytics.trackView("Vendors"); }
         /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;

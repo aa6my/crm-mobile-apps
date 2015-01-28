@@ -24,7 +24,7 @@ var apps = angular.module('leadModule', ['ionic']);
     apps.controller('Lead',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Lead(initial start of page will call this part) ============================= */
-        
+        if(typeof analytics !== "undefined") { analytics.trackView("Leads"); }
         /*-------------- initial value for page to show or hide button in lead form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;

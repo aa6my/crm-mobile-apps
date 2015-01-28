@@ -24,7 +24,7 @@ var apps = angular.module('fileModule', ['ionic']);
     apps.controller('File',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Website(initial start of page will call this part) ============================= */
-        
+        if(typeof analytics !== "undefined") { analytics.trackView("Files"); }
         /*-------------- initial value for page to show or hide button in website form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;

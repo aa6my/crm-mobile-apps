@@ -24,7 +24,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
     apps.controller('Quote',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== quote(initial start of page will call this part) ============================= */
-        
+        if(typeof analytics !== "undefined") { analytics.trackView("Quotes"); }
         /*-------------- initial value for page to show or hide button in quote form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;

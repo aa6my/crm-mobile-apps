@@ -36,7 +36,7 @@ var apps = angular.module('loginModule', []);
         })
         .error(function(data, status, headers, config){
        
-             $scope.alerts = [
+            $scope.alerts = [
               { type: 'danger', msg: 'Oh snap! Wrong Username/Password.' },
             ]
 

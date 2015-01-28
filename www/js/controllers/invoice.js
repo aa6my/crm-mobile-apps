@@ -24,7 +24,7 @@ var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
     apps.controller('Invoice',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== invoice(initial start of page will call this part) ============================= */
-        
+        if(typeof analytics !== "undefined") { analytics.trackView("Invoices"); }
         /*-------------- initial value for page to show or hide button in invoice form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;

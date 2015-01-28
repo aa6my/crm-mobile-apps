@@ -25,6 +25,7 @@ var apps = angular.module('jobModule', ['ionic']);
 
 	apps.controller('Job', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {       
 
+        if(typeof analytics !== "undefined") { analytics.trackView("Jobs"); }
        /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;

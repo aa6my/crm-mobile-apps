@@ -22,8 +22,9 @@
 
 var apps = angular.module('mainModule', ['ionic','highcharts-ng']);
     apps.controller('mainController',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
-       
-         $scope.addPoints = function () {
+    
+    if(typeof analytics !== "undefined") { analytics.trackView("Dashboard"); }
+    $scope.addPoints = function () {
         var seriesArray = $scope.chartConfig.series
         var rndIdx = Math.floor(Math.random() * seriesArray.length);
         seriesArray[rndIdx].data = seriesArray[rndIdx].data.concat([1, 10, 20])
