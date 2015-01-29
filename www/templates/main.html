@@ -13,15 +13,29 @@
     <div>
     <div>
         <div class="span12">
-            <input ng-model="chartConfig.title.text">
+            <!-- <input ng-model="chartConfig.title.text">
             <button ng-click="addSeries()">Add Series</button>
             <button ng-click="addPoints()">Add Points to Random Series</button>
             <button ng-click="removeRandomSeries()">Remove Random Series</button>
             <button ng-click="swapChartType()">Line/Bar</button>
-            <button ng-click="toggleLoading()">Loading?</button>
+            <button ng-click="toggleLoading()">Loading?</button> -->
+
+            <div class="list">
+
+            <label class="item item-input item-select">
+              <div class="input-label">
+                Year
+              </div>
+              <select ng-model="thisYear" ng-change="changeYear(thisYear)">
+                <option ng-repeat="tahun in years" value="{{tahun}}">{{tahun}}</option>
+              </select>
+            </label>
+
+          </div>
+          <div ng-show="emptyData" ng-init="false">No sales for this year</div>
         </div>
         <div class="row">
-            <highchart id="chart1" config="chartConfig" class="span10"></highchart>
+            <highchart id="chart1" config="chartConfig" class="span10" ></highchart>
         </div>
     </div>
     </div>

@@ -182,6 +182,8 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
       $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy','yyyy-MM-dd', 'shortDate'];
       $scope.format  = $scope.formats[3];
 
+      var params = '/dataAll/type/customers/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.customers = data.customers;  });
       /* quote items ===================================================== */
               /*-------------------- select product and display into select option in add form ----------------- */
                 var params = '/dataAll/type/products/format/json';

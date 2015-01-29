@@ -58,10 +58,22 @@
                 <input type="text" placeholder="Enter Terms" name="quote_customer_notes" ng-model="formData.quote_customer_notes">
               </label>
 
-              <label class="item item-input item-stacked-label">
+              <!-- <label class="item item-input item-stacked-label">
                 <span class="input-label">Customers</span>
                 <input type="text" placeholder="Segimidae" name="quote_customer_id" ng-model="formData.customer_id">
-              </label>
+              </label> -->
+              <div class="list">
+                <label class="item item-input item-stacked-label">
+                  <div class="input-label">
+                    Customer
+                  </div>
+                  <br/>
+                  <select ng-model="formData.customer_id">
+                    <option value="0" ng-repeat="cust in customers">{{cust.customer_name}}</option>
+                    
+                  </select>
+                </label>
+              </div>
 
               <div class="list">
                 <label class="item item-input item-stacked-label">
