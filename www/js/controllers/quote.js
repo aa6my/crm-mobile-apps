@@ -20,7 +20,7 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('quoteModule', ['ionic','ui.bootstrap','autocomplete']);
+var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
     apps.controller('Quote',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
 
       var params = '/dataAll/type/customers/format/json';
