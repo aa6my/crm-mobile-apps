@@ -3,7 +3,7 @@ var apps = angular.module('loginModule', []);
 	apps.controller('Login', function($scope,$http, $ionicSideMenuDelegate,$stateParams, Settings, $state, init, Auth,$ionicPopup) {
   $ionicSideMenuDelegate.canDragContent(false);
   
-    url = 'http://' +$stateParams.server_name+ '/apps/dataAll/type/vendors/format/json';
+    url = 'https://' +$stateParams.server_name+ '/apps/dataAll/type/vendors/format/json';
     //url = 'http://192.168.0.201/apps/dataAll/type/vendors/format/json';
 
     /** Using dummy data for development testing only */
@@ -31,8 +31,8 @@ var apps = angular.module('loginModule', []);
              
           init.username   = user.username;
           init.password   = user.password;
-          Settings.upload  = 'http://'+$stateParams.server_name+'/assets/uploads/files/';
-          Settings.url    = 'http://'+ $stateParams.server_name+'/apps';
+          Settings.upload  = 'https://'+$stateParams.server_name+'/assets/uploads/files/';
+          Settings.url    = 'https://'+ $stateParams.server_name+'/apps';
           
           $state.go('app.main');
         })
