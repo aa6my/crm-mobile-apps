@@ -14,10 +14,9 @@
         <div class="ft-container">
         <form action="">
             <div class="list">
-
+              <button class="button button-energized button-block" ng-click="click()">Scan for Product SKU</button>
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product SKU</span>
-                <button class="button button-small" ng-click="click()">Scan</button>
                <input type="text" ng-model="product_sku">
               </label>
 
@@ -42,8 +41,8 @@
               </label>
 
             <div class="padding">
-                <button type="button" class="button button-energized ion-android-checkbox-outline button-block" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
-                <button type="button" class="button button-energized ion-android-checkbox-outline button-block" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
+                <button type="button" class="button button-assertive ion-android-checkbox-outline button-block" ng-click="addData(product_sku)" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
+                <button type="button" class="button button-assertive ion-android-checkbox-outline button-block" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
             </div>
         </form>
 </div>

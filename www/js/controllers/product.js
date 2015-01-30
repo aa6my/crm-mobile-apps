@@ -92,13 +92,22 @@ var apps = angular.module('productModule', ['ionic']);
           
  
           /*================================ Add function ================================*/
-                $scope.addData  = function(){
+                $scope.addData  = function(sku){
 
-                    $scope.formData = {};                           // store data from form into formData onject
+                    $scope.formData = {};      
+                    var dataForm = {
+                      product_name : this.formData.product_name,
+                      product_desc : this.formData.product_desc,
+                      product_quantity : this.formData.product_quantity,
+                      product_amount : this.formData.product_amount,
+                      product_sku : sku
+                    };
+                                        // store data from form into formData onject
                     var params      = '/dataAll';                   // request Api link
                     var data        = {                             // data sent to Api
                                         type : "products", 
-                                        formData : this.formData
+                                        formData : dataForm,
+
                         };
                     var stateToRedirect = 'app.products';
                     CrudOperation.add(params, data, stateToRedirect);  
@@ -163,14 +172,13 @@ var apps = angular.module('productModule', ['ionic']);
                                     '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.cancelled + '</td></tr>' +
                                     '</tbody>' +
                                     '</table>';*/
-                                    $scope.formData.product_sku = result.result.text;
+                                  $scope.product_sku = result.result.text;
                             }
                             else {
                                 $state.go('app.productAdd_Edit',{},{reload:false});
                     
                             }
-                        });
+                        })
                 }
 
       })
-
