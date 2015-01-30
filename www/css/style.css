@@ -1,7 +1,5 @@
 .spacing{
-       margin-top: 50px;
-      
-       
+    margin-top: 50px;     
     }
 
     .error{
@@ -17,7 +15,6 @@
     -moz-box-shadow:    inset 0 0 40px #000000;
    -webkit-box-shadow: inset 0 0 40px #000000;
      box-shadow:         inset 0 0 40px #000000;
-
     }
 
     .copyright{
@@ -30,8 +27,7 @@
          background-color: rgba(0,0,0,0.2);
          border-style: solid !important;
          border-width: 1px;
-         border-color:#121C28;
-         
+         border-color:#121C28;    
     }
 
     .trans label{
@@ -40,7 +36,6 @@
 
     .trans select{
         color: #000;
-
     }
 
     .trans .item{
@@ -51,8 +46,6 @@
     .circle {
         border-radius: 100px;
         box-shadow:0 0 40px #111B28;
-        
-        /*border:1px solid #fff;*/
     }
 
     /*.menu-color{
@@ -71,6 +64,7 @@
 
     .head {
         background-color: #c66c66;
+        color: #FFFFFF;
     }
 
     .ft-icon-color i{
@@ -82,3 +76,22 @@
         color:red;
         font-size: 15px;
     }
+
+    .popup-buttons .button{
+        background-color: #EF4E3A;
+        border: none;
+        color: #FFF;
+    }
+
+    .button.button-positive.activated{
+        background-color: #CC2311;
+    }
+
+    .cancel-color{
+        color: #fff;
+    }
+
+    .ion-android-arrow-back, .ion-android-arrow-forward{
+        color: #fff;
+    }
+
