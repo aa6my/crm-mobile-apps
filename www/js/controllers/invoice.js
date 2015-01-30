@@ -414,8 +414,10 @@ var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
         }
 
 
-    $scope.goToListPayment = function(){
-      var invoice_id = $scope.formData.invoice_id;
+    $scope.goToListPayment = function(a){
+      //console.log($stateParams.invoice_id);
+      //var invoice_id = $scope.formData.invoice_id;
+      var invoice_id = $stateParams.invoice_id;
       var invoice_status = $scope.invoice_status;
       $state.go('app.invoice_payments',{invoice_id : invoice_id, invoice_status : invoice_status},{reload:false});
     }

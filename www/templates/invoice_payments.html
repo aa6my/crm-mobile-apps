@@ -197,9 +197,9 @@
                               <input ng-model="formData.invoice_payment_note" type="text" ng-keyup="kira()">
                            </label>                           
 
-                            <input ng-model="invoice_id" type="text">
-                            <input ng-model="invoice_status" type="text">
-                            <input ng-model="formData.invoice_payment_id" type="text">
+                            <input ng-model="invoice_id" type="hidden">
+                            <input ng-model="invoice_status" type="hidden">
+                            <input ng-model="formData.invoice_payment_id" type="hidden">
 
 
                             <button class="button button-full button-positive" ng-click="addInvoicePaymentData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
