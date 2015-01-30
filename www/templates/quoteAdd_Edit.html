@@ -62,7 +62,7 @@
                 <span class="input-label">Customers</span>
                 <input type="text" placeholder="Segimidae" name="quote_customer_id" ng-model="formData.customer_id">
               </label> -->
-              <div class="list">
+              <!-- <div class="list">
                 <label class="item item-input item-stacked-label">
                   <div class="input-label">
                     Customer
@@ -73,8 +73,32 @@
                     
                   </select>
                 </label>
-              </div>
+              </div> -->
+               <!-- <label class="item item-input item-stacked-label">
+                <span class="input-label">Customers</span>
+                <autocomplete ng-model="yourchoice" data="movies" on-type="updateMovies"></autocomplete>   
+              </label> -->
 
+              <!-- <div class="list">              
+                  <div class="input-label">
+                    <span style="padding-left:16px"><strong>Customer</strong></span>
+                  </div>
+                  <autocomplete ng-model="formData.customer_name" data="cust" value="{{formData.customer_name}}"></autocomplete>    
+                        
+              </div> -->
+              <script type="text/ng-template" id="customTemplate.html">
+                <a>
+                    
+                    <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+                </a>
+              </script>
+              <div class="list">              
+                  <div class="input-label">
+                    <span style="padding-left:16px"><strong>Customer</strong></span>
+                  </div>
+                  <input type="text" ng-model="formData.customer_id" value="{{customSelected.customer_id}}" placeholder="Custom template" typeahead="state as state.customer_name for state in statesWithFlags | filter:{customer_name:$viewValue}" typeahead-template-url="customTemplate.html" class="form-control">
+                        
+              </div>
               <div class="list">
                 <label class="item item-input item-stacked-label">
                   <div class="input-label">

@@ -20,8 +20,39 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
+var apps = angular.module('quoteModule', ['ionic','ui.bootstrap','autocomplete']);
     apps.controller('Quote',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
+
+      var params = '/dataAll/type/customers/format/json';
+                  CrudOperation.get(params).success(function(data){ 
+                    
+                    var km = [{}];
+                    for(var g = 0; g < data.customers.length; g++){
+                      
+                      km.push({ customer_name : data.customers[g].customer_name, customer_id : parseInt(data.customers[g].customer_id)});
+                      
+                    }
+                    km.splice(0,1);
+                    $scope.selected = undefined;
+                    $scope.statesWithFlags = km;
+                    //console.log(km);
+                    /*var km = [],
+                        mk = [];
+                    for(var g = 0; g < data.customers.length; g++){
+                      km.push(data.customers[g].customer_name);
+                      mk.push(data.customers[g].customer_id);
+                    }*/
+                    //$scope.cust = km;
+                    //$scope.cust_id = mk;
+            });
+
+
+  
+       /*$scope.movies = ["Lord of the Rings",
+                        "Drive",
+                        "Science of Sleep",
+                        "Back to the Future",
+                        "Oldboy"];*/
        
           /*=============== quote(initial start of page will call this part) ============================= */
         if(typeof analytics !== "undefined") { analytics.trackView("Quotes"); }
@@ -87,6 +118,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                     /*-- display value form list into update form */
                     var b           = UniversalFunction.displayFormData(quotes);
                     $scope.formData = b;
+                    $scope.formData.customer_id = "";
                     
               }
 
@@ -110,6 +142,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                                         type : "quotes", 
                                         formData : this.formData
                         };
+                    data.formData.customer_id = this.formData.customer_id.customer_id;                   
                     var stateToRedirect = 'app.quotes';
                     CrudOperation.add(params, data, stateToRedirect);  
 
@@ -130,7 +163,7 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
                                         quote_discount        : $scope.formData.quote_discount,
                                         quote_customer_notes  : $scope.formData.quote_customer_notes,
                                         quote_status          : $scope.formData.quote_status,
-                                        customer_id           : $scope.formData.customer_id 
+                                        customer_id           : $scope.formData.customer_id.customer_id 
 
 
                         };
