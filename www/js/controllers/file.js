@@ -24,7 +24,11 @@ var apps = angular.module('fileModule', ['ionic']);
     apps.controller('File',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Website(initial start of page will call this part) ============================= */
+
+        // Start of Google Analytic Function  
         if(typeof analytics !== "undefined") { analytics.trackView("Files"); }
+        // End
+
         /*-------------- initial value for page to show or hide button in website form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
@@ -45,9 +49,9 @@ var apps = angular.module('fileModule', ['ionic']);
                     
               }, function(err) {
                   console.error('ERR', err);
-              
               })
-                    
+            
+            //Refresh function when drag down content        
             $scope.doRefresh = function(){
               $http
                 .get(url, Auth.doAuth(init.username, init.password))
@@ -60,8 +64,9 @@ var apps = angular.module('fileModule', ['ionic']);
                 $scope.$broadcast('scroll.refreshComplete');
               });
             };
-
-               
+            // End refresh function
+              
+               // Go to ADD/EDIT Page function  
               $scope.goToAddDataPage = function(){
 
                    $state.go('app.fileAdd_Edit',{},{reload:false});
@@ -71,9 +76,7 @@ var apps = angular.module('fileModule', ['ionic']);
                    $scope.btnEdit = m.edit;
                    /*---------------------------*/
                    /*---- set form value to blank */
-                   UniversalFunction.displayFormData('');
-                   
-                  
+                   UniversalFunction.displayFormData(''); 
               }
 
                $scope.goToEditDataPage = function(files){
@@ -86,12 +89,10 @@ var apps = angular.module('fileModule', ['ionic']);
                     /*---------------------------*/
                     /*-- display value form list into update form */
                     var b           = UniversalFunction.displayFormData(files);
-                    $scope.formData = b;
-                    
+                    $scope.formData = b;   
               }
-
-          
- 
+              //End
+        
           /*================================ Add function ================================*/
                 $scope.addData  = function(){
 
@@ -103,12 +104,8 @@ var apps = angular.module('fileModule', ['ionic']);
                         };
                     var stateToRedirect = 'app.files';
                     CrudOperation.add(params, data, stateToRedirect);  
-
                 } 
         /*================================ End Add function ================================*/
-
-
-
 
         /*================================ Edit function ================================*/
                 $scope.editData = function(){
@@ -128,9 +125,6 @@ var apps = angular.module('fileModule', ['ionic']);
                     CrudOperation.update(params, data, stateToRedirect);  
                 } 
         /*================================ End Edit function ================================*/
-
-
-
 
         /*================================ Delete function ================================*/
                 $scope.deleteData = function(file) {

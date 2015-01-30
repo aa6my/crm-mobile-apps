@@ -24,7 +24,11 @@ var apps = angular.module('customerModule', ['ionic']);
     apps.controller('Customer',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Customer(initial start of page will call this part) ============================= */
+
+        // Start of Google Analytic Function 
         if(typeof analytics !== "undefined") { analytics.trackView("Customers"); }
+        // End of Google Analytic
+
         /*-------------- initial value for page to show or hide button in customer form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
@@ -45,9 +49,9 @@ var apps = angular.module('customerModule', ['ionic']);
                     
               }, function(err) {
                   console.error('ERR', err);
-              
               })
-                    
+                
+            //Refresh function when drag down content        
             $scope.doRefresh = function(){
               $http
                 .get(url, Auth.doAuth(init.username, init.password))
@@ -60,12 +64,14 @@ var apps = angular.module('customerModule', ['ionic']);
                 $scope.$broadcast('scroll.refreshComplete');
               });
             };
+            // End refresh function
 
             /*-------------------- select country name and display into select option in add form ----------------- */
               var params = '/dataAll/type/country/format/json';
                   CrudOperation.get(params).success(function(data){  $scope.country_list = data.country;  });
               /*------------ end selection ---------------------------------------------------------------------------*/
-               
+              
+              // Go to ADD/EDIT Page function 
               $scope.goToAddDataPage = function(){
 
                    $state.go('app.customerAdd_Edit',{},{reload:false});
@@ -94,7 +100,7 @@ var apps = angular.module('customerModule', ['ionic']);
                     
               }
 
-          
+            //End
  
           /*================================ Add function ================================*/
                 $scope.addData  = function(){

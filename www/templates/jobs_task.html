@@ -28,8 +28,8 @@
             <ion-list>
               <ion-item ng-repeat="task in job_task_list">
                <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} 
-               <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right"><i class="icon ion-android-create"></i></a> 
-               <a ng-click="deleteTask(task)" style="float:right"><i class="icon ion-ios-trash-outline"></i></a>
+               <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right" class="ft-icon-color"><i class="icon ion-android-create"></i></a> 
+               <a ng-click="deleteTask(task)" style="float:right" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
                </h3>
 
                <div style="margin-left:25px">
@@ -116,8 +116,8 @@
                             </label>
                             <input ng-model="formData.job_id" type="hidden">
                             <input ng-model="formData.product_id" type="hidden">                             
-                            <button class="button button-full button-positive" ng-click="addJobTaskData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
-                            <button class="button button-full button-positive" ng-click="editJobTaskData()" ng-show="edit_button" ng-init="false">Save</button>
+                            <button class="button button-full button-assertive" ng-click="addJobTaskData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
+                            <button class="button button-full button-assertive" ng-click="editJobTaskData()" ng-show="edit_button" ng-init="false">Save</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>
@@ -142,8 +142,8 @@
                             </label>
                             
                        
-                            <button class="button button-full button-positive" ng-click="choose_product()">Choose</button>
-                            <button class="button button-full button-positive" ng-click="editTaskData()" ng-show="s_button" ng-init="false">Save</button>
+                            <button class="button button-full button-assertive" ng-click="choose_product()">Choose</button>
+                            <button class="button button-full button-assertive" ng-click="editTaskData()" ng-show="s_button" ng-init="false">Save</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>

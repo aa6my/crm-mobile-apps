@@ -129,8 +129,8 @@
             </div> -->
               <ion-item ng-repeat="invoice in invoice_payments">
                <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Pay By :</strong> {{invoice.payment_method}} 
-               <a ng-click="modal_payment_show(invoice,'edit', 'Edit Invoice Payment')" style="float:right"><i class="icon ion-android-create"></i></a> 
-               <a ng-click="deletePayment(invoice)" style="float:right"><i class="icon ion-ios-trash-outline"></i></a>
+               <a ng-click="modal_payment_show(invoice,'edit', 'Edit Invoice Payment')" style="float:right" class="ft-icon-color"><i class="icon ion-android-create"></i></a> 
+               <a ng-click="deletePayment(invoice)" style="float:right" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
                </h3>
 
                <div style="margin-left:25px">
@@ -161,7 +161,7 @@
             </ion-list>
             <script id="modal_payments.html" type="text/ng-template">
                       <ion-modal-view >
-                        <ion-header-bar class="bar bar-header bar-positive">
+                        <ion-header-bar class="bar bar-header head">
                           <h1 class="title">{{myModal.title}}</h1>
                           <button class="button button-clear button-primary" ng-click="modal_payment_hide('{{myModal.type}}')">Cancel</button>
                         </ion-header-bar>
@@ -202,8 +202,8 @@
                             <input ng-model="formData.invoice_payment_id" type="hidden">
 
 
-                            <button class="button button-full button-positive" ng-click="addInvoicePaymentData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
-                            <button class="button button-full button-positive" ng-click="editInvoicePaymentData()" ng-show="edit_button" ng-init="false">Save</button>
+                            <button class="button button-full button-assertive" ng-click="addInvoicePaymentData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
+                            <button class="button button-full button-assertive" ng-click="editInvoicePaymentData()" ng-show="edit_button" ng-init="false">Save</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>
@@ -224,7 +224,7 @@
     <i class="icon ion-plus-circled" ng-click="modal_payment_show('','add','Add Payment')"></i>
   </a>
   <a class="tab-item">
-    <i class="icon ion-calculator" ng-click="goToListPayment({{formData.invoice_id}})"></i>
+    <i class="icon ion-gear-a"></i>
   </a>
 </div>
 </ion-view>
