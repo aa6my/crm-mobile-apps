@@ -44,18 +44,18 @@
                     <td>{{vendor.vendor_phone}}</td>
                     <td>{{vendor.vendor_email}}</td>
                     <td>
-                        <a ng-click="viewVendor(vendor)" class="ft-icon-color"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
+                        <!-- <a ng-click="viewVendor(vendor)" class="ft-icon-color"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a> -->
                         <a ng-click="goToEditDataPage(vendor)" class="ft-icon-color"><i class="icon ion-android-create"></i></a>
                         <a ng-click="deleteData(vendor)" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
                     </td>
                 </tr>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <td colspan="5" class="text-center">
-                        <div class="pagination pagination-centered"></div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <ul class="pagination"></ul>                        
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
