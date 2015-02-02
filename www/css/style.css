@@ -95,3 +95,7 @@
         color: #fff;
     }
 
+element.style {
+z-index: 0;
+}
+

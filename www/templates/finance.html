@@ -7,10 +7,56 @@
     <ion-nav-buttons side="right">
         <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
     </ion-nav-buttons>
-
+<div ng-controller="Finance" ng-app="financeModule">
     <!-- content-->
 	<ion-content class="has-header">
-		<h1>Finance</h1>
+
+    <script type="text/ng-template" id="customTemplate.html">
+                <a>
+                    
+                    <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+                </a>
+              </script>
+
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Customer Name" ng-model="fin.customer" value="{{customSelected.customer_id}}"  typeahead="state as state.customer_name for state in statesWithFlags | filter:{customer_name:$viewValue}" typeahead-template-url="customTemplate.html">
+    </label>
+    <button class="button button-small button-dark" ng-click="search_data(fin)">
+      Search Now
+    </button>
+
+
+  </div>
+  
+
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+     
+      <input type="text" datepicker-popup="{{format}}" ng-model="fin.start_date" is-open="$parent.openFor['opened1']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start Date"/>
+      </label>
+      <button class="button button-small button-stable" ng-click="openDatePicker($event,'opened1')">
+     <i class="icon ion-calendar"></i>
+    </button>
+      
+  </div>
+
+
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+     
+      <input type="text" datepicker-popup="{{format}}" ng-model="fin.end_date" is-open="$parent.openFor['opened2']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="End Date"/>
+      </label>
+      <button class="button button-small button-stable" ng-click="openDatePicker($event,'opened2')">
+     <i class="icon ion-calendar"></i>
+    </button>
+      
+  </div>
+
+       
+ 
+<!-- </div> -->
+
 	</ion-content>
 <div class="tabs tabs-icon-only">
   <a class="tab-item">
@@ -22,5 +68,6 @@
   <a class="tab-item">
     <i class="icon ion-gear-a"></i>
   </a>
+</div>
 </div>
 </ion-view>

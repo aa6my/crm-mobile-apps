@@ -26,7 +26,7 @@ var apps = angular.module('serverModule', []);
   $ionicSideMenuDelegate.canDragContent(false);
 
 
-    var murl = 'https://segiapps.com/x/dataAll/type/company/key/crm-product_id/val/1-1/joinid/company_id/jointo/applications';
+    var murl = 'http://apps.segimidae.net/x/dataAll/type/company/key/crm-product_id/val/1-1/joinid/company_id/jointo/applications';
 
 
     $http.get(murl)

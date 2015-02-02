@@ -179,6 +179,34 @@ angular
                     }
        }
 
+       func.convert_to_date = function(date_input){
+
+          var str_date = date_input.substr(4,11);
+            var exp_date = str_date.split(' ');
+
+            var months =  {        'Jan' : 1,
+                                   'Feb' : 2,
+                                   'Mac' : 3,
+                                   'Apr' : 4,
+                                   'May' : 5,
+                                   'Jun' : 6,
+                                   'Jul' : 7,
+                                   'Aug' : 8,
+                                   'Sep' : 9,
+                                   'Oct' : 10,
+                                   'Nov' : 11,
+                                   'Dec' : 12
+                        };
+                
+
+          var new_month = new Array();
+            if(exp_date[0] in months){
+              new_month = months[exp_date[0]];
+            }
+
+            return exp_date[1]+'-'+new_month+'-'+exp_date[2];
+       }
+
        return func;
 })
 
