@@ -31,7 +31,7 @@ angular.module('starter', [
     }
     else
     {
-      alert("Google Analytics plugin could not be loaded.");
+      //alert("Google Analytics plugin could not be loaded.");
     }
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
