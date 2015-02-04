@@ -515,5 +515,5 @@ var apps_invoice = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
 
 
 
-}])
+}]);
           

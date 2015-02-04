@@ -161,5 +161,5 @@ var apps_lead = angular.module('leadModule', ['ionic']);
 
 
 
-      }])
+      }]);
 

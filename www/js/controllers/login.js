@@ -52,4 +52,4 @@ var apps_login = angular.module('loginModule', []);
         })             
   }
   
-}])
+}]);

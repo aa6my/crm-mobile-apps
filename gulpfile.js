@@ -43,8 +43,7 @@ var src = './www/js/controllers/*.js';
 var dist = './www/js/controllers/dist'
 // JS concat, strip debugging and minify
 gulp.task('uglify', function() {
-  gulp.src(src)
-    
+  gulp.src(src)    
     .pipe(stripDebug())
     .pipe(uglify())
     .pipe(concat('script.js'))

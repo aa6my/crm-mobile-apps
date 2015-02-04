@@ -167,5 +167,5 @@ var apps_customer = angular.module('customerModule', ['ionic']);
 
 
 
-      }])
+      }]);
 

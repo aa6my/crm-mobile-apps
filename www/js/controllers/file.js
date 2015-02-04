@@ -143,5 +143,5 @@ var apps_file = angular.module('fileModule', ['ionic']);
 
 
 
-      }])
+      }]);
 

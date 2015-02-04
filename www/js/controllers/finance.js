@@ -79,5 +79,5 @@ var apps_finance = angular.module('financeModule', ['ionic']);
         }
 
 
-      }])
+      }]);
 
