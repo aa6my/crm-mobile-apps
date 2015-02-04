@@ -119,11 +119,11 @@ var apps_product = angular.module('productModule', ['ionic']);
 
 
         /*================================ Edit function ================================*/
-                $scope.editData = function(){
+                $scope.editData = function(sku){
 
                     var params     = '/dataAll';                  // request Api link
                     var dataUpdate = {                             // field column need to update
-                                        product_sku : $scope.formData.product_sku,
+                                        product_sku :sku,
                                         product_name : $scope.formData.product_name,
                                         product_desc : $scope.formData.product_desc,
                                         product_quantity : $scope.formData.product_quantity,
