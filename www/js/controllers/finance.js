@@ -54,14 +54,22 @@ var apps_finance = angular.module('financeModule', ['ionic']);
 
 
           $scope.search_data = function(finance_obj){
-
+           
               var start_date =  UniversalFunction.convert_to_date(String(finance_obj.start_date)),
                   end_date   =  UniversalFunction.convert_to_date(String(finance_obj.end_date));
 
             var params = '/finance/user/'+finance_obj.customer.customer_id+'/start_date/'+start_date+'/end_date/'+end_date+'/format/json';
                   CrudOperation.get(params).success(function(data){ 
                     
-                    console.log(data);
+                    if(data.invoices==""){
+                      $scope.no_data = true;
+                      $scope.finance_content = false;
+                    }
+                    else{
+                      $scope.finances = UniversalFunction.redraw(data.invoices);
+                      $scope.no_data = false;
+                      $scope.finance_content = true;
+                    }
                     
             });
          

@@ -53,7 +53,56 @@
       
   </div>
 
-       
+    <div class="card" ng-show="no_data" ng-init="false">
+    <div class="item item-divider">
+      Data Result
+    </div>
+    <div class="item item-text-wrap">
+      Sorry bro, no record in database.
+    </div>
+    <div class="item item-divider">
+      
+    </div>
+  </div>
+
+     <div class="ft-container" ng-show="finance_content" ng-init="false">
+            <table class="footable" data-page-size="5">
+                <thead>
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Customer Name
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th data-hide="phone">
+                        Payment Method
+                    </th>
+                
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="finance in finances()">
+                    <td>{{finance.invoice_payment_date}}</td>
+                    <td>{{finance.customer_name}}</td>
+                    <td>{{finance.invoice_payment_amount}}</td>
+                    <td>{{finance.payment_method}}</td>
+                    
+                </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                        <ul class="pagination">
+                        </ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>  
  
 <!-- </div> -->
 
@@ -71,3 +120,8 @@
 </div>
 </div>
 </ion-view>
+<script type="text/javascript">
+    $(function () {
+        $('table').footable();
+    });
+</script>
