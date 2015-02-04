@@ -6,12 +6,16 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
-
+/*---------------------------------------------*/
+var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
+var stripDebug = require('gulp-strip-debug');
+/*-----------------------------------------------*/
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['jshint']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -24,6 +28,33 @@ gulp.task('sass', function(done) {
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
 });
+
+
+
+
+/*---------------------------------------*/
+gulp.task('jshint', function() {
+  gulp.src('./www/js/controllers/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+var src = './www/js/controllers/*.js';
+var dist = './www/js/controllers/dist'
+// JS concat, strip debugging and minify
+gulp.task('uglify', function() {
+  gulp.src(src)
+    
+    .pipe(stripDebug())
+    .pipe(uglify())
+    .pipe(concat('script.js'))
+    .pipe(gulp.dest(dist));
+});
+/*----------------------------------------*/
+
+
+
+
 
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
