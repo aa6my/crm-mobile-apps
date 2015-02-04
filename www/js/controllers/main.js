@@ -167,5 +167,5 @@ var apps_main = angular.module('mainModule', ['ionic','highcharts-ng']);
 
   
 
-      }])
+      }]);
 

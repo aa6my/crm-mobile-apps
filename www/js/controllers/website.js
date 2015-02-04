@@ -145,5 +145,5 @@ var apps_website = angular.module('websiteModule', ['ionic']);
           /*================================ End back function ================================*/
 
 
-      }])
+      }]);
 

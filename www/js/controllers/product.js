@@ -181,4 +181,4 @@ var apps_product = angular.module('productModule', ['ionic']);
                         })
                 }
 
-      }])
+      }]);

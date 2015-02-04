@@ -158,5 +158,5 @@ var apps_vendor = angular.module('vendorModule', ['ionic']);
           /*================================ End back function ================================*/
 
 
-      }])
+      }]);
 

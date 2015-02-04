@@ -466,5 +466,5 @@ var apps_quote = angular.module('quoteModule', ['ionic','ui.bootstrap']);
 
     
       
-}])
+}]);
 

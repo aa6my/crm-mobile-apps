@@ -17,4 +17,4 @@ apps_signout.controller('Signout',['$scope','$http','$stateParams', 'Settings', 
             }
         })      
     }  
-}])
+}]);

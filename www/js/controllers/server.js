@@ -60,4 +60,4 @@ var apps_server = angular.module('serverModule', []);
     }         
   
   
-}])
+}]);
