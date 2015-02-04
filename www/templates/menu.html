@@ -60,10 +60,10 @@
         <i class="icon ion-android-document"></i>
           Invoices
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/files">
+        <!-- <ion-item nav-clear menu-close href="#/app/files">
         <i class="icon ion-android-folder"></i>
           Files
-        </ion-item>
+        </ion-item> -->
         <ion-item nav-clear menu-close href="#/app/finance">
         <i class="icon ion-cash"></i>
           Finance
@@ -74,13 +74,16 @@
 
   <!-- Right side menu-->
   <ion-side-menu side="right">
-    <header class="bar bar-header bar-stable">
-      <h1 class="title">Menu2</h1>
+    <header class="bar bar-header bar-dark">
+      <h1 class="title">Settings</h1>
     </header>
     <ion-content class="has-header">
       <ion-list>
         <ion-item nav-clear menu-close href="#/app/search">
           Search
+        </ion-item>
+        <ion-item nav-clear menu-close ng-controller="Signout" ng-click="doSignout()">
+          Sign Out
         </ion-item>
       </ion-list>
     </ion-content>
