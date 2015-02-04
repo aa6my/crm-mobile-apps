@@ -20,8 +20,8 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
-    apps.controller('Invoice',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
+var apps_invoice = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
+    apps_invoice.controller('Invoice',['$scope','$http', '$state','$ionicPopup','$ionicModal', '$stateParams', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== invoice(initial start of page will call this part) ============================= */
         if(typeof analytics !== "undefined") { analytics.trackView("Invoices"); }
@@ -515,5 +515,5 @@ var apps = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
 
 
 
-})
+}])
           

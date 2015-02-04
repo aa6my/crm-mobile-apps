@@ -20,8 +20,8 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('leadModule', ['ionic']);
-    apps.controller('Lead',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+var apps_lead = angular.module('leadModule', ['ionic']);
+    apps_lead.controller('Lead',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Lead(initial start of page will call this part) ============================= */
         if(typeof analytics !== "undefined") { analytics.trackView("Leads"); }
@@ -161,5 +161,5 @@ var apps = angular.module('leadModule', ['ionic']);
 
 
 
-      })
+      }])
 

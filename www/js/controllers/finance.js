@@ -20,11 +20,11 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('financeModule', ['ionic']);
-    apps.controller('Finance',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+var apps_finance = angular.module('financeModule', ['ionic']);
+    apps_finance.controller('Finance',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Lead(initial start of page will call this part) ============================= */
-        if(typeof analytics !== "undefined") { analytics.trackView("Leads"); }
+        if(typeof analytics !== "undefined") { analytics.trackView("Finance"); }
         
         var params = '/dataAll/type/customers/format/json';
                   CrudOperation.get(params).success(function(data){ 
@@ -71,5 +71,5 @@ var apps = angular.module('financeModule', ['ionic']);
         }
 
 
-      })
+      }])
 

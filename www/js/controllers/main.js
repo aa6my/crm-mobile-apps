@@ -20,8 +20,8 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('mainModule', ['ionic','highcharts-ng']);
-    apps.controller('mainController',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+var apps_main = angular.module('mainModule', ['ionic','highcharts-ng']);
+    apps_main.controller('mainController',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
     
     //if(typeof analytics !== "undefined") { analytics.trackView("Dashboard"); }
     /*$scope.addPoints = function () {
@@ -167,5 +167,5 @@ var apps = angular.module('mainModule', ['ionic','highcharts-ng']);
 
   
 
-      })
+      }])
 

@@ -20,8 +20,8 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('fileModule', ['ionic']);
-    apps.controller('File',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+var apps_file = angular.module('fileModule', ['ionic']);
+    apps_file.controller('File',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Website(initial start of page will call this part) ============================= */
 
@@ -69,14 +69,14 @@ var apps = angular.module('fileModule', ['ionic']);
                // Go to ADD/EDIT Page function  
               $scope.goToAddDataPage = function(){
 
-                   $state.go('app.fileAdd_Edit',{},{reload:false});
-                   /*------------- If click add new button show only submit button with save function--------------*/
+                   /*$state.go('app.fileAdd_Edit',{},{reload:false});
+               
                    var m = UniversalFunction.buttonOnly(true,false);
                    $scope.btnAdd = m.add;
                    $scope.btnEdit = m.edit;
-                   /*---------------------------*/
-                   /*---- set form value to blank */
-                   UniversalFunction.displayFormData(''); 
+              
+                   UniversalFunction.displayFormData(''); */
+                   alert("Page under construction.");
               }
 
                $scope.goToEditDataPage = function(files){
@@ -143,5 +143,5 @@ var apps = angular.module('fileModule', ['ionic']);
 
 
 
-      })
+      }])
 

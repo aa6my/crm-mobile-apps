@@ -20,8 +20,8 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
-    apps.controller('Quote',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
+var apps_quote = angular.module('quoteModule', ['ionic','ui.bootstrap']);
+    apps_quote.controller('Quote',['$scope','$http', '$state','$ionicPopup','$ionicModal', '$stateParams', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
 
       var params = '/dataAll/type/customers/format/json';
                   CrudOperation.get(params).success(function(data){ 
@@ -466,5 +466,5 @@ var apps = angular.module('quoteModule', ['ionic','ui.bootstrap']);
 
     
       
-})
+}])
 

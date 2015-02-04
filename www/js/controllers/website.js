@@ -20,8 +20,8 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('websiteModule', ['ionic']);
-    apps.controller('Website',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+var apps_website = angular.module('websiteModule', ['ionic']);
+    apps_website.controller('Website',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== website(initial start of page will call this part) ============================= */
         if(typeof analytics !== "undefined") { analytics.trackView("Websites"); }
@@ -145,5 +145,5 @@ var apps = angular.module('websiteModule', ['ionic']);
           /*================================ End back function ================================*/
 
 
-      })
+      }])
 

@@ -18,7 +18,8 @@ angular.module('starter', [
                            'loginModule',
                            'serverModule',
                            'mainModule',
-                           'financeModule'
+                           'financeModule',
+                           'signoutModule'
                           ])
 
 

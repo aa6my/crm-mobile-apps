@@ -20,10 +20,10 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('jobModule', ['ionic']);
+var apps_job = angular.module('jobModule', ['ionic']);
 	
 
-	apps.controller('Job', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {       
+	apps_job.controller('Job',['$scope','$http', '$state','$ionicPopup','$ionicModal','$stateParams', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation', 'jobService', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {       
 
         if(typeof analytics !== "undefined") { analytics.trackView("Jobs"); }
        /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
@@ -366,4 +366,4 @@ var apps = angular.module('jobModule', ['ionic']);
         
 
 
-});
+}]);

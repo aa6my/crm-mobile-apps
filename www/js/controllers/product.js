@@ -20,8 +20,8 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('productModule', ['ionic']);
-    apps.controller('Product',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation, appServices) {
+var apps_product = angular.module('productModule', ['ionic']);
+    apps_product.controller('Product',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation', 'appServices',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation, appServices) {
        
           /*=============== Product(initial start of page will call this part) ============================= */
         if(typeof analytics !== "undefined") { analytics.trackView("Products"); }
@@ -181,4 +181,4 @@ var apps = angular.module('productModule', ['ionic']);
                         })
                 }
 
-      })
+      }])

@@ -20,8 +20,8 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('vendorModule', ['ionic']);
-    apps.controller('Vendor',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+var apps_vendor = angular.module('vendorModule', ['ionic']);
+    apps_vendor.controller('Vendor',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Vendor(initial start of page will call this part) ============================= */
         if(typeof analytics !== "undefined") { analytics.trackView("Vendors"); }
@@ -158,5 +158,5 @@ var apps = angular.module('vendorModule', ['ionic']);
           /*================================ End back function ================================*/
 
 
-      })
+      }])
 

@@ -20,8 +20,8 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('customerModule', ['ionic']);
-    apps.controller('Customer',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+var apps_customer = angular.module('customerModule', ['ionic']);
+    apps_customer.controller('Customer',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Customer(initial start of page will call this part) ============================= */
 
@@ -167,5 +167,5 @@ var apps = angular.module('customerModule', ['ionic']);
 
 
 
-      })
+      }])
 

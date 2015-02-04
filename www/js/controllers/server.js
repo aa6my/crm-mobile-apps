@@ -20,13 +20,13 @@
  * @version    0.5.1
 */
 
-var apps = angular.module('serverModule', []);
+var apps_server = angular.module('serverModule', []);
 	
-	apps.controller('Server', function($scope,$http, $ionicSideMenuDelegate, Settings, $state, init, Auth) {
+	apps_server.controller('Server',['$scope','$http', '$ionicSideMenuDelegate', 'Settings', '$state', 'init', 'Auth',function($scope,$http, $ionicSideMenuDelegate, Settings, $state, init, Auth) {
   $ionicSideMenuDelegate.canDragContent(false);
 
 
-    var murl = 'http://apps.segimidae.net/x/dataAll/type/company/key/crm-product_id/val/1-1/joinid/company_id/jointo/applications';
+    var murl = 'https://segiapps.com/x/dataAll/type/company/key/crm-product_id/val/1-1/joinid/company_id/jointo/applications';
 
 
     $http.get(murl)
@@ -60,4 +60,4 @@ var apps = angular.module('serverModule', []);
     }         
   
   
-})
+}])
