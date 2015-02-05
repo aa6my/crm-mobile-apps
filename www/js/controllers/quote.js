@@ -20,11 +20,11 @@
  * @version    0.5.1
 */
 
-var apps_quote = angular.module('quoteModule', ['ionic','ui.bootstrap']);
+var apps_quote = angular.module('quoteModule', ['ionic','ui.bootstrap','cgBusy']);
     apps_quote.controller('Quote',['$scope','$http', '$state','$ionicPopup','$ionicModal', '$stateParams', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
 
       var params = '/dataAll/type/customers/format/json';
-                  CrudOperation.get(params).success(function(data){ 
+                $scope.myPromise =  CrudOperation.get(params).success(function(data){ 
                     
                     var km = [{}];
                     for(var g = 0; g < data.customers.length; g++){
@@ -68,7 +68,7 @@ var apps_quote = angular.module('quoteModule', ['ionic','ui.bootstrap']);
         
          var url = Settings.url + '/dataAll/type/quotes/format/json';
              
-             $http
+          $scope.myPromise =   $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -80,7 +80,7 @@ var apps_quote = angular.module('quoteModule', ['ionic','ui.bootstrap']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   
@@ -228,7 +228,7 @@ var apps_quote = angular.module('quoteModule', ['ionic','ui.bootstrap']);
       if($stateParams.quote_id !== undefined && $stateParams.quote_id !== null){
             var quote_id = $stateParams.quote_id;
             var params = '/dataAll/type/quote_items/key/quote_id/val/'+quote_id+'/joinid/product_id/jointo/products/format/json';
-                      CrudOperation.get(params).success(function(data){            
+                  $scope.myPromise =    CrudOperation.get(params).success(function(data){            
                       $scope.quote_items   = data.quote_items;
                       $scope.formData.quote_id = quote_id;                      
                     });                     

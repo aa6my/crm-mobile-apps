@@ -127,6 +127,7 @@
               </div>
               
             </div> -->
+            <div cg-busy="myPromise"></div>
               <ion-item ng-repeat="invoice in invoice_payments">
                <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Pay By :</strong> {{invoice.payment_method}} 
                <a ng-click="modal_payment_show(invoice,'edit', 'Edit Invoice Payment')" style="float:right" class="ft-icon-color"><i class="icon ion-android-create"></i></a> 

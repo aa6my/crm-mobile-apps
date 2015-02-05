@@ -56,7 +56,7 @@ var apps_main = angular.module('mainModule', ['ionic','highcharts-ng']);
         }
         
 
-                  CrudOperation.get(params).success(function(data){
+                 $scope.myPromise = CrudOperation.get(params).success(function(data){
 
                     if(data[1] == undefined || data[1] == null || data[1] == ""){
                         $scope.emptyData = true;

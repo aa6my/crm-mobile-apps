@@ -25,6 +25,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
+        <div cg-busy="myPromise"></div>
             <ion-list>
               <ion-item ng-repeat="task in job_task_list">
                <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} 

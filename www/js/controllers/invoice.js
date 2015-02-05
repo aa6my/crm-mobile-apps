@@ -20,7 +20,7 @@
  * @version    0.5.1
 */
 
-var apps_invoice = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
+var apps_invoice = angular.module('invoiceModule', ['ionic','ui.bootstrap','cgBusy']);
     apps_invoice.controller('Invoice',['$scope','$http', '$state','$ionicPopup','$ionicModal', '$stateParams', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup,$ionicModal, $stateParams, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== invoice(initial start of page will call this part) ============================= */
@@ -37,7 +37,7 @@ var apps_invoice = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
 
             var url = Settings.url + '/dataAll/type/invoices/format/json';
             
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -49,7 +49,7 @@ var apps_invoice = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   
@@ -212,7 +212,7 @@ var apps_invoice = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
             var invoice_id = $stateParams.invoice_id,
                 invoice_status = $stateParams.invoice_status;
             var params = '/dataAll/type/invoice_items/key/invoice_id/val/'+invoice_id+'/joinid/product_id/jointo/products/format/json';
-                      CrudOperation.get(params).success(function(data){            
+                   $scope.myPromise =   CrudOperation.get(params).success(function(data){            
                       $scope.invoice_items   = data.invoice_items;
                       $scope.formData.invoice_id = invoice_id;
                       $scope.invoice_status = invoice_status;                      
@@ -424,7 +424,7 @@ var apps_invoice = angular.module('invoiceModule', ['ionic','ui.bootstrap']);
 
     if($stateParams.invoice_status != undefined && $stateParams.invoice_status != ""){
        var params = '/dataAll/type/invoice_payments/key/invoice_id/val/'+$stateParams.invoice_id+'/joinid/payment_id/jointo/payments/format/json';
-       CrudOperation.get(params).success(function(data){            
+       $scope.myPromise = CrudOperation.get(params).success(function(data){            
                       $scope.invoice_payments   = data.invoice_payments;
                       $scope.invoice_id = $stateParams.invoice_id;
                       $scope.invoice_status = $stateParams.invoice_status; 

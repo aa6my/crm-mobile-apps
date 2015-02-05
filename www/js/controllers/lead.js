@@ -20,7 +20,7 @@
  * @version    0.5.1
 */
 
-var apps_lead = angular.module('leadModule', ['ionic']);
+var apps_lead = angular.module('leadModule', ['ionic','cgBusy']);
     apps_lead.controller('Lead',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Lead(initial start of page will call this part) ============================= */
@@ -37,7 +37,7 @@ var apps_lead = angular.module('leadModule', ['ionic']);
         
          var url = Settings.url + '/dataAll/type/leads/format/json';
 
-              $http
+         $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  

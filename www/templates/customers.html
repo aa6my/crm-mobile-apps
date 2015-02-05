@@ -13,9 +13,11 @@
     <ion-content class="has-header">
         <ion-refresher
         pulling-text="Pull to refresh..."
+        refreshing-icon=""
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
+        <div cg-busy="myPromise"></div>
             <table class="footable" data-page-size="5">
                 <thead>
                     <tr>

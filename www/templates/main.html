@@ -34,7 +34,9 @@
           </div>
           <div ng-show="emptyData" ng-init="false">No sales for this year</div>
         </div>
+        <div cg-busy="myPromise"></div>
         <div class="row">
+        
             <highchart id="chart1" config="chartConfig" class="span10" ></highchart>
         </div>
     </div>

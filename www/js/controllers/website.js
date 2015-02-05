@@ -20,7 +20,7 @@
  * @version    0.5.1
 */
 
-var apps_website = angular.module('websiteModule', ['ionic']);
+var apps_website = angular.module('websiteModule', ['ionic','cgBusy']);
     apps_website.controller('Website',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== website(initial start of page will call this part) ============================= */
@@ -38,7 +38,7 @@ var apps_website = angular.module('websiteModule', ['ionic']);
             var url = Settings.url + '/dataAll/type/websites/format/json';
 
             
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -51,7 +51,7 @@ var apps_website = angular.module('websiteModule', ['ionic']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   

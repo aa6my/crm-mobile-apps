@@ -26,6 +26,7 @@
         </ion-refresher>
         <div class="ft-container">
         
+        
         <div class="padding">
 
           <a ng-click="convert_to_invoice(quote_items)" class="item item-icon-left" style="border:1px solid #000">
@@ -33,7 +34,7 @@
             Convert Quote Into Invoice
           </a>
         
-        </div>
+        </div><div cg-busy="myPromise"></div>
             <ion-list>
               <ion-item ng-repeat="quote in quote_items">
                <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Quote Item Name :</strong> {{quote.quote_item_name}} 

@@ -20,7 +20,7 @@
  * @version    0.5.1
 */
 
-var apps_vendor = angular.module('vendorModule', ['ionic']);
+var apps_vendor = angular.module('vendorModule', ['ionic','cgBusy']);
     apps_vendor.controller('Vendor',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Vendor(initial start of page will call this part) ============================= */
@@ -37,7 +37,7 @@ var apps_vendor = angular.module('vendorModule', ['ionic']);
 
             var url = Settings.url + '/dataAll/type/vendors/format/json';
             
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -49,7 +49,7 @@ var apps_vendor = angular.module('vendorModule', ['ionic']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   

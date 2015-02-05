@@ -39,7 +39,7 @@ var apps_product = angular.module('productModule', ['ionic']);
         /*---------------------------------------------------------------*/
         
          var url = Settings.url + '/dataAll/type/products/format/json';
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -51,7 +51,7 @@ var apps_product = angular.module('productModule', ['ionic']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   

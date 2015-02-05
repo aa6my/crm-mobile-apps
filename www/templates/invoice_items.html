@@ -25,6 +25,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
+        <div cg-busy="myPromise"></div>
             <ion-list>
               <ion-item ng-repeat="invoice in invoice_items">
                <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Invoice Item Name :</strong> {{invoice.invoice_item_name}} 

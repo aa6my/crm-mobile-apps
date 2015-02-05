@@ -20,7 +20,7 @@
  * @version    0.5.1
 */
 
-var apps_customer = angular.module('customerModule', ['ionic']);
+var apps_customer = angular.module('customerModule', ['ionic','cgBusy']);
     apps_customer.controller('Customer',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Customer(initial start of page will call this part) ============================= */
@@ -38,10 +38,10 @@ var apps_customer = angular.module('customerModule', ['ionic']);
         /*------------initial value for form data of update function ----*/
         $scope.formData = UniversalFunction.returnDisplayFormData();
         /*---------------------------------------------------------------*/
-        
+
          var url = Settings.url + '/dataAll/type/customers/format/json';
               
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -53,7 +53,7 @@ var apps_customer = angular.module('customerModule', ['ionic']);
                 
             //Refresh function when drag down content        
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   

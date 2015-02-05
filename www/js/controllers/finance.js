@@ -20,7 +20,7 @@
  * @version    0.5.1
 */
 
-var apps_finance = angular.module('financeModule', ['ionic']);
+var apps_finance = angular.module('financeModule', ['ionic','cgBusy']);
     apps_finance.controller('Finance',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Lead(initial start of page will call this part) ============================= */
@@ -59,7 +59,7 @@ var apps_finance = angular.module('financeModule', ['ionic']);
                   end_date   =  UniversalFunction.convert_to_date(String(finance_obj.end_date));
 
             var params = '/finance/user/'+finance_obj.customer.customer_id+'/start_date/'+start_date+'/end_date/'+end_date+'/format/json';
-                  CrudOperation.get(params).success(function(data){ 
+                $scope.myPromise =  CrudOperation.get(params).success(function(data){ 
                     
                     if(data.invoices==""){
                       $scope.no_data = true;

@@ -4,8 +4,8 @@ var apps_login = angular.module('loginModule', []);
   $ionicSideMenuDelegate.canDragContent(false);
   
   
-    url = 'https://' +Settings.domain_name+ '/apps/dataAll/type/vendors/format/json';
-    //url = 'https://192.168.0.201/apps/dataAll/type/vendors/format/json';
+    //url = 'https://' +Settings.domain_name+ '/apps/dataAll/type/vendors/format/json';
+    url = 'https://192.168.0.201/apps/dataAll/type/vendors/format/json';
     $scope.company_name = Settings.company_name;
     console.log(Settings.company_name);
 
@@ -35,8 +35,8 @@ var apps_login = angular.module('loginModule', []);
              
           init.username   = user.username;
           init.password   = user.password;
-          Settings.upload  = 'https://'+Settings.domain_name+'/assets/uploads/files/';
-          Settings.url    = 'https://'+Settings.domain_name+'/apps';
+          /*Settings.upload  = 'https://'+Settings.domain_name+'/assets/uploads/files/';
+          Settings.url    = 'https://'+Settings.domain_name+'/apps';*/
           $state.go('app.main');
           console.log(Settings.upload);
         })

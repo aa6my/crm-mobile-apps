@@ -20,7 +20,7 @@
  * @version    0.5.1
 */
 
-var apps_file = angular.module('fileModule', ['ionic']);
+var apps_file = angular.module('fileModule', ['ionic','cgBusy']);
     apps_file.controller('File',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Website(initial start of page will call this part) ============================= */
@@ -41,7 +41,7 @@ var apps_file = angular.module('fileModule', ['ionic']);
         
          var url = Settings.url + '/dataAll/type/files/format/json';
               
-               $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -53,7 +53,7 @@ var apps_file = angular.module('fileModule', ['ionic']);
             
             //Refresh function when drag down content        
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   

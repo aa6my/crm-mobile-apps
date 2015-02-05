@@ -20,7 +20,7 @@
  * @version    0.5.1
 */
 
-var apps_job = angular.module('jobModule', ['ionic']);
+var apps_job = angular.module('jobModule', ['ionic','cgBusy']);
 	
 
 	apps_job.controller('Job',['$scope','$http', '$state','$ionicPopup','$ionicModal','$stateParams', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation', 'jobService', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {       
@@ -38,7 +38,7 @@ var apps_job = angular.module('jobModule', ['ionic']);
 
         var url = Settings.url + '/dataAll/type/jobs/format/json';
 
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -50,7 +50,7 @@ var apps_job = angular.module('jobModule', ['ionic']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   
@@ -213,7 +213,7 @@ var apps_job = angular.module('jobModule', ['ionic']);
         if($stateParams.job_id !== undefined && $stateParams.job_id !== null){
             var job_id = $stateParams.job_id;
             var params = '/dataAll/type/jobs_task/key/job_id/val/'+job_id+'/joinid/product_id/jointo/products/format/json';
-                      CrudOperation.get(params).success(function(data){            
+                    $scope.myPromise =  CrudOperation.get(params).success(function(data){            
                       $scope.job_task_list   = data.jobs_task; 
                       $scope.formData.job_id = job_id;
                       $scope.job_hour        = $stateParams.job_hour;
