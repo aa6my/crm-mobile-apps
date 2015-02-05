@@ -276,7 +276,7 @@ angular.module('starter', [
     }) 
 
     .state('app.login', {
-      url: "/login/:server_name",
+      url: "/login",
      //url: "/login/:server_name{crm:(?:/[^/]+)?}",
       views: {
         'menuContent' :{

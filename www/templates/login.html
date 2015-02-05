@@ -1,8 +1,9 @@
-<ion-view title="LOGIN">
-<ion-content class="bg">  
 <div ng-controller="Login">
+<ion-view title="{{company_name}}">
+<ion-content class="bg">  
+
   <div class="col">
-  <p align="center"><i class="icon ion-arrow-graph-up-right custom-icon"></i></p>
+  <p class="logo"><i class="icon ion-arrow-graph-up-right custom-icon"></i></p>
   <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
     <form ng-submit="">
       <div class="list list-inset">
@@ -19,6 +20,7 @@
     </form>
      <p class="copyright" align="center">2015 &copy; Copyright SeGi MiDae - Media Solutions</p>
   </div>
-</div>
+
 </ion-content>
 </ion-view>
+</div>
