@@ -23,43 +23,9 @@
 var apps_main = angular.module('mainModule', ['ionic','highcharts-ng']);
     apps_main.controller('mainController',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
     
-    //if(typeof analytics !== "undefined") { analytics.trackView("Dashboard"); }
-    /*$scope.addPoints = function () {
-        var seriesArray = $scope.chartConfig.series
-        var rndIdx = Math.floor(Math.random() * seriesArray.length);
-        seriesArray[rndIdx].data = seriesArray[rndIdx].data.concat([1, 10, 20])
-    };
+    if(typeof analytics !== "undefined") { analytics.trackView("Dashboard"); }
+    
 
-    $scope.addSeries = function () {
-        var rnd = []
-        for (var i = 0; i < 10; i++) {
-            rnd.push(Math.floor(Math.random() * 20) + 1)
-        }
-        $scope.chartConfig.series.push({
-            data: rnd
-        })
-    }
-
-    $scope.removeRandomSeries = function () {
-        var seriesArray = $scope.chartConfig.series
-        var rndIdx = Math.floor(Math.random() * seriesArray.length);
-        seriesArray.splice(rndIdx, 1)
-    }
-
-    $scope.swapChartType = function () {
-        if (this.chartConfig.options.chart.type === 'line') {
-            this.chartConfig.options.chart.type = 'bar'
-        } else {
-            this.chartConfig.options.chart.type = 'line'
-            this.chartConfig.options.chart.zoomType = 'x'
-        }
-    }
-
-
-    $scope.toggleLoading = function () {
-        this.chartConfig.loading = !this.chartConfig.loading
-    }
-    */
     var tarikh = new Date();
     var tahun = tarikh.getFullYear();
 
