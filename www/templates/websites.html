@@ -1,5 +1,5 @@
 <div ng-controller="Website" ng-app="websiteModule">
-<ion-view title="Websites">
+<ion-view title="WEBSITES">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -16,6 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
+        <div cg-busy="myPromise"></div>
             <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
@@ -36,9 +37,9 @@
                     <td>{{website.website_name}}</td>
                     <td>{{website.website_url}}</td>
                     <td>
-                        <a ng-click="viewWebsite(website)"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
-                        <a ng-click="goToEditDataPage(website)"><i class="icon ion-android-create"></i></a>
-                        <a ng-click="deleteData(website)"><i class="icon ion-ios-trash-outline"></i></a>
+                        <!-- <a ng-click="viewWebsite(website)" class="ft-icon-color"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a> -->
+                        <a ng-click="goToEditDataPage(website)" class="ft-icon-color"><i class="icon ion-android-create"></i></a>
+                        <a ng-click="deleteData(website)" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
 
                     </td>
                 </tr>

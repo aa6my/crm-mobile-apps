@@ -1,5 +1,5 @@
 <div ng-controller="Invoice" ng-app="invoiceModule">
-<ion-view title="Invoices">
+<ion-view title="INVOICES">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -16,6 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
          <div class="ft-container">
+         <div cg-busy="myPromise"></div>
             <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
@@ -39,14 +40,11 @@
                     <td>{{invoice.invoice_number}}</td>
                     <td>{{invoice.invoice_date_created}}</td>
                     <td>{{invoice.invoice_subject}}</td>
-                    <!-- <td data-value="78025368997">22 Jun 1972</td> -->
-                    <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <a ng-click="viewInvoice(invoice)"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
-                        <a ng-click="goToEditDataPage(invoice)"><i class="icon ion-android-create"></i></a>
-                        <a ng-click="deleteData(invoice)"><i class="icon ion-ios-trash-outline"></i></a>
-
-
+                        <!-- <a ng-click="viewInvoice(invoice)" class="ft-icon-color"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a> -->
+                        <a ng-click="goToInvoiceItemList(invoice)" class="ft-icon-color"><i class="icon ion-clipboard" ></i></a>
+                        <a ng-click="goToEditDataPage(invoice)" class="ft-icon-color"><i class="icon ion-android-create"></i></a>
+                        <a ng-click="deleteData(invoice)" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
                     </td>
                 </tr>
                 </tbody>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.segimidae.crm" version="0.3.0" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>SegiMidaeCRM</name>
+<widget id="com.segimidae.crm" version="0.5.1" xmlns:gap="http://phonegap.com/ns/1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>segiCRM</name>
   <description>
-        Segi Midae CRM
+        Segi Midae Customer Relationship Management
     </description>
-  <author email="support@segimidae.net" href="http://segimidae.net/">
+  <author email="dev@segimidae.net" href="http://segimidae.net/">
       Segi Midae Developer Team
     </author>
     <content src="index.html" />
@@ -14,6 +14,8 @@
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="orientation" value="portrait" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="3000" />
 
     <!-- Don't store local date in an iCloud backup. Turn this to "cloud" to enable storage 
          to be sent to iCloud. Note: enabling this could result in Apple rejecting your app.
@@ -26,6 +28,12 @@
     <feature name="BarcodeScanner">
         <param name="android-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner" />
         <param name="ios-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner" />
+    </feature>
+    <feature name="Keyboard">
+            <param name="ios-package" value="IonicKeyboard" onload="true" />
+    </feature>
+    <feature name="UniversalAnalytics">
+      <param name="android-package" value="com.danielcwilson.plugins.analytics.UniversalAnalyticsPlugin" />
     </feature>
 
     <!-- phonegap directives -->

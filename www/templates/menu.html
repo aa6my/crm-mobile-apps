@@ -1,13 +1,13 @@
 <ion-side-menus>
   <ion-side-menu-content>
-    <ion-nav-bar class="bar-stable bar-positive nav-title-slide-ios7">
+    <ion-nav-bar class="bar head nav-title-slide-ios7">
     </ion-nav-bar>
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-side-menu-content>
 
   <!-- Left side menu-->
   <ion-side-menu side="left">
-    <header class="bar bar-header bar-stable">
+    <header class="bar bar-header bar-dark">
       <h1 class="title">Menu</h1>
     </header>
     <ion-content class="has-header">
@@ -25,36 +25,47 @@
           Playlists
         </ion-item> -->
         <ion-item nav-clear menu-close href="#/app/main">
+        <i class="icon ion-ios-speedometer"></i>
           Dashboard
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/vendors">
+        <i class="icon ion-android-walk"></i>
           Vendors
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/leads">
+        <i class="icon ion-android-people"></i>
           Leads
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/customers">
+        <i class="icon ion-android-star"></i>
           Customers
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/products">
+        <i class="icon ion-android-cart"></i>
           Products
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/quotes">
+        <i class="icon ion-android-hangout"></i>
           Quotes
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/websites">
+        <i class="icon ion-android-globe"></i>
           Websites
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/jobs">
+        <i class="icon ion-briefcase"></i>
           Jobs
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/invoices">
+        <i class="icon ion-android-document"></i>
           Invoices
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/files">
+        <!-- <ion-item nav-clear menu-close href="#/app/files">
+        <i class="icon ion-android-folder"></i>
           Files
-        </ion-item>
+        </ion-item> -->
         <ion-item nav-clear menu-close href="#/app/finance">
+        <i class="icon ion-cash"></i>
           Finance
         </ion-item>
       </ion-list>
@@ -63,13 +74,16 @@
 
   <!-- Right side menu-->
   <ion-side-menu side="right">
-    <header class="bar bar-header bar-stable">
-      <h1 class="title">Menu2</h1>
+    <header class="bar bar-header bar-dark">
+      <h1 class="title">Settings</h1>
     </header>
     <ion-content class="has-header">
       <ion-list>
         <ion-item nav-clear menu-close href="#/app/search">
           Search
+        </ion-item>
+        <ion-item nav-clear menu-close ng-controller="Signout" ng-click="doSignout()">
+          Sign Out
         </ion-item>
       </ion-list>
     </ion-content>

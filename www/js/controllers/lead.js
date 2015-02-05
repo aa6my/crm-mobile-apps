@@ -1,8 +1,30 @@
-var apps = angular.module('leadModule', ['ionic']);
-    apps.controller('Lead',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+/**
+
+  +-+-+-+-+ +-+-+-+-+-+
+  |S|E|G|I| |M|i|D|a|e|
+  +-+-+-+-+ +-+-+-+-+-+
+
+ * CRM MOBILE APPLICATION
+ *
+ * http://www.segimidae.net
+ *
+ * Ionic Framework
+ * 
+ * @category   controllers
+ * @package    lead.js
+ * @author     Nizam <nizam@segimidae.net>
+ * @author     Norlihazmey <norlihazmey@segimidae.net>
+ * @author     Azim <azim@segimidae.net>
+ * @license    SeGi MiDae
+ * @copyright  2015 SEGI MiDae
+ * @version    0.5.1
+*/
+
+var apps_lead = angular.module('leadModule', ['ionic','cgBusy']);
+    apps_lead.controller('Lead',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Lead(initial start of page will call this part) ============================= */
-        
+        if(typeof analytics !== "undefined") { analytics.trackView("Leads"); }
         /*-------------- initial value for page to show or hide button in lead form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
@@ -15,7 +37,7 @@ var apps = angular.module('leadModule', ['ionic']);
         
          var url = Settings.url + '/dataAll/type/leads/format/json';
 
-              $http
+         $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -39,6 +61,10 @@ var apps = angular.module('leadModule', ['ionic']);
               });
             };
 
+            /*-------------------- select country name and display into select option in add form ----------------- */
+              var params = '/dataAll/type/country/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.country_list = data.country;  });
+              /*------------ end selection ---------------------------------------------------------------------------*/
                
               $scope.goToAddDataPage = function(){
 
@@ -135,5 +161,5 @@ var apps = angular.module('leadModule', ['ionic']);
 
 
 
-      })
+      }]);
 

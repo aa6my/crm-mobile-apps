@@ -1,8 +1,30 @@
-var apps = angular.module('vendorModule', ['ionic']);
-    apps.controller('Vendor',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+/**
+
+  +-+-+-+-+ +-+-+-+-+-+
+  |S|E|G|I| |M|i|D|a|e|
+  +-+-+-+-+ +-+-+-+-+-+
+
+ * CRM MOBILE APPLICATION
+ *
+ * http://www.segimidae.net
+ *
+ * Ionic Framework
+ * 
+ * @category   controllers
+ * @package    vendor.js
+ * @author     Nizam <nizam@segimidae.net>
+ * @author     Norlihazmey <norlihazmey@segimidae.net>
+ * @author     Azim <azim@segimidae.net>
+ * @license    SeGi MiDae
+ * @copyright  2015 SEGI MiDae
+ * @version    0.5.1
+*/
+
+var apps_vendor = angular.module('vendorModule', ['ionic','cgBusy']);
+    apps_vendor.controller('Vendor',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Vendor(initial start of page will call this part) ============================= */
-        
+        if(typeof analytics !== "undefined") { analytics.trackView("Vendors"); }
         /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
@@ -15,7 +37,7 @@ var apps = angular.module('vendorModule', ['ionic']);
 
             var url = Settings.url + '/dataAll/type/vendors/format/json';
             
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -27,7 +49,7 @@ var apps = angular.module('vendorModule', ['ionic']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   
@@ -106,7 +128,8 @@ var apps = angular.module('vendorModule', ['ionic']);
                                         vendor_fax : $scope.formData.vendor_fax,
                                         vendor_address : $scope.formData.vendor_address,
                                         vendor_postcode : $scope.formData.vendor_postcode,
-                                        vendor_state : $scope.formData.vendor_state
+                                        vendor_state : $scope.formData.vendor_state,
+                                        country_id   : $scope.formData.country_id
                         };
                     var data       = {                             // data sent to Api
                                       type : "vendors",
@@ -135,5 +158,5 @@ var apps = angular.module('vendorModule', ['ionic']);
           /*================================ End back function ================================*/
 
 
-      })
+      }]);
 

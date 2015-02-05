@@ -1,8 +1,30 @@
-var apps = angular.module('websiteModule', ['ionic']);
-    apps.controller('Website',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+/**
+
+  +-+-+-+-+ +-+-+-+-+-+
+  |S|E|G|I| |M|i|D|a|e|
+  +-+-+-+-+ +-+-+-+-+-+
+
+ * CRM MOBILE APPLICATION
+ *
+ * http://www.segimidae.net
+ *
+ * Ionic Framework
+ * 
+ * @category   controllers
+ * @package    website.js
+ * @author     Nizam <nizam@segimidae.net>
+ * @author     Norlihazmey <norlihazmey@segimidae.net>
+ * @author     Azim <azim@segimidae.net>
+ * @license    SeGi MiDae
+ * @copyright  2015 SEGI MiDae
+ * @version    0.5.1
+*/
+
+var apps_website = angular.module('websiteModule', ['ionic','cgBusy']);
+    apps_website.controller('Website',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== website(initial start of page will call this part) ============================= */
-        
+        if(typeof analytics !== "undefined") { analytics.trackView("Websites"); }
         /*-------------- initial value for page to show or hide button in website form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
@@ -16,7 +38,7 @@ var apps = angular.module('websiteModule', ['ionic']);
             var url = Settings.url + '/dataAll/type/websites/format/json';
 
             
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -29,7 +51,7 @@ var apps = angular.module('websiteModule', ['ionic']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   
@@ -123,5 +145,5 @@ var apps = angular.module('websiteModule', ['ionic']);
           /*================================ End back function ================================*/
 
 
-      })
+      }]);
 

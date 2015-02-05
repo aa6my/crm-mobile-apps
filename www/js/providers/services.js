@@ -1,13 +1,16 @@
 angular
-.module('ServiceModule', ['ngResource','ionic'])
+.module('ServiceModule', ['ngResource','ionic','ValConstantService'])
 /**
  * Default setting for crm-mobile-apps 
  * call this function when needed
  */
-.factory('Settings', function() {
+.factory('Settings', function(init) {
   return {
-      upload  : 'http://192.168.0.200/crm/assets/uploads/files/',
-      url     : 'http://192.168.0.200/crm/apps'
+      upload  : '',
+     // url     : 'https://192.168.0.201/apps',
+      url     : '',
+      domain_name : '',
+      company_name : ''
   };
 })
 
@@ -179,6 +182,34 @@ angular
                     }
        }
 
+       func.convert_to_date = function(date_input){
+
+          var str_date = date_input.substr(4,11);
+            var exp_date = str_date.split(' ');
+
+            var months =  {        'Jan' : 1,
+                                   'Feb' : 2,
+                                   'Mar' : 3,
+                                   'Apr' : 4,
+                                   'May' : 5,
+                                   'Jun' : 6,
+                                   'Jul' : 7,
+                                   'Aug' : 8,
+                                   'Sep' : 9,
+                                   'Oct' : 10,
+                                   'Nov' : 11,
+                                   'Dec' : 12
+                        };
+                
+
+          var new_month = new Array();
+            if(exp_date[0] in months){
+              new_month = months[exp_date[0]];
+            }
+
+            return exp_date[1]+'-'+new_month+'-'+exp_date[2];
+       }
+
        return func;
 })
 
@@ -321,17 +352,56 @@ angular
                   }) 
       }
 
+      operation.add_no_redirect = function(params, data){
+        
+          var url             = Settings.url + params;
+          //var reload          = (reload === undefined || reload === null || reload === "") ? false : true;
+          //var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
+
+          var f = $http.post(url,data, Auth.doAuth(init.username, init.password));
+              return f.success(function(response) {            
+                    var data = response.data,
+                                status = response.status,
+                                header = response.header,
+                                config = response.config;
+                                return status;
+
+                  })
+                  .error(function(data, status, headers, config){
+                    console.log(config);            
+                  }) 
+      }
 
 
-      operation.update = function(params, data, stateToRedirect){
+
+      operation.update = function(params, data, stateToRedirect, reload){
         
           var url = Settings.url + params;
+          var reload          = (reload === undefined || reload === null || reload === "") ? false : true;
           var stateToRedirect = (stateToRedirect === undefined || stateToRedirect === null || stateToRedirect === "") ? $state.current : stateToRedirect;
 
                   $http.post(url,data, Auth.doAuth(init.username, init.password, 'PUT')) /* <----- different here with add method -- */
                   .success(function(data) {
                     
-                    $state.go(stateToRedirect, {}, {reload: false});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
+                    $state.go(stateToRedirect, {}, {reload: reload});//reload : false(default boolean) - set to true if want to reload controller/view/page after submit data
+
+                  })
+                  .error(function(data, status, headers, config){
+                    console.log(config);
+                    
+                  }) 
+      }
+
+      operation.update_no_redirect = function(params, data){
+        
+          var url = Settings.url + params;          
+          var j   = $http.post(url,data, Auth.doAuth(init.username, init.password, 'PUT')); 
+              return j.success(function(response) {
+                   var data = response.data,
+                                status = response.status,
+                                header = response.header,
+                                config = response.config;
+                                return status;
 
                   })
                   .error(function(data, status, headers, config){

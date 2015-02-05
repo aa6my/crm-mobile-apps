@@ -4,7 +4,7 @@
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Job Title</span>
-                <input type="text" placeholder="Segimidae" name="quote_subject" ng-model="formData.job_title">
+                <input type="text" placeholder="Enter Job Title" name="job_title" ng-model="formData.job_title">
               </label>
 
                
@@ -18,7 +18,7 @@
                   	<option ng-repeat="cc in job_types" value="{{cc.job_type_id}}" ng-selected="{{cc.job_type_id==formData.job_type_id}}">{{cc.job_type_name}}</option>
                   </select> -->
                   <select  ng-model="formData.job_type_id" ng-options="cc.job_type_id as cc.job_type_name for cc in job_types track by cc.job_type_id" ng-selected="{{cc.job_type_id}}">
-                  	<option value="">dd</option>
+                  	<option value="">--Choose Type--</option>
                   	<!-- <option ng-repeat="cc in job_types" value="{{cc.job_type_id}}" ng-selected="{{cc.job_type_id==formData.job_type_id}}">{{cc.job_type_name}}</option> -->
                   </select>
                 </label>
@@ -26,7 +26,7 @@
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Hourly Rate</span>
-                <input type="text" placeholder="Segimidae" name="quote_subject" ng-model="formData.job_hour">
+                <input type="text" placeholder="Enter Rate per hour" name="job_hour" ng-model="formData.job_hour">
               </label>
 
               
@@ -51,7 +51,7 @@
                   <p class="input-group">
                       <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.job_quote_date" is-open="$parent.openFor['opened1']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                       <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened1')"><i class="glyphicon glyphicon-calendar"></i></button>
+                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened1')"><i class="icon ion-calendar"></i></button>
                       </span>
                   </p>
                 </div>
@@ -64,20 +64,20 @@
                   <p class="input-group">
                       <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.job_date_start" is-open="$parent.openFor['opened2']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                       <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened2')"><i class="glyphicon glyphicon-calendar"></i></button>
+                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened2')"><i class="icon ion-calendar"></i></button>
                       </span>
                   </p>
                 </div>
               </div>
 
               <label class="item item-input item-stacked-label">
-                <span class="input-label">Start Time</span>
-                <input type="text" placeholder="Segimidae" name="quote_discount" ng-model="formData.job_start_time">
+                <span class="input-label">Start Time (hh:mm AM/PM)</span>
+                <input type="time" placeholder="Start time" name="quote_discount" ng-model="formData.job_start_time">
               </label>
 
               <label class="item item-input item-stacked-label">
-                <span class="input-label">End Time<span>
-                <input type="text" placeholder="Segimidae" name="quote_customer_notes" ng-model="formData.job_end_time">
+                <span class="input-label">End Time (hh:mm AM/PM)<span>
+                <input type="time" placeholder="Segimidae" name="quote_customer_notes" ng-model="formData.job_end_time">
               </label>
 
 
@@ -88,7 +88,7 @@
                   <p class="input-group">
                       <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.job_due_date" is-open="$parent.openFor['opened3']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                       <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened3')"><i class="glyphicon glyphicon-calendar"></i></button>
+                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened3')"><i class="icon ion-calendar"></i></button>
                       </span>
                   </p>
                 </div>
@@ -101,7 +101,7 @@
                   <p class="input-group">
                       <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.job_complete_date" is-open="$parent.openFor['opened4']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                       <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened4')"><i class="glyphicon glyphicon-calendar"></i></button>
+                          <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened4')"><i class="icon ion-calendar"></i></button>
                       </span>
                   </p>
                 </div>
@@ -114,7 +114,7 @@
                   </div>
                   <br/>
                   <select ng-model="formData.user_id">
-                    <option value="">--Choose job type--</option>
+                    <option value="">--Choose staff member--</option>
                   	<option ng-repeat="cc in user_meta" value="{{cc.user_id}}">{{cc.first_name}}</option>
                   </select>
                 </label>
@@ -122,17 +122,11 @@
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Tax<span>
-                <input type="text" placeholder="Segimidae" name="quote_customer_notes" ng-model="formData.job_tax">
+                <input type="text" placeholder="Enter tax (%)" name="job_task" ng-model="formData.job_tax">
               </label>
 
 
               <div class="padding">
-               <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="goToStep('step2')">&nbsp;&nbsp;Next</button>
+               <button type="button" class="button button-energized ion-android-checkbox-outline button-block" ng-click="goToStep('step2')">&nbsp;&nbsp;Next</button>
               </div>
-            <!-- <div class="padding">
-                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
-                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
-           
-            </div> -->
-        
-
+          

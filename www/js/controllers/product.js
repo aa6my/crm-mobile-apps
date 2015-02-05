@@ -1,20 +1,45 @@
-var apps = angular.module('productModule', ['ionic']);
-    apps.controller('Product',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation, appServices) {
+/**
+
+  +-+-+-+-+ +-+-+-+-+-+
+  |S|E|G|I| |M|i|D|a|e|
+  +-+-+-+-+ +-+-+-+-+-+
+
+ * CRM MOBILE APPLICATION
+ *
+ * http://www.segimidae.net
+ *
+ * Ionic Framework
+ * 
+ * @category   controllers
+ * @package    product.js
+ * @author     Nizam <nizam@segimidae.net>
+ * @author     Norlihazmey <norlihazmey@segimidae.net>
+ * @author     Azim <azim@segimidae.net>
+ * @license    SeGi MiDae
+ * @copyright  2015 SEGI MiDae
+ * @version    0.5.1
+*/
+
+var apps_product = angular.module('productModule', ['ionic']);
+    apps_product.controller('Product',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation', 'appServices',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation, appServices) {
        
           /*=============== Product(initial start of page will call this part) ============================= */
-        
+        if(typeof analytics !== "undefined") { analytics.trackView("Products"); }
         /*-------------- initial value for page to show or hide button in product form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
+        $scope.product_add = m.add;
+        $scope.product_edit = m.edit;
         $scope.btnEdit = m.edit;
         /*---------------------------*/
 
         /*------------initial value for form data of update function ----*/
         $scope.formData = UniversalFunction.returnDisplayFormData();
+        //$scope.product_sku = "";
         /*---------------------------------------------------------------*/
         
          var url = Settings.url + '/dataAll/type/products/format/json';
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -26,7 +51,7 @@ var apps = angular.module('productModule', ['ionic']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   
@@ -54,29 +79,52 @@ var apps = angular.module('productModule', ['ionic']);
               }
 
                $scope.goToEditDataPage = function(products){
+                    //init.sku = products.product_sku;
 
                     $state.go('app.productAdd_Edit',{},{reload:false});
                     /*-------------If click edit button show only save button with edit function--------------*/
+                    
                     var n           = UniversalFunction.buttonOnly(false,true);
                     $scope.btnAdd   = n.add;
                     $scope.btnEdit  = n.edit;
                     /*---------------------------*/
                     /*-- display value form list into update form */
                     var b           = UniversalFunction.displayFormData(products);
+                    //var h = {product_sku:''};
+                       // h.product_sku = b.product_sku;
                     $scope.formData = b;
-                    
+                    //$scope.product_sku = "sdsd";
+                    //$scope.product_sku = "";
+                    //$scope.product_sku = b.product_sku;
+                    /*if ($scope.formData.product_sku !== null || $scope.formData.product_sku !== "" ) {
+                      $scope.product_sku = $scope.formData.product_sku;
+                    }else{
+                      $scope.product_sku = b.product_sku;
+                    };*/
+                    //console.log(init.sku);
+                    //$scope.product_sku = init.sku;
+                   console.log($scope.formData.product_sku);
               }
 
           
  
           /*================================ Add function ================================*/
-                $scope.addData  = function(){
+                $scope.addData  = function(sku){
 
-                    $scope.formData = {};                           // store data from form into formData onject
+                    $scope.formData = {};      
+                    var dataForm = {
+                      product_name : this.formData.product_name,
+                      product_desc : this.formData.product_desc,
+                      product_quantity : this.formData.product_quantity,
+                      product_amount : this.formData.product_amount,
+                      product_sku : sku
+                    };
+                                        // store data from form into formData onject
                     var params      = '/dataAll';                   // request Api link
                     var data        = {                             // data sent to Api
                                         type : "products", 
-                                        formData : this.formData
+                                        formData : dataForm,
+
                         };
                     var stateToRedirect = 'app.products';
                     CrudOperation.add(params, data, stateToRedirect);  
@@ -90,9 +138,19 @@ var apps = angular.module('productModule', ['ionic']);
         /*================================ Edit function ================================*/
                 $scope.editData = function(){
 
+                  if($scope.product_add==true){
+
+                    var ssk = $scope.product_sku;
+                  }
+                  else{
+                    var ssk = $scope.formData.product_sku;
+                  }
+
+
+
                     var params     = '/dataAll';                  // request Api link
                     var dataUpdate = {                             // field column need to update
-                                        product_sku : $scope.formData.product_sku,
+                                        product_sku  :  ssk,
                                         product_name : $scope.formData.product_name,
                                         product_desc : $scope.formData.product_desc,
                                         product_quantity : $scope.formData.product_quantity,
@@ -128,6 +186,9 @@ var apps = angular.module('productModule', ['ionic']);
           /*================================ End back function ================================*/
 
                 $scope.click = function() {
+
+                  $scope.product_add = true;
+                  $scope.product_edit = false;
                     var promise = appServices.scanBarcode();
                     promise.then(
                         function(result) {
@@ -141,19 +202,13 @@ var apps = angular.module('productModule', ['ionic']);
                                     '<tr><td>Text:</td><td>&nbsp;</td><td>' + result.result.cancelled + '</td></tr>' +
                                     '</tbody>' +
                                     '</table>';*/
-                                    alert(result.result.text);
-                                    $scope.barcoderesult = [{
-
-                                      Barcode: result.result.text
-
-                                    }];
+                                  $scope.product_sku = result.result.text;
                             }
                             else {
                                 $state.go('app.productAdd_Edit',{},{reload:false});
                     
                             }
-                        });
+                        })
                 }
 
-      })
-
+      }]);

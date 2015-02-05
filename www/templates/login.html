@@ -1,40 +1,26 @@
-
- 
- <!--    <form ng-submit="">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form> -->
-
-<ion-view title="Login">
-<ion-content>  
 <div ng-controller="Login">
+<ion-view title="{{company_name}}">
+<ion-content class="bg">  
+
   <div class="col">
+  <p class="logo"><i class="icon ion-arrow-graph-up-right custom-icon"></i></p>
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
     <form ng-submit="">
       <div class="list list-inset">
         <label class="item item-input">
-          <input type="text" placeholder="" ng-model="username" value="admin@admin.com">
+          <input type="text" placeholder="Enter username" ng-model="username" value="">
         </label>
         <label class="item item-input">
-          <input type="text" placeholder="" ng-model="password" value="123456">
+          <input type="password" placeholder="Enter password" ng-model="password" value="">
         </label>
       </div>
       <div class="padding">
         <button class="button button-block button-assertive" ng-click="doLogin()">Submit</button>
-        <div>{{success}}</div>
       </div>
     </form>
+     <p class="copyright" align="center">2015 &copy; Copyright SeGi MiDae - Media Solutions</p>
   </div>
-</div>
+
 </ion-content>
 </ion-view>
+</div>

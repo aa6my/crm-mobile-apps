@@ -1,4 +1,4 @@
-<ion-view title="Finance">
+<ion-view title="FINANCE">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -7,10 +7,106 @@
     <ion-nav-buttons side="right">
         <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
     </ion-nav-buttons>
-
+<div ng-controller="Finance" ng-app="financeModule">
     <!-- content-->
 	<ion-content class="has-header">
-		<h1>Finance</h1>
+
+    <script type="text/ng-template" id="customTemplate.html">
+                <a>
+                    
+                    <span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+                </a>
+              </script>
+
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Customer Name" ng-model="fin.customer" value="{{customSelected.customer_id}}"  typeahead="state as state.customer_name for state in statesWithFlags | filter:{customer_name:$viewValue}" typeahead-template-url="customTemplate.html">
+    </label>
+    <button class="button button-small button-dark" ng-click="search_data(fin)">
+      Search Now
+    </button>
+
+
+  </div>
+  
+
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+     
+      <input type="text" datepicker-popup="{{format}}" ng-model="fin.start_date" is-open="$parent.openFor['opened1']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="Start Date"/>
+      </label>
+      <button class="button button-small button-stable" ng-click="openDatePicker($event,'opened1')">
+     <i class="icon ion-calendar"></i>
+    </button>
+      
+  </div>
+
+
+  <div class="item item-input-inset">
+    <label class="item-input-wrapper">
+     
+      <input type="text" datepicker-popup="{{format}}" ng-model="fin.end_date" is-open="$parent.openFor['opened2']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" placeholder="End Date"/>
+      </label>
+      <button class="button button-small button-stable" ng-click="openDatePicker($event,'opened2')">
+     <i class="icon ion-calendar"></i>
+    </button>
+      
+  </div>
+
+    <div class="card" ng-show="no_data" ng-init="false">
+    <div class="item item-divider">
+      Data Result
+    </div>
+    <div class="item item-text-wrap">
+      Sorry, no record in database.
+    </div>
+    <div class="item item-divider">
+      
+    </div>
+  </div>
+
+     <div class="ft-container" ng-show="finance_content" ng-init="false">
+     <div cg-busy="myPromise"></div>
+            <table class="footable" data-page-size="5">
+                <thead>
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Customer Name
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th data-hide="phone">
+                        Payment Method
+                    </th>
+                
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="finance in finances()">
+                    <td>{{finance.invoice_payment_date}}</td>
+                    <td>{{finance.customer_name}}</td>
+                    <td>{{finance.invoice_payment_amount}}</td>
+                    <td>{{finance.payment_method}}</td>
+                    
+                </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                        <ul class="pagination">
+                        </ul>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>  
+ 
+<!-- </div> -->
+
 	</ion-content>
 <div class="tabs tabs-icon-only">
   <a class="tab-item">
@@ -23,4 +119,10 @@
     <i class="icon ion-gear-a"></i>
   </a>
 </div>
+</div>
 </ion-view>
+<script type="text/javascript">
+    $(function () {
+        $('table').footable();
+    });
+</script>

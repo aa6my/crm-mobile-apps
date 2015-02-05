@@ -1,5 +1,5 @@
 <div ng-controller="Invoice">
-<ion-view title="Invoices">
+<ion-view title="INVOICES">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -18,7 +18,7 @@
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Invoice Subject</span>
-                <input type="text" placeholder="Segimidae" name="invoice_subject" ng-model="formData.invoice_subject">
+                <input type="text" placeholder="Enter Invoice Subject" name="invoice_subject" ng-model="formData.invoice_subject">
               </label>
 
               <label class="item item-input item-stacked-label">
@@ -29,7 +29,7 @@
                   <p class="input-group">
                       <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.invoice_date_created" is-open="$parent.opened1" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                       <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          <button type="button" class="btn btn-default" ng-click="open1($event)"><i class="icon ion-calendar"></i></button>
                       </span>
                   </p>
                 </div>
@@ -42,7 +42,7 @@
                   <p class="input-group">
                       <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formData.invoice_valid_until" is-open="$parent.opened2" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
                       <span class="input-group-btn">
-                          <button type="button" class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          <button type="button" class="btn btn-default" ng-click="open2($event)"><i class="icon ion-calendar"></i></button>
                       </span>
                   </p>
                 </div>
@@ -50,7 +50,7 @@
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Invoice Terms</span>
-                <input type="text" placeholder="Segimidae" name="invoice_customer_notes" ng-model="formData.invoice_customer_notes">
+                <input type="text" placeholder="Enter Invoice Terms" name="invoice_customer_notes" ng-model="formData.invoice_customer_notes">
               </label>
               <div class="list">
                 <label class="item item-input item-stacked-label">
@@ -68,9 +68,8 @@
               </div>
 
             <div class="padding">
-                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
-                <button type="button" class="button button-energized ion-android-checkbox-outline button-small" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
-           <!-- <button class="button icon-left ion-star button-positive">Favorites</button> -->
+                <button type="button" class="button button-assertive ion-android-checkbox-outline button-block" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
+                <button type="button" class="button button-assertive ion-android-checkbox-outline button-block" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button><br><br><br>
             </div>
             </div>
         </form> 

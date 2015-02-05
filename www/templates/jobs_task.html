@@ -8,7 +8,7 @@
 </style>
 
 
-<ion-view title="Jobs Tasks">
+<ion-view title="JOB TASKS">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -25,11 +25,12 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
+        <div cg-busy="myPromise"></div>
             <ion-list>
               <ion-item ng-repeat="task in job_task_list">
                <h3><strong>{{$index + 1}}. <i class="icon ion-ios-pricetags"></i>  Job Task Due Date :</strong> {{task.job_task_due_date}} 
-               <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right"><i class="icon ion-android-create"></i></a> 
-               <a ng-click="deleteTask(task)" style="float:right"><i class="icon ion-ios-trash-outline"></i></a>
+               <a ng-click="modal_show(task,'edit', 'Edit Job Task')" style="float:right" class="ft-icon-color"><i class="icon ion-android-create"></i></a> 
+               <a ng-click="deleteTask(task)" style="float:right" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
                </h3>
 
                <div style="margin-left:25px">
@@ -65,43 +66,18 @@
             </ion-list>
             <script id="modal.html" type="text/ng-template">
                       <ion-modal-view >
-                        <ion-header-bar class="bar bar-header bar-positive">
+                        <ion-header-bar class="bar bar-header head">
                           <h1 class="title">{{myModal.title}}</h1>
                           <button class="button button-clear button-primary" ng-click="modal_hide('{{myModal.type}}')">Cancel</button>
                         </ion-header-bar>
                         <ion-content class="padding">
-                              <button class="button button-small button-energized" ng-click="show_field('description', '{{myModal.type}}')" ng-show="b_description" ng-init="false">Create New description </button>
-                             <!-- <button class="button button-small button-energized" ng-click="show_field('original', '{{myModal.type}}','{{myModal.task}}')" ng-show="original" ng-init='false'>Restore Original Data </button>-->
-                              <button class="button button-small button-energized" ng-click="show_field('product', '{{myModal.type}}')">Choose from product</button>
+                              <button class="button button-small button-energized" ng-click="modal_product.show()">Choose from product</button>
 <br/><br/>
                           <div class="list">
-                          <!-- ------------------- This is for new description --------------------- --> 
-
-                            <label class="item item-input" ng-show="n_description" ng-init="false">
+                          <label class="item item-input" >
                               <i class="icon ion-ios-list-outline" data-pack="default"></i>
                               <span class="input-label">Description</span>
                               <input ng-model="formData.job_task_description"  type="text" >
-                            </label>
-
-
-                            <!-- ------------------- This is for new edit description only --------------------- -->                            
-                            <label class="item item-input" ng-show="edit_description" ng-init="false">
-                              <i class="icon ion-ios-list-outline" data-pack="default"></i>
-                              <span class="input-label">Description</span>
-                              <input ng-model="formData.job_task_description"  type="text" >
-                            </label>
-
-
-                          <!-- ------------------- This is for product description --------------------- -->
-
-                            <label class="item item-input item-select" ng-show="p_description" ng-init="false">
-                                    <i class="icon ion-ios-list-outline" data-pack="default"></i>
-                                    <span class="input-label">Description</span>
-                                    <select ng-model="formData.product_id" ng-change="choose_value(formData.product_id)">
-                                     <option ng-repeat="a in products" value="{{a.product_id}}">{{a.product_name}}</option>        
-                                  </select>
-                                  <input ng-model="formData.job_task_description"  type="text" readonly>
-                                  
                             </label>
                             <label class="item item-input">
                               <i class="icon ion-ios-alarm-outline" data-pack="default"></i>  
@@ -119,10 +95,7 @@
                               <span class="input-label">Due Date</span>
                               <input ng-model="formData.job_task_due_date" type="date" value="2012-11-08">
 
-                             <!-- <input type="text" datepicker-popup="{{format}}" ng-model="formData.job_task_due_date" is-open="$parent.openFor['opened12']" min-date="minDate" max-date="'2030-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close">
-                              <span class="input-group-btn">
-                                  <button type="button" class="btn btn-default" ng-click="openDatePicker($event,'opened12')"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                              </span>
+                             
                   
                             </label>
                             <label class="item item-input item-select">
@@ -143,13 +116,42 @@
                                    </span>                                   
                             </label>
                             <input ng-model="formData.job_id" type="hidden">
-                            
-                            <button class="button button-full button-positive" ng-click="addTaskData()" ng-show="c_button" ng-init="false">Create</button>
-                            <button class="button button-full button-positive" ng-click="editTaskData()" ng-show="s_button" ng-init="false">Save</button>
+                            <input ng-model="formData.product_id" type="hidden">                             
+                            <button class="button button-full button-assertive" ng-click="addJobTaskData(formData)" ng-show="add_button" ng-init="false">Add Item</button>
+                            <button class="button button-full button-assertive" ng-click="editJobTaskData()" ng-show="edit_button" ng-init="false">Save</button>
                           </div>
                         </ion-content>
                       </ion-modal-view>
                     </script>
+
+
+                    <script id="modal_product.html" type="text/ng-template">
+                      <ion-modal-view >
+                        <ion-header-bar class="bar bar-header head">
+                          <h1 class="title">{{myModal.title}}</h1>
+                          <button class="button button-clear button-primary" ng-click="modal_product.hide()">Cancel</button>
+                        </ion-header-bar>
+                        <ion-content class="padding">
+                          <div class="list">
+                          
+                            <label class="item item-input" >
+                              <i class="icon ion-ios-list-outline" data-pack="default"></i>
+                              <span class="input-label">Choose Product</span>
+                              <select ng-model="modal_product.pro_id">
+                                     <option ng-repeat="a in products" value="{{a.product_id}}">{{a.product_name}}</option>        
+                              </select>
+                            </label>
+                            
+                       
+                            <button class="button button-full button-assertive" ng-click="choose_product()">Choose</button>
+                            <button class="button button-full button-assertive" ng-click="editTaskData()" ng-show="s_button" ng-init="false">Save</button>
+                          </div>
+                        </ion-content>
+                      </ion-modal-view>
+                    </script>
+                    <br/>
+                    <br/>
+                    <br/>
         </div>
 </ion-content>
   <div class="tabs tabs-icon-only">

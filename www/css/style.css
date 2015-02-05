@@ -1,1 +1,106 @@
-/* Empty. Add your own CSS if you like */
+.spacing{
+    margin-top: 50px;     
+    }
+
+    .logo{
+        height: 170px;
+        text-align: center;
+    }
+
+    .error{
+        color: red;
+    }
+    .custom-icon {
+      font-size: 150px;
+      color : #EF4E3A;
+    }
+
+    .bg {
+    background-color: #172434;
+    -moz-box-shadow:    inset 0 0 40px #000000;
+   -webkit-box-shadow: inset 0 0 40px #000000;
+     box-shadow:         inset 0 0 40px #000000;
+    }
+
+    .copyright{
+        color: #555555;
+    }
+
+
+
+    .trans{
+         background-color: rgba(0,0,0,0.2);
+         border-style: solid !important;
+         border-width: 1px;
+         border-color:#121C28;    
+    }
+
+    .trans label{
+        color: #fff;
+    }
+
+    .trans select{
+        color: #000;
+    }
+
+    .trans .item{
+        border-style: none !important;
+         border-width: 0;
+    }
+
+    .circle {
+        border-radius: 100px;
+        box-shadow:0 0 40px #111B28;
+    }
+
+    /*.menu-color{
+        background-color: #444444;
+    }*/
+
+    /*.menu-color .item, .menu-color .item-content, .menu-color .item-complex{
+    background-color: rgba(0,0,0,0);
+    color: #444444;
+    border: none;
+    border-top: 1px solid #464646;
+    border-bottom: 2px solid #333333;
+    color: #F0F1F1;
+    max-height: none;
+    }*/
+
+    .head {
+        background-color: #c66c66;
+        color: #FFFFFF;
+    }
+
+    .ft-icon-color i{
+        color: black;
+        font-size: 25px;
+    }
+
+    .wrong-login{
+        color:red;
+        font-size: 15px;
+    }
+
+    .popup-buttons .button{
+        background-color: #EF4E3A;
+        border: none;
+        color: #FFF;
+    }
+
+    .button.button-positive.activated{
+        background-color: #CC2311;
+    }
+
+    .cancel-color{
+        color: #fff;
+    }
+
+    .ion-android-arrow-back, .ion-android-arrow-forward{
+        color: #fff;
+    }
+
+element.style {
+z-index: 0;
+}
+

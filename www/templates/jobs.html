@@ -1,5 +1,5 @@
 <div ng-controller="Job">
-<ion-view title="Jobs">
+<ion-view title="JOBS">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -16,7 +16,8 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
-            <table class="footable" data-page-size="5">
+        <div cg-busy="myPromise"></div>
+            <table class="footable" data-page-size="10">
                 <thead>
                 <tr>
                     <th>
@@ -42,19 +43,20 @@
                   <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <a ng-click="viewJob(job)" style="height:5px;"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
-                        <a ng-click="goToJobTaskList(job)"><i class="icon ion-clipboard" ></i></a>
-                        <a ng-click="goToEditDataPage(job)"><i class="icon ion-android-create"></i></a>
-                        <a ng-click="deleteData(job)"><i class="icon ion-ios-trash-outline"></i></a>
+                        <!-- <a ng-click="viewJob(job)" class="ft-icon-color"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a> -->
+                        <a ng-click="goToJobTaskList(job)" class="ft-icon-color"><i class="icon ion-clipboard" ></i></a>
+                        <a ng-click="goToEditDataPage(job)" class="ft-icon-color"><i class="icon ion-android-create"></i></a>
+                        <a ng-click="deleteData(job)" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
                     </td>
                 </tr>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <td colspan="5">
-                        <div class="pagination pagination-centered"></div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                        <ul class="pagination">
+                        </ul>
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>

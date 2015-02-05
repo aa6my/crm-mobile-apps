@@ -1,8 +1,34 @@
-var apps = angular.module('fileModule', ['ionic']);
-    apps.controller('File',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+/**
+
+  +-+-+-+-+ +-+-+-+-+-+
+  |S|E|G|I| |M|i|D|a|e|
+  +-+-+-+-+ +-+-+-+-+-+
+
+ * CRM MOBILE APPLICATION
+ *
+ * http://www.segimidae.net
+ *
+ * Ionic Framework
+ * 
+ * @category   controllers
+ * @package    file.js
+ * @author     Nizam <nizam@segimidae.net>
+ * @author     Norlihazmey <norlihazmey@segimidae.net>
+ * @author     Azim <azim@segimidae.net>
+ * @license    SeGi MiDae
+ * @copyright  2015 SEGI MiDae
+ * @version    0.5.1
+*/
+
+var apps_file = angular.module('fileModule', ['ionic','cgBusy']);
+    apps_file.controller('File',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Website(initial start of page will call this part) ============================= */
-        
+
+        // Start of Google Analytic Function  
+        if(typeof analytics !== "undefined") { analytics.trackView("Files"); }
+        // End
+
         /*-------------- initial value for page to show or hide button in website form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
@@ -15,7 +41,7 @@ var apps = angular.module('fileModule', ['ionic']);
         
          var url = Settings.url + '/dataAll/type/files/format/json';
               
-               $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -23,11 +49,11 @@ var apps = angular.module('fileModule', ['ionic']);
                     
               }, function(err) {
                   console.error('ERR', err);
-              
               })
-                    
+            
+            //Refresh function when drag down content        
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   
@@ -38,20 +64,19 @@ var apps = angular.module('fileModule', ['ionic']);
                 $scope.$broadcast('scroll.refreshComplete');
               });
             };
-
-               
+            // End refresh function
+              
+               // Go to ADD/EDIT Page function  
               $scope.goToAddDataPage = function(){
 
-                   $state.go('app.fileAdd_Edit',{},{reload:false});
-                   /*------------- If click add new button show only submit button with save function--------------*/
+                   /*$state.go('app.fileAdd_Edit',{},{reload:false});
+               
                    var m = UniversalFunction.buttonOnly(true,false);
                    $scope.btnAdd = m.add;
                    $scope.btnEdit = m.edit;
-                   /*---------------------------*/
-                   /*---- set form value to blank */
-                   UniversalFunction.displayFormData('');
-                   
-                  
+              
+                   UniversalFunction.displayFormData(''); */
+                   alert("Page under construction.");
               }
 
                $scope.goToEditDataPage = function(files){
@@ -64,12 +89,10 @@ var apps = angular.module('fileModule', ['ionic']);
                     /*---------------------------*/
                     /*-- display value form list into update form */
                     var b           = UniversalFunction.displayFormData(files);
-                    $scope.formData = b;
-                    
+                    $scope.formData = b;   
               }
-
-          
- 
+              //End
+        
           /*================================ Add function ================================*/
                 $scope.addData  = function(){
 
@@ -81,12 +104,8 @@ var apps = angular.module('fileModule', ['ionic']);
                         };
                     var stateToRedirect = 'app.files';
                     CrudOperation.add(params, data, stateToRedirect);  
-
                 } 
         /*================================ End Add function ================================*/
-
-
-
 
         /*================================ Edit function ================================*/
                 $scope.editData = function(){
@@ -107,9 +126,6 @@ var apps = angular.module('fileModule', ['ionic']);
                 } 
         /*================================ End Edit function ================================*/
 
-
-
-
         /*================================ Delete function ================================*/
                 $scope.deleteData = function(file) {
                     var params = '/dataAll/type/files/key/file_id/val/'+file.file_id;
@@ -127,5 +143,5 @@ var apps = angular.module('fileModule', ['ionic']);
 
 
 
-      })
+      }]);
 

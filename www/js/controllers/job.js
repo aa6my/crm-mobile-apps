@@ -1,42 +1,44 @@
-var apps = angular.module('jobModule', ['ionic']);
+/**
+
+  +-+-+-+-+ +-+-+-+-+-+
+  |S|E|G|I| |M|i|D|a|e|
+  +-+-+-+-+ +-+-+-+-+-+
+
+ * CRM MOBILE APPLICATION
+ *
+ * http://www.segimidae.net
+ *
+ * Ionic Framework
+ * 
+ * @category   controllers
+ * @package    job.js
+ * @author     Nizam <nizam@segimidae.net>
+ * @author     Norlihazmey <norlihazmey@segimidae.net>
+ * @author     Azim <azim@segimidae.net>
+ * @license    SeGi MiDae
+ * @copyright  2015 SEGI MiDae
+ * @version    0.5.1
+*/
+
+var apps_job = angular.module('jobModule', ['ionic','cgBusy']);
 	
 
-	apps.controller('Job', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {
+	apps_job.controller('Job',['$scope','$http', '$state','$ionicPopup','$ionicModal','$stateParams', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation', 'jobService', function($scope,$http, $state,$ionicPopup,$ionicModal,$stateParams, Settings, init, Auth, UniversalFunction, CrudOperation, jobService) {       
 
-       
-
+        if(typeof analytics !== "undefined") { analytics.trackView("Jobs"); }
        /*-------------- initial value for page to show or hide button in vendor form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
         $scope.btnEdit = m.edit;
-        /*---------------------------*/
-        
+        /*---------------------------*/      
 
         /*------------initial value for form data of update function ----*/
         $scope.formData = UniversalFunction.returnDisplayFormData();
-        /*---------------------------------------------------------------*/
-
-    /*url = Settings.url + '/dataAll/type/jobs/format/json';
-        $http.get(url, Auth.doAuth(init.username, init.password)).
-        success(function(data) {
-          $scope.jobs = data.jobs;
-          //console.log('Success', data.jobs);
-      $scope.doRefresh = function() {
-        $http.get(url, Auth.doAuth(init.username, init.password))
-         .success(function(data) {
-           $scope.jobs = data.jobs;
-         })
-         .finally(function() {
-           $scope.$broadcast('scroll.refreshComplete');
-         });
-      };
-  }, function(err) {console.error('ERR', err);})
-
-        //$scope.job_task_list = {};*/
+        /*---------------------------------------------------------------*/    
 
         var url = Settings.url + '/dataAll/type/jobs/format/json';
 
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -48,7 +50,7 @@ var apps = angular.module('jobModule', ['ionic']);
               })
                     
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   
@@ -87,8 +89,7 @@ var apps = angular.module('jobModule', ['ionic']);
                     $scope.step     = step;
                     $scope.formData = this.formData;  // When click next or back button, retain the value of form form previous entering
 
-      }/*--- end ng-switch --*/
-      
+      }/*--- end ng-switch --*/    
       
 
       $scope.goToAddDataPage = function(){ 
@@ -202,6 +203,23 @@ var apps = angular.module('jobModule', ['ionic']);
 
          /*================================ job task part ================================*/ 
 
+         /*-------------------- select product and display into select option in add form ----------------- */
+                var params = '/dataAll/type/products/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.products = data.products;  });
+        /*------------ end selection -----------------------------------------------------------------------*/ 
+        // Display job task in job_task.html page
+        // $stateParams.job_id came from $scope.goToJobTaskList function
+        // Must include paramter name in app.js for paramater declaration
+        if($stateParams.job_id !== undefined && $stateParams.job_id !== null){
+            var job_id = $stateParams.job_id;
+            var params = '/dataAll/type/jobs_task/key/job_id/val/'+job_id+'/joinid/product_id/jointo/products/format/json';
+                    $scope.myPromise =  CrudOperation.get(params).success(function(data){            
+                      $scope.job_task_list   = data.jobs_task; 
+                      $scope.formData.job_id = job_id;
+                      $scope.job_hour        = $stateParams.job_hour;
+                    });                     
+        }
+
          // function ionic to call modal box
          // will triggered after add job task button clicked
         $ionicModal.fromTemplateUrl('modal.html', {
@@ -211,18 +229,6 @@ var apps = angular.module('jobModule', ['ionic']);
         }).then(function(modal) {
             $scope.modal = modal
         }) 
-        // function ionic to hide modal box
-        // will trigger when cancel button clicked
-        // after that clear the form data to empty field 
-        function clear_job_task_form(){
-              $scope.formData.job_task_description = "";
-              $scope.formData.job_task_hour        = "";
-              $scope.formData.job_task_amount      = "";
-              $scope.formData.job_task_due_date    = "";
-              $scope.formData.user_id              = "";
-              $scope.formData.job_task_percentage  = "";
-        }
-
 
         var myModal = {
               title : '',
@@ -233,111 +239,100 @@ var apps = angular.module('jobModule', ['ionic']);
               title : '',
               type  : ''
         };
-        $scope.modal_hide = function(type){
-              $scope.modal.hide();
-              $scope.p_description = false;
-              $scope.n_description = false;
-              $state.go($state.current,{},{reload:true}); 
-        }
-        $scope.modal_show = function(data, type, title){
+
+        
+         $scope.modal_show = function(data, type, title){
            console.log(type);
-            $scope.b_description = true;
+            
             if(type === "edit"){
-                $scope.formData  = data;
-                $scope.edit_description = true;
-                $scope.c_button = false;
-                $scope.s_button = true;            
+                $scope.formData    = data;                
+                $scope.edit_button = true;
+                $scope.add_button  = false;
+
+                var percentage = $scope.formData.job_task_percentage;
+                if(percentage == 0 || percentage == false){
+
+                    percentage == false;
+                }
+                else if(percentage == 1 || percentage == true){
+                    percentage == true;
+                }
+
             }else if(type === "add")  { 
-                $scope.c_button = true;
-                $scope.s_button = false;
-            }
-
-              myModal.title = title;
-              myModal.type = type;
-              myModal.task = data;         
-              $scope.myModal.title = myModal.title;
-              $scope.myModal.type  = myModal.type;
-              $scope.myModal.task  = myModal.task;
-              $scope.modal.show();
-
-        }
-        // Display job task in job_task.html page
-        // $stateParams.job_id came from $scope.goToJobTaskList function
-        // Must include paramter name in app.js for paramater declaration
-        if($stateParams.job_id !== undefined && $stateParams.job_id !== null){
-            var job_id = $stateParams.job_id;
-            var params = '/dataAll/type/jobs_task/key/job_id/val/'+job_id+'/joinid/product_id/jointo/products/format/json';
-                      CrudOperation.get(params).success(function(data){            
-                      $scope.job_task_list   = data.jobs_task; 
-                      $scope.formData.job_id = job_id;
-                      $scope.job_hour        = $stateParams.job_hour;
-                    });                     
-        }
-          // show field either text field or select drop down list
-          // for job description & job task hour & job task amount. 
-          $scope.show_field = function(view_type, type, data){
-            console.log(view_type);
-                
-                     
-            if(view_type == 'product'){
-                /*if($scope.formData.job_task_description != "" || $scope.formData.job_task_amount !="" || $scope.formData.job_task_hour != "" || $scope.formData.job_task_description != null){
+                $scope.add_button                    = true;
+                $scope.edit_button                   = false;
                 $scope.formData.job_task_description = "";
                 $scope.formData.job_task_hour        = "";
                 $scope.formData.job_task_amount      = "";
-                 } */  
-                $scope.p_description = true;
-                $scope.n_description = false;
-                $scope.edit_description = false;  
-               /*-------------------- select product and display into select option in add form ----------------- */
-                var params = '/dataAll/type/products/format/json';
-                  CrudOperation.get(params).success(function(data){  $scope.products = data.products;  });
-              /*------------ end selection -----------------------------------------------------------------------*/  
+                $scope.formData.job_task_due_date    = "";
+                $scope.formData.user_id              = "";
+                $scope.formData.job_task_percentage  = "";
+                $scope.formData.product_id           = "";
+               
             }
-            else if(view_type == 'original'){          
+                myModal.title = title;
+                $scope.myModal.title = myModal.title;
+                $scope.modal.show();
 
-              $scope.formData = myModal.task;
-              console.log(myModal.task);
-              
-            }
-            else{ 
-                         
-                $scope.n_description = true;
-                $scope.p_description = false; 
-                $scope.edit_description = false;             
-            }
+        } 
+        $scope.modal_hide = function(type){
+              $scope.modal.hide();
+              $state.go($state.current,{},{reload:true}); 
+        }
+        
 
-            
-          }
+
+      /********************************* Second modal(choose product) *****************************/
+
+            $ionicModal.fromTemplateUrl('modal_product.html', {
+            scope: $scope,
+            animation: 'slide-in-up',
+            focusFirstInput: true
+        }).then(function(modal) {
+            $scope.modal_product = modal
+        });
+
+        $scope.choose_product = function(){
+          //console.log($scope.modal_product.pro_id);
+                var product_id = $scope.modal_product.pro_id;              
+                var params = '/dataAll/type/products/key/product_id/val/'+product_id+'/format/json';
+                  CrudOperation.get(params).success(function(data){                    
+                      $scope.formData.job_task_description = data.products[0].product_desc;
+                      //$scope.formData.quote_item_name        = data.products[0].product_name;
+                      $scope.formData.job_task_hour    = data.products[0].product_quantity;
+                      $scope.formData.job_task_amount       = data.products[0].product_amount;
+                      //$scope.formData.quote_item_subtotal    = data.products[0].product_quantity * data.products[0].product_amount;
+                      $scope.formData.product_id             = data.products[0].product_id;
+                });  
+                $scope.modal_product.hide();
+        }
+
+  /********************************* end Second modal(choose product) *****************************/
+
+      
           /*================================ Add job task function ================================*/
-                $scope.addTaskData  = function(){
-                    
-                    var params      = '/dataAll';                   // request Api link
-                    var data        = {                             // data sent to Api
-                                        type : "jobs_task", 
-                                        formData : this.formData
-                        };
-                    CrudOperation.add(params, data, '', true);
-                    $scope.modal.hide();
-                }       
-        /*================================ End Delete function ================================*/
-        $scope.choose_value = function(product_id){
-          /*-------------------- select product data by product id then insert into description ----------------- */
-              var params = '/dataAll/type/products/key/product_id/val/'+product_id+'format/json';
-                  CrudOperation.get(params).success(function(data){  
-                    $scope.formData.job_task_description = data.products[0].product_name;
-                    $scope.formData.job_task_amount      = data.products[0].product_amount;
-                    $scope.formData.job_task_hour        = data.products[0].product_quantity; 
-              });
-          /*------------ end selection ---------------------------------------------------------------------------*/
-        }
-
-        $scope.calculate_amount = function(hour, job_hour){
-                 $scope.formData.job_task_amount = hour * job_hour;
-        }
-
-
-        $scope.editTaskData = function(){
-                var params     = '/dataAll';                  // request Api link
+              $scope.addJobTaskData = function(){
+                var params      = '/dataAll';                   // request Api link
+                var data_data = {
+                                              'product_id'                  : $scope.formData.product_id,
+                                              'job_id'                    : $scope.formData.job_id,
+                                              'job_task_hour'             : $scope.formData.job_task_hour,
+                                              'job_task_description'      : $scope.formData.job_task_description,
+                                              'job_task_amount'            : $scope.formData.job_task_amount,
+                                              'job_task_due_date'         : $scope.formData.job_task_due_date,
+                                              'user_id'         : $scope.formData.user_id,
+                                              'job_task_percentage'         : $scope.formData.job_task_percentage
+                }
+                var data        = {                             // data sent to Api
+                                      type : "jobs_task", 
+                                      formData : data_data
+                              };
+                CrudOperation.add(params, data, '', false);
+                $scope.modal.hide();
+          }     
+        
+        $scope.editJobTaskData = function(){
+        var params     = '/dataAll';                  // request Api link
                     var dataUpdate = {                             // field column need to update
                                         'product_id'                  : $scope.formData.product_id,
                                         'job_task_hour'               : $scope.formData.job_task_hour,
@@ -356,12 +351,19 @@ var apps = angular.module('jobModule', ['ionic']);
                     
                     $scope.modal.hide();
                     CrudOperation.update(params, data);
-        }
-
+    }
+        
+    
         $scope.deleteTask = function(jobs_task) {
                     var params = '/dataAll/type/jobs_task/key/job_task_id/val/'+jobs_task.job_task_id;
                     CrudOperation.delete(params);
                 }
+        $scope.calculate_amount = function(hour, job_hour){
+                 $scope.formData.job_task_amount = hour * job_hour;
+        }
 
 
-});
+        
+
+
+}]);

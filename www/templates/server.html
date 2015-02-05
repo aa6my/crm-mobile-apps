@@ -1,0 +1,33 @@
+<ion-view title="segiCRM">
+
+
+<ion-content class="bg"> 
+<div class="spacing" style=""> 
+<div ng-controller="Server">
+  <div class="col">
+  <center><img class="circle" src="img/logo.jpg"></center>
+    <form ng-submit="">
+     <br><alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+      <div class="list list-inset trans">
+        <label class="item item-input item-stacked-label padding">
+          Company
+        &nbsp;&nbsp;
+        
+          <select ng-model="company_id">
+              <option value="">-- Choose Company --</option>
+              <option value="{{s.company_id}}" ng-repeat="s in server">{{s.company_name}}</option>
+          </select>
+        </label>
+      </div>
+      <br>
+      <div class="padding">
+        <button class="button button-block button-assertive" ng-click="goToLogin(s)">Proceed</button>
+      </div>
+    </form>
+    <p class="copyright" align="center">2015 &copy; Copyright SeGi MiDae - Media Solutions</p>
+  </div>
+</div>
+</div>
+</ion-content>
+
+</ion-view>

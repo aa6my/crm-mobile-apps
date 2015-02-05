@@ -1,5 +1,4 @@
-<div ng-controller="Vendor" ng-app="vendorModule">
-<ion-view title="Vendors">
+<ion-view title="VENDORS">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -8,7 +7,7 @@
     <ion-nav-buttons side="right">
         <button menu-toggle="right" class="button button-icon icon ion-android-arrow-forward"></button>
     </ion-nav-buttons>
-
+    <div ng-controller="Vendor" ng-app="vendorModule">
     <!-- content-->
     <ion-content class="has-header">
         <ion-refresher
@@ -16,6 +15,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
+        <div cg-busy="myPromise"></div>
             <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
@@ -45,18 +45,18 @@
                     <td>{{vendor.vendor_phone}}</td>
                     <td>{{vendor.vendor_email}}</td>
                     <td>
-                        <a ng-click="viewVendor(vendor)"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
-                        <a ng-click="goToEditDataPage(vendor)"><i class="icon ion-android-create"></i></a>
-                        <a ng-click="deleteData(vendor)"><i class="icon ion-ios-trash-outline"></i></a>
+                        <!-- <a ng-click="viewVendor(vendor)" class="ft-icon-color"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a> -->
+                        <a ng-click="goToEditDataPage(vendor)" class="ft-icon-color"><i class="icon ion-android-create"></i></a>
+                        <a ng-click="deleteData(vendor)" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
                     </td>
                 </tr>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <td colspan="5" class="text-center">
-                        <div class="pagination pagination-centered"></div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <ul class="pagination"></ul>                        
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
@@ -74,8 +74,8 @@
     <i class="icon ion-gear-a"></i>
   </a>
 </div>
-</ion-view>
 </div>
+</ion-view>
 
 <script type="text/javascript">
     $(function () {

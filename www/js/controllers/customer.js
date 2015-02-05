@@ -1,8 +1,34 @@
-var apps = angular.module('customerModule', ['ionic']);
-    apps.controller('Customer',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
+/**
+
+  +-+-+-+-+ +-+-+-+-+-+
+  |S|E|G|I| |M|i|D|a|e|
+  +-+-+-+-+ +-+-+-+-+-+
+
+ * CRM MOBILE APPLICATION
+ *
+ * http://www.segimidae.net
+ *
+ * Ionic Framework
+ * 
+ * @category   controllers
+ * @package    customer.js
+ * @author     Nizam <nizam@segimidae.net>
+ * @author     Norlihazmey <norlihazmey@segimidae.net>
+ * @author     Azim <azim@segimidae.net>
+ * @license    SeGi MiDae
+ * @copyright  2015 SEGI MiDae
+ * @version    0.5.1
+*/
+
+var apps_customer = angular.module('customerModule', ['ionic','cgBusy']);
+    apps_customer.controller('Customer',['$scope','$http', '$state','$ionicPopup', 'Settings', 'init', 'Auth', 'UniversalFunction', 'CrudOperation',function($scope,$http, $state,$ionicPopup, Settings, init, Auth, UniversalFunction, CrudOperation) {
        
           /*=============== Customer(initial start of page will call this part) ============================= */
-        
+
+        // Start of Google Analytic Function 
+        if(typeof analytics !== "undefined") { analytics.trackView("Customers"); }
+        // End of Google Analytic
+
         /*-------------- initial value for page to show or hide button in customer form add/edit-------------*/
         var m = UniversalFunction.returnButtonOnly();
         $scope.btnAdd = m.add;
@@ -12,10 +38,10 @@ var apps = angular.module('customerModule', ['ionic']);
         /*------------initial value for form data of update function ----*/
         $scope.formData = UniversalFunction.returnDisplayFormData();
         /*---------------------------------------------------------------*/
-        
+
          var url = Settings.url + '/dataAll/type/customers/format/json';
               
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                  
@@ -23,11 +49,11 @@ var apps = angular.module('customerModule', ['ionic']);
                     
               }, function(err) {
                   console.error('ERR', err);
-              
               })
-                    
+                
+            //Refresh function when drag down content        
             $scope.doRefresh = function(){
-              $http
+            $scope.myPromise =  $http
                 .get(url, Auth.doAuth(init.username, init.password))
                 .success(function(data){
                   
@@ -38,7 +64,14 @@ var apps = angular.module('customerModule', ['ionic']);
                 $scope.$broadcast('scroll.refreshComplete');
               });
             };
-               
+            // End refresh function
+
+            /*-------------------- select country name and display into select option in add form ----------------- */
+              var params = '/dataAll/type/country/format/json';
+                  CrudOperation.get(params).success(function(data){  $scope.country_list = data.country;  });
+              /*------------ end selection ---------------------------------------------------------------------------*/
+              
+              // Go to ADD/EDIT Page function 
               $scope.goToAddDataPage = function(){
 
                    $state.go('app.customerAdd_Edit',{},{reload:false});
@@ -67,7 +100,7 @@ var apps = angular.module('customerModule', ['ionic']);
                     
               }
 
-          
+            //End
  
           /*================================ Add function ================================*/
                 $scope.addData  = function(){
@@ -100,7 +133,8 @@ var apps = angular.module('customerModule', ['ionic']);
                                         customer_fax : $scope.formData.customer_fax,
                                         customer_address : $scope.formData.customer_address,
                                         customer_postcode : $scope.formData.customer_postcode,
-                                        customer_state : $scope.formData.customer_state
+                                        customer_state : $scope.formData.customer_state,
+                                        country_id : $scope.formData.country_id
                         };
                     var data       = {                             // data sent to Api
                                       type : "customers",
@@ -133,5 +167,5 @@ var apps = angular.module('customerModule', ['ionic']);
 
 
 
-      })
+      }]);
 

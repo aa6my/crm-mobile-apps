@@ -1,5 +1,5 @@
 <div ng-controller="File" ng-app="fileModule">
-<ion-view title="Files">
+<ion-view title="FILES">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -16,6 +16,7 @@
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
+        <div cg-busy="myPromise"></div>
             <table class="footable" data-page-size="5">
                 <thead>
                 <tr>
@@ -38,19 +39,19 @@
                     <!-- <td data-value="78025368997">22 Jun 1972</td> -->
                     <!-- <td data-value="1"><span class="status-metro status-active" title="Active">Active</span></td> -->
                     <td>
-                        <a ng-click="viewFile(file)"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a>
-                        <a ng-click="goToEditDataPage(file)"><i class="icon ion-android-create"></i></a>
-                        <a ng-click="deleteData(file)"><i class="icon ion-ios-trash-outline"></i></a>
+                       <!--  <a ng-click="viewFile(file)" class="ft-icon-color"><i class="icon ion-ios-list-outline" data-pack="default" style=""></i></a> -->
+                        <a ng-click="goToEditDataPage(file)" class="ft-icon-color"><i class="icon ion-android-create"></i></a>
+                        <a ng-click="deleteData(file)" class="ft-icon-color"><i class="icon ion-ios-trash-outline"></i></a>
 
                     </td>
                 </tr>
                 </tbody>
                 <tfoot>
-                <tr>
-                    <td colspan="5" class="text-center">
-                        <div class="pagination pagination-centered"></div>
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="5" class="text-center">
+                            <ul class="pagination"></ul>                        
+                        </td>
+                    </tr>
                 </tfoot>
             </table>
         </div>
@@ -71,20 +72,6 @@
 
 <script type="text/javascript">
     $(function () {
-
         $('table').footable();
-        
-        /*$('table').data('page-size', 5);
-        $('table').trigger('footable_initialized');
-        $('table').trigger('footable_setup_paging');*/
-
-        //$('table').trigger('footable_redraw'); //force a redraw
-        /*$('.colour-switch a').click(function(e) {
-            e.preventDefault();
-            $('.colour-switch a').each(function() {
-                $('table').removeClass($(this).data('class'));
-            });
-            $('table').addClass($(this).data('class'));
-        });*/
     });
 </script>

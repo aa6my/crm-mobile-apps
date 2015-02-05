@@ -2,5 +2,6 @@ angular
 .module('ValConstantService', [])
 .value('init',{
    username : '',
-   password : ''
+   password : '',
+   domain_name : ''
 })

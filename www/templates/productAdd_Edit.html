@@ -1,5 +1,5 @@
 <div ng-controller="Product">
-<ion-view title="Products">
+<ion-view title="PRODUCTS">
 
     <!--navigation button on top-->
     <ion-nav-buttons side="left">
@@ -14,37 +14,39 @@
         <div class="ft-container">
         <form action="">
             <div class="list">
-
-              <label class="item item-input item-stacked-label">
+              <button class="button button-energized button-block" ng-click="click()">Scan for Product SKU</button>
+              <label class="item item-input item-stacked-label" ng-show="product_add">
                 <span class="input-label">Product SKU</span>
-                <button class="button button-small" ng-click="click()">Scan</button>
-                <div ng-repeat="bcode in barcoderesult">{{bcode.Barcode}}
-              </div>
+               <input type="text" placeholder="Stock Keeping Unit Number" ng-model="product_sku">
+              </label>
+              <label class="item item-input item-stacked-label" ng-show="product_edit">
+                <span class="input-label">Product SKU</span>
+               <input type="text" placeholder="Stock Keeping Unit Number" ng-model="formData.product_sku">
               </label>
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product Name</span>
-                <input type="text" placeholder="Segimidae" name="product_name" ng-model="formData.product_name">
+                <input type="text" placeholder="Enter Product Name" name="product_name" ng-model="formData.product_name">
               </label>
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product Description</span>
-                <input type="text" placeholder="Segimidae" name="product_desc" ng-model="formData.product_desc">
+                <input type="text" placeholder="Enter Product Description" name="product_desc" ng-model="formData.product_desc">
               </label>
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product Quantity</span>
-                <input type="text" placeholder="Segimidae" name="product_quantity" ng-model="formData.product_quantity">
+                <input type="text" placeholder="Enter Product Quantity" name="product_quantity" ng-model="formData.product_quantity">
               </label>
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label">Product Amount</span>
-                <input type="text" placeholder="Segimidae" name="product_amount" ng-model="formData.product_amount">
+                <input type="text" placeholder="Enter Product Amount" name="product_amount" ng-model="formData.product_amount">
               </label>
 
             <div class="padding">
-                <button type="button" class="button button-energized ion-android-checkbox-outline button-block" ng-click="addData()" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
-                <button type="button" class="button button-energized ion-android-checkbox-outline button-block" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
+                <button type="button" class="button button-assertive ion-android-checkbox-outline button-block" ng-click="addData(product_sku)" ng-show="btnAdd">&nbsp;&nbsp;Submit</button>
+                <button type="button" class="button button-assertive ion-android-checkbox-outline button-block" ng-click="editData()" ng-show="btnEdit">&nbsp;&nbsp;Save</button>
             </div>
         </form>
 </div>
