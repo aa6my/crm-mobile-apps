@@ -13,15 +13,15 @@
           Company
         &nbsp;&nbsp;
         
-          <select ng-model="server_name">
+          <select ng-model="company_id">
               <option value="">-- Choose Company --</option>
-              <option value="{{s.domain_name}}" ng-repeat="s in server">{{s.company_name}}</option>
+              <option value="{{s.company_id}}" ng-repeat="s in server">{{s.company_name}}</option>
           </select>
         </label>
       </div>
       <br>
       <div class="padding">
-        <button class="button button-block button-assertive" ng-click="goToLogin()">Proceed</button>
+        <button class="button button-block button-assertive" ng-click="goToLogin(s)">Proceed</button>
       </div>
     </form>
     <p class="copyright" align="center">2015 &copy; Copyright SeGi MiDae - Media Solutions</p>

@@ -42,7 +42,7 @@ var apps_server = angular.module('serverModule', []);
 
 
     $scope.goToLogin = function(){
-      if ($scope.server_name == null) {
+      if ($scope.company_id == null) {
           $scope.alerts = [
               { type: 'danger', msg: 'Please choose company before proceed.' },
             ]
@@ -52,9 +52,20 @@ var apps_server = angular.module('serverModule', []);
             }
       }
       else {
-          $state.go('app.login',{server_name : $scope.server_name}, {reload:false});
-      };
- /*     console.log($scope.server_name);*/
+
+        url = 'https://segiapps.com/x/dataAll/type/company/key/crm-product_id-company.company_id/val/1-1-'+$scope.company_id+'/joinid/company_id/jointo/applications';
+ 
+        $http.get(url)
+              .success(function(data) {
+                Settings.domain_name = data.company[0].domain_name;
+                Settings.company_name = data.company[0].company_name;
+                $state.go('app.login', {reload:false});
+                
+              })
+                
+      }
+
+   //console.log(s);
        
         
     }         
