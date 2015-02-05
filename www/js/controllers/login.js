@@ -1,14 +1,15 @@
 var apps_login = angular.module('loginModule', []);
 	
+  apps_login.controller('titleCtrl', ['$scope','Settings', function($scope,Settings){
+    $scope.company_name = Settings.company_name;
+  }]);
+
 	apps_login.controller('Login',['$scope','$http', '$ionicSideMenuDelegate','$stateParams', 'Settings', '$state', 'init', 'Auth','$ionicPopup',function($scope,$http, $ionicSideMenuDelegate,$stateParams, Settings, $state, init, Auth,$ionicPopup) {
   $ionicSideMenuDelegate.canDragContent(false);
   
   
     url = 'https://' +Settings.domain_name+ '/apps/dataAll/type/vendors/format/json';
    // url = 'https://192.168.0.201/apps/dataAll/type/vendors/format/json';
-    $scope.company_name = Settings.company_name;
-    console.log(Settings.company_name);
-
 
     /** Using dummy data for development testing only */
    /* $scope.username = 'admin@admin.com';
@@ -22,7 +23,6 @@ var apps_login = angular.module('loginModule', []);
         password : $scope.password
       } 
 
-   
   $http.get(url, Auth.doAuth(user.username, user.password))
         .success(function(data) {
         
