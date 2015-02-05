@@ -2,6 +2,11 @@
     margin-top: 50px;     
     }
 
+    .logo{
+        height: 170px;
+        text-align: center;
+    }
+
     .error{
         color: red;
     }
