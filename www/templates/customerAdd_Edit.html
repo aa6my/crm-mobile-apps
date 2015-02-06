@@ -69,8 +69,10 @@
                                 Country
                             </div>
                             <br/>
-                            <select ng-model="formData.country_id">
-                                <option ng-repeat="country in country_list" value="{{country.country_id}}">{{country.country_name}}</option>
+                            <select class="input--select" ng-model="formData.country_id" ng-options="country.country_id as country.country_name for country in country_list">
+                            <!-- <select ng-model="formData.country_id"> -->
+                                <!-- <option ng-repeat="country in country_list" value="{{country.country_id}}">{{country.country_name}}</option> -->
+
                             </select>
                         </label>
                     </div>
