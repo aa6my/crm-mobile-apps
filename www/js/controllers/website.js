@@ -144,6 +144,8 @@ var apps_website = angular.module('websiteModule', ['ionic','cgBusy']);
                   }
           /*================================ End back function ================================*/
 
-
+                $scope.backHome = function(){
+                  UniversalFunction.home_button();
+                }
       }]);
 
