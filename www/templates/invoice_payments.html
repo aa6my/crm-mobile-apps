@@ -1,89 +1,3 @@
-<style type="text/css">
-.separator{
-  border-left:1px solid #A9A9AA;
-  width:1px;
-  height:70px;
-  margin:0 10px;
-}
-
-.status{  
-  
-  padding : 5px 10px;
-  border:1px solid black;
-  width:80px;
-  height:80px;
-  text-align: center;
-  border-radius:50%;
-  -webkit-border-radius:100%;
-  border:2px solid #fff;  
-  /*-webkit-box-shadow:inset 0px 0px 5px #202021;*/
-  -webkit-box-shadow:0px 0px 5px #202021,inset 0px 0px 25px #933100;
-  /*-webkit-box-shadow: 0 0 0 2px #33302A, 0 0 0 2px white;*/  
-  color:#FFFFFF;
-  margin-top:10px;
-
- 
-
-
-  /*line-height:50p;*/
-  
-}
-/*.status:after{
- content:'sds';
- position: absolute;
- border:2px solid #953707;
- border-radius:50%;
- width:70px;
-  height:70px;
-  padding : 5px 10px;
-  margin:2px;
- 
-}*/
-/*div.bg_blur{
-  background:black url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT6l0xAW1T8zVZZUK6y8AuJ3V2vhKvxWdJzaQDPxJyPFqnccg2gYQ);
-}*/
-/*html .bar_b:before {
-  background: black url(http://cdn.css-tricks.com/images/forums-bg.png) repeat 50% 100% fixed;
-}*/
-/*.bar_b {
-  float: left;
-  margin: 5px;
-  text-align: center;
-  color: #000;
-  text-shadow: 0px 1px 2px rgba(0,0,0,0.25);
-  line-height: 5em;
-  position: relative;
-  height: 5em;
-  width: 200px;
-  background: rgba(190,220,250,0.5);
-  border-top: 1px solid rgba(250,253,255,0.2);
-  box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
-  border-radius: 4px;
-}
-
-.bar_b:before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  height: 100%;
-  top: 0; right: 0; left: 0;
-  filter: blur(5px);
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-}*/
-/*.line_b{
-  height:1px;
-  width:100%;
-  background: #fff;
-  position:absolute;
-  margin-top:50px;
-
-}*/
-</style>
-
-
 <ion-view title="INVOICE PAYMENTS">
 
     <!--navigation button on top-->
@@ -96,8 +10,9 @@
 <div ng-controller="Invoice" ng-app="invoiceModule">
     <!-- content-->
     <ion-content class="has-header">
-        <ion-refresher
+         <ion-refresher
         pulling-text="Pull to refresh..."
+        refreshing-icon=""
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">

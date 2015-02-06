@@ -140,8 +140,9 @@ var apps_file = angular.module('fileModule', ['ionic','cgBusy']);
                   }
           /*================================ End back function ================================*/
 
-
-
+              $scope.backHome = function(){
+                    UniversalFunction.home_button();
+                  }
 
       }]);
 

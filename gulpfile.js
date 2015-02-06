@@ -41,7 +41,8 @@ gulp.task('jshint', function() {
 });
 
 var src = './www/js/controllers/*.js';
-var dist = './www/js/controllers/dist'
+var dist = './www/js/controllers/dist';
+
 
 gulp.task('uglify_controllers', function() {
   gulp.src(src)
@@ -66,9 +67,9 @@ gulp.task('minifyHtml', function(){
 
   var srcHtml = './www/templates/*.html';
   var destHtml = './www/templates/dist';
-
+  var opts = {empty: true, quotes : true}; // do not remove empty code html(angular directive and attribute)
   gulp.src(srcHtml)    
-    .pipe(minifyHtml())
+    .pipe(minifyHtml(opts))
     .pipe(gulp.dest(destHtml));
 });
 /*----------------------------------------*/

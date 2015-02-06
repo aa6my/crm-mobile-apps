@@ -363,6 +363,9 @@ var apps_job = angular.module('jobModule', ['ionic','cgBusy']);
         }
 
 
+        $scope.backHome = function(){
+          UniversalFunction.home_button();
+        }
         
 
 

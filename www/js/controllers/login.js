@@ -38,7 +38,7 @@ var apps_login = angular.module('loginModule', []);
           Settings.upload  = 'https://'+Settings.domain_name+'/assets/uploads/files/';
           Settings.url    = 'https://'+Settings.domain_name+'/apps';
           $state.go('app.main');
-          console.log(Settings.upload);
+          //console.log(Settings.upload);
         })
         .error(function(data, status, headers, config){
        

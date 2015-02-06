@@ -64,10 +64,12 @@
       
     </div>
   </div>
-
+  <div ng-show="finance_content">
+    <p align="center"><strong>{{fin_total}}</strong></p>
+  </div>
      <div class="ft-container" ng-show="finance_content" ng-init="false">
      <div cg-busy="myPromise"></div>
-            <table class="footable" data-page-size="5">
+            <table class="footable" data-page-size="3">
                 <thead>
                 <tr>
                     <th>
@@ -110,7 +112,7 @@
 	</ion-content>
 <div class="tabs tabs-icon-only">
   <a class="tab-item">
-    <i class="icon ion-home"></i>
+    <i class="icon ion-home" ng-click="backHome()"></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-star"></i>

@@ -134,7 +134,7 @@ angular
  * call this function when needed
  * mostly suitable for process that can accessable by all controllers
  */
-.factory('UniversalFunction', function($http, Auth, init){
+.factory('UniversalFunction', function($http, Auth, init,$state){
 
    var func     = {};
    var formData = {};
@@ -208,6 +208,12 @@ angular
             }
 
             return exp_date[1]+'-'+new_month+'-'+exp_date[2];
+       }
+
+       func.home_button = function(){
+
+        return $state.go('app.main');
+
        }
 
        return func;

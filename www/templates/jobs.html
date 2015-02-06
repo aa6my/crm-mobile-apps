@@ -13,6 +13,7 @@
     <ion-content class="has-header">
         <ion-refresher
         pulling-text="Pull to refresh..."
+        refreshing-icon=""
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
@@ -23,10 +24,10 @@
                     <th>
                         Job title
                     </th>
-                    <th>
+                    <th data-hide="phone">
                         Date start
                     </th>
-                    <th>
+                    <th data-hide="phone">
                         Due Date
                     </th>
                     <th>
@@ -63,7 +64,7 @@
 </ion-content>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">
-    <i class="icon ion-home"></i>
+    <i class="icon ion-home" ng-click="backHome()"></i>
   </a>
    <a class="tab-item">
     <i class="icon ion-plus-circled" ng-click='goToAddDataPage("add")'></i>

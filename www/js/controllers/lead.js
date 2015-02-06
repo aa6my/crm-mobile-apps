@@ -128,7 +128,8 @@ var apps_lead = angular.module('leadModule', ['ionic','cgBusy']);
                                         lead_fax : $scope.formData.lead_fax,
                                         lead_address : $scope.formData.lead_address,
                                         lead_postcode : $scope.formData.lead_postcode,
-                                        lead_state : $scope.formData.lead_state
+                                        lead_state : $scope.formData.lead_state,
+                                        country_id : $scope.formData.country_id
                         };
                     var data       = {                             // data sent to Api
                                       type : "leads",
@@ -158,7 +159,9 @@ var apps_lead = angular.module('leadModule', ['ionic','cgBusy']);
                   }
           /*================================ End back function ================================*/
 
-
+                $scope.backHome = function(){
+                  UniversalFunction.home_button();
+                }
 
 
       }]);

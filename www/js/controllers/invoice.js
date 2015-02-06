@@ -513,6 +513,9 @@ var apps_invoice = angular.module('invoiceModule', ['ionic','ui.bootstrap','cgBu
     }
     
 
+    $scope.backHome = function(){
+        UniversalFunction.home_button();
+    }
 
 
 }]);
