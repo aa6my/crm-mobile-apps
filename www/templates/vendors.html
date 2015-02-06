@@ -10,8 +10,9 @@
     <div ng-controller="Vendor" ng-app="vendorModule">
     <!-- content-->
     <ion-content class="has-header">
-        <ion-refresher
+         <ion-refresher
         pulling-text="Pull to refresh..."
+        refreshing-icon=""
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
@@ -65,7 +66,7 @@
 </ion-content>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">
-    <i class="icon ion-home"></i>
+    <i class="icon ion-home" ng-click="backHome()"></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-plus-circled" ng-click='goToAddDataPage()'></i>
