@@ -184,6 +184,9 @@ var apps_product = angular.module('productModule', ['ionic']);
 
                   }
           /*================================ End back function ================================*/
+                $scope.backHome = function(){
+                  UniversalFunction.home_button();
+                }
 
                 $scope.click = function() {
 

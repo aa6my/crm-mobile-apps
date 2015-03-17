@@ -41,6 +41,11 @@ var apps_finance = angular.module('financeModule', ['ionic','cgBusy']);
                     
             });
 
+
+          $scope.backHome = function(){
+               UniversalFunction.home_button();
+          }
+
           $scope.openDatePicker  = function($event, ng_open_name){
             //console.log(ng_open_name);
                     $scope.openFor = {};
@@ -69,6 +74,13 @@ var apps_finance = angular.module('financeModule', ['ionic','cgBusy']);
                       $scope.finances = UniversalFunction.redraw(data.invoices);
                       $scope.no_data = false;
                       $scope.finance_content = true;
+                      console.log(data.invoices);
+                      var total_finance = 0;
+                      for(var i=0; i<data.invoices.length; i++){
+                        total_finance += parseInt(data.invoices[i].invoice_payment_amount);
+                      }
+
+                      $scope.fin_total = "Total payments : "+total_finance;
                     }
                     
             });

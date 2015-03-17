@@ -195,8 +195,9 @@ var apps_quote = angular.module('quoteModule', ['ionic','ui.bootstrap','cgBusy']
                   }
           /*================================ End back function ================================*/
 
-
-
+            $scope.backHome = function(){
+              UniversalFunction.home_button();
+            }
 
             $scope.open1 = function($event) {
               $event.preventDefault();

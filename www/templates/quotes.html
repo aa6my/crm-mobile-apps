@@ -11,8 +11,9 @@
 
     <!-- content-->
     <ion-content class="has-header">
-        <ion-refresher
+         <ion-refresher
         pulling-text="Pull to refresh..."
+        refreshing-icon=""
         on-refresh="doRefresh()">
         </ion-refresher>
         <div class="ft-container">
@@ -26,7 +27,7 @@
                     <th>
                         Date Issued
                     </th>
-                    <th>
+                    <th data-hide="phone">
                         Valid Until
                     </th>
                     <th data-hide="phone">
@@ -78,7 +79,7 @@
 </ion-content>
   <div class="tabs tabs-icon-only">
   <a class="tab-item">
-    <i class="icon ion-home"></i>
+    <i class="icon ion-home" ng-click="backHome()"></i>
   </a>
   <a class="tab-item">
     <i class="icon ion-plus-circled" ng-click='goToAddDataPage()'></i>

@@ -24,16 +24,27 @@ angular.module('starter', [
 
 
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$state) {
+  $ionicPlatform.registerBackButtonAction(function (event) {
+            if ($state.is('app.server')) {
+                alert("Exiting the app. Goodbye!");
+                navigator.app.exitApp();
+            } else if ($state.is('app.main')){
+               console.log("aa");
+            } else{
+              navigator.app.backHistory();
+            }
+        }, 101);
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (typeof analytics !== 'undefined'){
       analytics.startTrackerWithId('UA-58939571-2');
+      analytics.trackException('Error', true);
     }
     else
     {
-      //alert("Google Analytics plugin could not be loaded.");
+      alert("Google Analytics plugin could not be loaded.");
     }
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

@@ -165,7 +165,9 @@ var apps_customer = angular.module('customerModule', ['ionic','cgBusy']);
           /*================================ End back function ================================*/
 
 
-
+                  $scope.backHome = function(){
+                    UniversalFunction.home_button();
+                  }
 
       }]);
 

@@ -4,6 +4,7 @@ var bower = require('bower');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
+var minifyHtml = require('gulp-minify-html');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 /*---------------------------------------------*/
@@ -40,26 +41,37 @@ gulp.task('jshint', function() {
 });
 
 var src = './www/js/controllers/*.js';
-var dist = './www/js/controllers/dist'
+var dist = './www/js/controllers/dist';
+
 
 gulp.task('uglify_controllers', function() {
-  gulp.src(src)    
+  gulp.src(src)
+    
     .pipe(stripDebug())
     .pipe(uglify())
-    .pipe(concat('script.js'))
+    .pipe(concat('script_controllers.js'))
     .pipe(gulp.dest(dist));
 });
 
-
-//var src = '[./www/js/providers/*.js, ]';
 /*var dist = './www/js/providers/dist';
 gulp.task('uglify_providers', function() {
-  gulp.src(['./www/js/providers/*.js','!./www/js/providers/angular-base64.js','!./www/js/providers/angular-resource.js','!./www/js/providers/angular-resource.min.js','!./www/js/providers/ui-bootstrap-tpls-0.12.0.js','!./www/js/providers/ui-bootstrap-tpls-0.12.0.min.js'])    
-    .pipe(stripDebug())
+  gulp.src(['./www/js/providers/*.js','!./www/js/providers/angular-base64.js','!./www/js/providers/angular-resource.js','!./www/js/providers/angular-resource.min.js','!./www/js/providers/ui-bootstrap-tpls-0.12.0.js','!./www/js/providers/ui-bootstrap-tpls-0.12.0.min.js','!./www/js/providers/services.js'])    
+    //.pipe(stripDebug())
+    .pipe(concat('script_providers.js'))    
     .pipe(uglify())
-    .pipe(concat('script_providers.js'))
     .pipe(gulp.dest(dist));
 });*/
+
+
+gulp.task('minifyHtml', function(){
+
+  var srcHtml = './www/templates/*.html';
+  var destHtml = './www/templates/dist';
+  var opts = {empty: true, quotes : true}; // do not remove empty code html(angular directive and attribute)
+  gulp.src(srcHtml)    
+    .pipe(minifyHtml(opts))
+    .pipe(gulp.dest(destHtml));
+});
 /*----------------------------------------*/
 
 

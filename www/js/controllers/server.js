@@ -37,7 +37,7 @@ var apps_server = angular.module('serverModule', []);
     .error(function(data, status, headers, config){
           $scope.success = "xberjaya";
           //console.log(config);
-    })    
+    })     
 
 
 

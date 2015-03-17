@@ -157,6 +157,9 @@ var apps_vendor = angular.module('vendorModule', ['ionic','cgBusy']);
                   }
           /*================================ End back function ================================*/
 
+          $scope.backHome = function(){
+            UniversalFunction.home_button();
+          }
 
       }]);
 

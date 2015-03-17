@@ -53,20 +53,6 @@
         box-shadow:0 0 40px #111B28;
     }
 
-    /*.menu-color{
-        background-color: #444444;
-    }*/
-
-    /*.menu-color .item, .menu-color .item-content, .menu-color .item-complex{
-    background-color: rgba(0,0,0,0);
-    color: #444444;
-    border: none;
-    border-top: 1px solid #464646;
-    border-bottom: 2px solid #333333;
-    color: #F0F1F1;
-    max-height: none;
-    }*/
-
     .head {
         background-color: #c66c66;
         color: #FFFFFF;
@@ -98,6 +84,30 @@
 
     .ion-android-arrow-back, .ion-android-arrow-forward{
         color: #fff;
+    }
+
+    .separator{
+      border-left:1px solid #A9A9AA;
+      width:1px;
+      height:70px;
+      margin:0 10px;
+    }
+
+    .status{  
+  
+      padding : 5px 10px;
+      border:1px solid black;
+      width:80px;
+      height:80px;
+      text-align: center;
+      border-radius:50%;
+      -webkit-border-radius:100%;
+      border:2px solid #fff;  
+      /*-webkit-box-shadow:inset 0px 0px 5px #202021;*/
+      -webkit-box-shadow:0px 0px 5px #202021,inset 0px 0px 25px #933100;
+      /*-webkit-box-shadow: 0 0 0 2px #33302A, 0 0 0 2px white;*/  
+      color:#FFFFFF;
+      margin-top:10px;
     }
 
 element.style {
